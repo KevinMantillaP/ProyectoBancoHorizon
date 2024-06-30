@@ -7,6 +7,7 @@
 - `npm install @types/express --save-dev`
 - `npm install -g @angular/cli`
 - `npm install @angular/common @angular/core @angular/http`
+- `npm install moment`
 - Instalar MongoDB y Postman.
 
 

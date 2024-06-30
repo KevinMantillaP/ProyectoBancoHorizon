@@ -4,6 +4,7 @@ import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import moment from 'moment';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -31,10 +32,14 @@ export class RegistrarUsuarioComponent {
   }
 
   validateAge(control: FormControl) {
-    const date = new Date(control.value);
-    const age = new Date().getFullYear() - date.getFullYear();
-    return age >= 18 ? null : { ageInvalid: true };
-  }
+    const today = moment().startOf('day'); // La fecha de hoy a las 00:00
+    const inputDate = moment(control.value).startOf('day'); // La fecha de nacimiento a las 00:00
+    let age = today.diff(inputDate, 'years'); // Diferencia en años
+    console.log('Hoy:', today.format('YYYY-MM-DD'));
+    console.log('Fecha de nacimiento:', inputDate.format('YYYY-MM-DD'));
+    console.log('Edad:', age);
+    return age >= 18 ? null : { ageInvalid: true };
+  }    
 
   onSubmit() {
     if (this.registroForm.valid) {
@@ -52,7 +57,14 @@ export class RegistrarUsuarioComponent {
         }
       );
     } else {
-      this.snackBar.open('Por favor complete todos los campos correctamente', 'Cerrar', {
+      let mensaje = 'Por favor complete todos los campos correctamente:';
+      Object.keys(this.registroForm.controls).forEach(key => {
+        const control = this.registroForm.get(key);
+        if (control && control.invalid && control.touched) {
+          mensaje += `\n- ${key.charAt(0).toUpperCase() + key.slice(1)}`;
+        }
+      });
+      this.snackBar.open(mensaje, 'Cerrar', {
         duration: 3000
       });
     }
