@@ -6,6 +6,7 @@ import loginUsuarioRoutes from './loginUsuarioRoutes';
 import administradorRoutes from './administradorRoutes';
 import loginAdministradorRoutes from './loginAdministradorRoutes';
 import auditoriaRoutes from './auditoriaRoutes';
+import emailRoutes from './emailRoutes'
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use(loginUsuarioRoutes);
 router.use(administradorRoutes);
 router.use(loginAdministradorRoutes);
 router.use(auditoriaRoutes);
+router.use(emailRoutes);
 
 export default router;

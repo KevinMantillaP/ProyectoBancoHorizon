@@ -35,6 +35,13 @@ export const crearCliente = async (req: Request, res: Response) => {
         return res.status(400).json({ message: 'El cliente debe tener más de 18 años para registrarse.' });
     }
 
+    try {
+        // Verificar si la cédula ya existe
+        const existingCliente = await Cliente.findOne({ cedula });
+        if (existingCliente) {
+            return res.status(409).json({ message: 'La cédula ya está registrada.' });
+        }
+
     const nuevoCliente = new Cliente({
         cedula,
         nombres,
@@ -48,7 +55,7 @@ export const crearCliente = async (req: Request, res: Response) => {
         calleSecundaria
     });
 
-    try {
+    
         const clienteGuardado = await nuevoCliente.save();
         res.status(201).json(clienteGuardado);
     } catch (err: any) {
