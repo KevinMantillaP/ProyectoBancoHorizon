@@ -39,6 +39,7 @@
         <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento">
         <small *ngIf="registroForm.get('fechaNacimiento')?.invalid && registroForm.get('fechaNacimiento')?.touched">
           <span *ngIf="registroForm.get('fechaNacimiento')?.errors?.['required']">Fecha de nacimiento es requerida</span>
+          <span *ngIf="registroForm.get('fechaNacimiento')?.errors?.['ageInvalid']">Debe ser mayor de 18 años</span>
         </small>
       </div>
 
@@ -97,7 +98,10 @@
           <span *ngIf="registroForm.get('calleSecundaria')?.errors?.['required']">Calle secundaria es requerida</span>
         </small>
       </div>
-      <button type="submit">Registrar</button>
+      <div class="button-container">
+        <button (click)="redirectTo('')">Regresar</button>
+        <button type="submit">Registrar</button>
+      </div>
     </form>
   </div>
 </div>

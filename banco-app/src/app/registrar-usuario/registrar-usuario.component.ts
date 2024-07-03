@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import moment from 'moment';
+import { Router } from '@angular/router';
+import { EmailService } from '../services/email-validation.service';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -16,7 +18,7 @@ import moment from 'moment';
 export class RegistrarUsuarioComponent {
   registroForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private snackBar: MatSnackBar, private router: Router, private emailService: EmailService) {
     this.registroForm = this.fb.group({
       cedula: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       nombres: ['', Validators.required],
@@ -34,24 +36,36 @@ export class RegistrarUsuarioComponent {
   validateAge(control: FormControl) {
     const today = moment().startOf('day'); // La fecha de hoy a las 00:00
     const inputDate = moment(control.value).startOf('day'); // La fecha de nacimiento a las 00:00
+
     let age = today.diff(inputDate, 'years'); // Diferencia en años
-    console.log('Hoy:', today.format('YYYY-MM-DD'));
-    console.log('Fecha de nacimiento:', inputDate.format('YYYY-MM-DD'));
-    console.log('Edad:', age);
-    return age >= 18 ? null : { ageInvalid: true };
-  }    
+
+    return age >= 18 ? null : { ageInvalid: true };
+  }
+
 
   onSubmit() {
     if (this.registroForm.valid) {
+      const correo = this.registroForm.value.correo;
+      
       this.usuarioService.registrarUsuario(this.registroForm.value).subscribe(
         response => {
-          this.snackBar.open('Usuario registrado con éxito', 'Cerrar', {
-            duration: 3000
-          });
+          this.emailService.sendVerificationEmail(correo).subscribe(
+            () => {
+              this.snackBar.open('Usuario registrado con éxito. Verifique su correo.', 'Cerrar', {
+                duration: 3000
+              });
+              this.router.navigate(['/verificar-codigo'], { queryParams: { correo } });
+            },
+            error => {
+              this.snackBar.open('Error al enviar el correo de verificación', 'Cerrar', {
+                duration: 3000
+              });
+            }
+          );
           this.registroForm.reset();
         },
         error => {
-          this.snackBar.open('Error al registrar usuario', 'Cerrar', {
+          this.snackBar.open(error, 'Cerrar', { // Mostrar mensaje de error específico
             duration: 3000
           });
         }
@@ -68,5 +82,9 @@ export class RegistrarUsuarioComponent {
         duration: 3000
       });
     }
+  }
+
+  redirectTo(route: string) {
+    this.router.navigate([route]);
   }
 }

@@ -59,7 +59,12 @@ input {
     background: #EBEBEB;
 }
 
-button {
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.button-container button {
     width: 100%;
     padding: 10px;
     background-color: #1A61A0;
@@ -68,9 +73,11 @@ button {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    margin:5px;
+    position: sticky;
 }
 
-button:hover {
+.button-container button:hover {
     background-color: #29AECC;
 }
 

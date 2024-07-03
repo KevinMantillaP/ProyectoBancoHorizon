@@ -2,12 +2,15 @@
 
 
 ## Requisitos para funcionamiento del proyecto.
+- `npm install`
 - `npm install typescript ts-node @types/node --save-dev`
 - `npm install express mongoose`
 - `npm install @types/express --save-dev`
 - `npm install -g @angular/cli`
 - `npm install @angular/common @angular/core @angular/http`
 - `npm install moment`
+- `npm install @sendgrid/mail`
+
 - Instalar MongoDB y Postman.
 
 
