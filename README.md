@@ -9,7 +9,7 @@
 - `npm install -g @angular/cli`
 - `npm install @angular/common @angular/core @angular/http`
 - `npm install moment`
-- `npm install @sendgrid/mail`
+
 
 - Instalar MongoDB y Postman.
 
@@ -28,3 +28,6 @@
 ![Iniciar Base de Datos](/img_readme/IniciarBaseDatos.png)
 2. Abrir otro terminar, ingresar a la carpeta `banco-app` y ejecutar el comando `ng serve`
 ![Iniciar Proyecto](/img_readme/IniciarProyecto.png)
+
+- `npm install googleapis`
+- `npm i --save-dev @types/nodemailer`

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,9 +14,9 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule]
 })
-export class VerificarCodigoComponent {
+export class VerificarCodigoComponent implements OnInit {
   verifyForm: FormGroup;
-  correo: string= '';
+  correo: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -27,25 +27,35 @@ export class VerificarCodigoComponent {
     private router: Router
   ) {
     this.verifyForm = this.fb.group({
-      verificationCode: ['', Validators.required]
+      code1: ['', [Validators.required, Validators.maxLength(1)]],
+      code2: ['', [Validators.required, Validators.maxLength(1)]],
+      code3: ['', [Validators.required, Validators.maxLength(1)]],
+      code4: ['', [Validators.required, Validators.maxLength(1)]],
+      code5: ['', [Validators.required, Validators.maxLength(1)]],
+      code6: ['', [Validators.required, Validators.maxLength(1)]]
     });
   }
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.correo = params['correo'];
-    });
+  ngOnInit(): void {
+    this.correo = this.route.snapshot.queryParamMap.get('correo') || '';
   }
 
   onSubmit() {
     if (this.verifyForm.valid) {
-      const verificationCode = this.verifyForm.value.verificationCode;
+      const verificationCode = this.verifyForm.value.code1 +
+                               this.verifyForm.value.code2 +
+                               this.verifyForm.value.code3 +
+                               this.verifyForm.value.code4 +
+                               this.verifyForm.value.code5 +
+                               this.verifyForm.value.code6;
+      console.log('Código de verificación ingresado:', verificationCode);
+
       this.emailService.verifyCode(this.correo, verificationCode).subscribe(
         () => {
           this.snackBar.open('Código verificado con éxito', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/']); // Redirigir a la página de inicio u otra página relevante
+          this.router.navigate(['/ingresar-credenciales']); // Redirigir a la página de inicio u otra página relevante
         },
         error => {
           this.snackBar.open('Código de verificación incorrecto', 'Cerrar', {

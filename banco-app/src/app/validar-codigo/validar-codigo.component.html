@@ -1,42 +1,48 @@
 <div class="header">
-    <h2>Horizon Bank</h2>
+  <h2>Horizon Bank</h2>
+</div>
+<div class="content">
+  <div class="verify-container">
+    <h2>Ingrese el Código</h2>
+    <p>Se ha enviado un correo con un código de confirmación a su correo</p>
+    <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+      <div class="code-inputs">
+        <input type="text" maxlength="1" formControlName="code1">
+        <input type="text" maxlength="1" formControlName="code2">
+        <input type="text" maxlength="1" formControlName="code3">
+        <input type="text" maxlength="1" formControlName="code4">
+        <input type="text" maxlength="1" formControlName="code5">
+        <input type="text" maxlength="1" formControlName="code6">
+      </div>
+      <button type="submit">Siguiente</button>
+    </form>
   </div>
-  <!-- validar-codigo.component.html -->
-  <div class="container">
-    <div class="verify-container">
-        <h2>Verificar Código</h2>
-        <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
-        <label for="verificationCode">Código de Verificación</label>
-        <input id="verificationCode" formControlName="verificationCode" type="text" required>
-        <button type="submit">Verificar</button>
-        </form>
-    </div>
+</div>
+<div class="footer">
+  <div class="footer-column">
+    <div>Horizon Bank</div>
   </div>
-  <div class="footer">
-    <div class="footer-column">
-      <div>Horizon Bank</div>
+  <div class="footer-column">
+    <div class="mi-div">Ayuda y Contacto</div>
+    <div>+593999999999</div>
+    <div>
+      <a href="#">Facebook</a>
     </div>
-    <div class="footer-column">
-      <div class="mi-div">Ayuda y Contacto</div>
-      <div>+593999999999</div>
-      <div>
-        <a href="#">Facebook</a>
-      </div>
-      <div>
-        <a href="#">Instagram</a>
-      </div>
-      <div>
-        <a href="#">LinkedIn</a>
-      </div>
+    <div>
+      <a href="#">Instagram</a>
     </div>
-    <div class="footer-column">
-      <div class="mi-div">Sobre Nosotros</div>
-      <div>Quienes Somos</div>
-      <div>Trabaja con Nosotros</div>
-      <div>Trasparencia</div>
-    </div>
-    <div class="footer-column">
-      <div class="mi-div">Mas Servicios</div>
-      <div>Transacciones en Linea</div>
+    <div>
+      <a href="#">LinkedIn</a>
     </div>
   </div>
+  <div class="footer-column">
+    <div class="mi-div">Sobre Nosotros</div>
+    <div>Quienes Somos</div>
+    <div>Trabaja con Nosotros</div>
+    <div>Transparencia</div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Mas Servicios</div>
+    <div>Transacciones en Linea</div>
+  </div>
+</div>
