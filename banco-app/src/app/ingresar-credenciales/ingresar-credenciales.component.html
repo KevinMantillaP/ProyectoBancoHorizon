@@ -1,0 +1,74 @@
+<div class="header">
+    <h2>Horizon Bank</h2>
+</div>
+<div class="main-content">
+    <div class="content">
+        <div class="container">
+            <h1>Registro</h1>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <!-- Nombre de Usuario Field -->
+                <div>
+                    <label for="nombreUsuario">Nombre de Usuario</label>
+                    <input id="nombreUsuario" formControlName="nombreUsuario" placeholder="Nombre de Usuario">
+                    <small *ngIf="loginForm.get('nombreUsuario')?.invalid && loginForm.get('nombreUsuario')?.touched">
+                        <span *ngIf="loginForm.get('nombreUsuario')?.errors?.['required']">Nombre de usuario es requerido</span>
+                    </small>
+                </div>
+
+                <!-- Contraseña Field -->
+                <div>
+                    <label for="contraseña">Contraseña</label>
+                    <input id="contraseña" type="password" formControlName="contraseña" placeholder="Contraseña">
+                    <small *ngIf="loginForm.get('contraseña')?.invalid && loginForm.get('contraseña')?.touched">
+                        <span *ngIf="loginForm.get('contraseña')?.errors?.['required']">Contraseña es requerida</span>
+                        <span *ngIf="loginForm.get('contraseña')?.errors?.['minlength']">Contraseña debe tener al menos 6 caracteres</span>
+                    </small>
+                </div>
+
+                <div>
+                    <label for="confirmarContraseña">Confirmar Contraseña</label>
+                    <input id="confirmarContraseña" type="password" formControlName="confirmarContraseña" placeholder="Confirmar Contraseña">
+                    <small *ngIf="loginForm.get('confirmarContraseña')?.invalid && loginForm.get('confirmarContraseña')?.touched">
+                        <span *ngIf="loginForm.get('confirmarContraseña')?.errors?.['required']">Confirmar contraseña es requerida</span>
+                    </small>
+                    <small *ngIf="loginForm.errors?.['mismatch'] && loginForm.get('confirmarContraseña')?.touched">
+                        <span>Las contraseñas no coinciden</span>
+                    </small>
+                </div>
+
+                <div class="button-container">
+                    <button (click)="redirectTo('')">Regresar</button>
+                    <button type="submit">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-column">
+        <div>Horizon Bank</div>
+    </div>
+    <div class="footer-column">
+        <div class="mi-div">Ayuda y Contacto</div>
+        <div>+593999999999</div>
+        <div>
+            <a href="#">Facebook</a>
+        </div>
+        <div>
+            <a href="#">Instagram</a>
+        </div>
+        <div>
+            <a href="#">LinkedIn</a>
+        </div>
+    </div>
+    <div class="footer-column">
+        <div class="mi-div">Sobre Nosotros</div>
+        <div>Quienes Somos</div>
+        <div>Trabaja con Nosotros</div>
+        <div>Transparencia</div>
+    </div>
+    <div class="footer-column">
+        <div class="mi-div">Mas Servicios</div>
+        <div>Transacciones en Linea</div>
+    </div>
+</div>

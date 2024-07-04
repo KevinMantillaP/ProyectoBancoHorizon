@@ -46,7 +46,7 @@ export class RegistrarUsuarioComponent {
   onSubmit() {
     if (this.registroForm.valid) {
       const correo = this.registroForm.value.correo;
-      
+      const cedula = this.registroForm.value.cedula;
       this.usuarioService.registrarUsuario(this.registroForm.value).subscribe(
         response => {
           this.emailService.sendVerificationEmail(correo).subscribe(
@@ -54,7 +54,7 @@ export class RegistrarUsuarioComponent {
               this.snackBar.open('Usuario registrado con éxito. Verifique su correo.', 'Cerrar', {
                 duration: 3000
               });
-              this.router.navigate(['/verificar-codigo'], { queryParams: { correo } });
+              this.router.navigate(['/verificar-codigo'], { queryParams: { correo, cedula} }, );
             },
             error => {
               this.snackBar.open('Error al enviar el correo de verificación', 'Cerrar', {

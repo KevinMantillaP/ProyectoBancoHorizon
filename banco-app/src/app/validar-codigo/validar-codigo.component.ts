@@ -17,11 +17,11 @@ import { CommonModule } from '@angular/common';
 export class VerificarCodigoComponent implements OnInit {
   verifyForm: FormGroup;
   correo: string = '';
+  cedula: string = '';
 
   constructor(
     private fb: FormBuilder,
     private emailService: EmailService,
-    private usuarioService: UsuarioService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router
@@ -38,6 +38,7 @@ export class VerificarCodigoComponent implements OnInit {
 
   ngOnInit(): void {
     this.correo = this.route.snapshot.queryParamMap.get('correo') || '';
+    this.cedula = this.route.snapshot.queryParamMap.get('cedula') || '';
   }
 
   onSubmit() {
@@ -55,7 +56,7 @@ export class VerificarCodigoComponent implements OnInit {
           this.snackBar.open('Código verificado con éxito', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/ingresar-credenciales']); // Redirigir a la página de inicio u otra página relevante
+          this.router.navigate(['/ingresar-credenciales'], { queryParams: { cedula: this.cedula } });
         },
         error => {
           this.snackBar.open('Código de verificación incorrecto', 'Cerrar', {

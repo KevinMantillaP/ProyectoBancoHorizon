@@ -23,6 +23,15 @@ export class UsuarioService {
     );
   }
 
+  crearLoginUsuario(loginData: any): Observable<any> {
+    const url = `${this.baseUrl}/loginUsuario`;
+    return this.http.post<any>(url, loginData).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError('Error al crear el login del usuario.');
+      })
+    );
+  }
+
   sendVerificationEmail(correo: string): Observable<any> {
     const url = `${this.baseUrl}/email/enviar-verificacion-correo`; // Endpoint para enviar correo de verificación
     return this.http.post(url, { correo });

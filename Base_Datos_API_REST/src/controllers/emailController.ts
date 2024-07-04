@@ -32,8 +32,6 @@ export const enviarCodigoVerificacion = async (req: Request, res: Response) => {
       { new: true, upsert: true }
     );
 
-    console.log('Cliente actualizado o creado:', cliente);
-
     // Obtener el access token
     const accessToken = await oauth2Client.getAccessToken();
 
@@ -65,11 +63,8 @@ export const enviarCodigoVerificacion = async (req: Request, res: Response) => {
     // Envía el correo usando nodemailer
     const result = await transporter.sendMail(mailOptions);
 
-    console.log('Correo enviado:', result);
-
     return res.status(200).json({ message: 'Correo de verificación enviado' });
   } catch (error) {
-    console.error('Error al enviar el correo:', (error as Error).message);
     return res.status(500).json({ message: 'Error al enviar el correo de verificación' });
   }
 };
@@ -77,34 +72,25 @@ export const enviarCodigoVerificacion = async (req: Request, res: Response) => {
 export const verificarCodigo = async (req: Request, res: Response) => {
   const { correo, verificationCode } = req.body;
 
-  console.log('Correo recibido:', correo);
-  console.log('Código de verificación recibido:', verificationCode);
-
   try {
     const cliente = await Cliente.findOne({ correo });
-
-    console.log('Cliente encontrado:', cliente);
 
     if (!cliente) {
       return res.status(404).json({ message: 'Cliente no encontrado' });
     }
 
-    console.log('Código de verificación almacenado:', cliente.verificationCode);
-    console.log('Código de verificación proporcionado:', verificationCode);
-
     if (cliente.verificationCode === verificationCode) {
       cliente.isVerified = true;
       cliente.verificationCode = undefined;
 
-      const updatedCliente = await cliente.save();
+      await cliente.save();
 
-      console.log('Cliente actualizado:', updatedCliente);
+    
       return res.status(200).json({ message: 'Código verificado con éxito' });
     } else {
       return res.status(400).json({ message: 'Código de verificación incorrecto' });
     }
   } catch (error) {
-    console.error('Error al verificar el código:', (error as Error).message);
     return res.status(500).json({ message: 'Error al verificar el código' });
   }
 };
