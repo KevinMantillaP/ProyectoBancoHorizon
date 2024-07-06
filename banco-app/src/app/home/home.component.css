@@ -79,8 +79,9 @@ body {
 }
 
 .why-choose-us h2 {
-    color: #1A61A0;
+    color: #29AECC;
     margin-bottom: 40px;
+    font-weight: bold;
 }
 
 .reasons {
@@ -193,7 +194,7 @@ body {
     align-items: center;
     background-color: #EFF7F8;
     padding: 20px;
-    border: 5px solid #1A61A0;
+    border: 5px solid #8ADBE5;
     margin: 15px;
     border-radius: 10px;
   }

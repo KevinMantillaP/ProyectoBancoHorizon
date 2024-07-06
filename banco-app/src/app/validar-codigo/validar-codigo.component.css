@@ -141,6 +141,10 @@ body, html {
     font-size: 18px;
     margin-bottom: 10px;
   }
+
+  .footer{
+    height: 45%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -154,5 +158,9 @@ body, html {
     height: 35px;
     font-size: 18px;
     margin-bottom: 8px;
+  }
+
+  .footer{
+    height: 45%;
   }
 }

@@ -32,6 +32,10 @@ export class UsuarioService {
     );
   }
 
+  loginUsuario(credentials: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, credentials);
+  }
+
   sendVerificationEmail(correo: string): Observable<any> {
     const url = `${this.baseUrl}/email/enviar-verificacion-correo`; // Endpoint para enviar correo de verificación
     return this.http.post(url, { correo });
