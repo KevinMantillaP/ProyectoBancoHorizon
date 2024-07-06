@@ -26,3 +26,17 @@ export const crearCuenta = async (req: Request, res: Response) => {
       res.status(500).json({ message: 'Error al crear la cuenta', error });
     }
 };
+
+export const verificarNumeroCuenta = async (req: Request, res: Response) => {
+    try {
+      const { numeroCuenta } = req.params;
+      const cuentaExistente = await Cuenta.findOne({ numeroCuenta });
+      res.json({ exists: !!cuentaExistente });
+    } catch (error) {
+      console.error('Error al verificar el número de cuenta:', error);
+      res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
+
+
+

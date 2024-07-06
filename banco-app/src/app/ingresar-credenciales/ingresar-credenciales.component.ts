@@ -78,6 +78,24 @@ export class IngresarCredencialesComponent implements OnInit{
       ? null : { 'mismatch': true };
   }
 
+  generateUniqueAccountNumber(callback: (numeroCuenta: string) => void) {
+    const numeroCuenta = this.generateAccountNumber();
+    this.cuentaService.verificarNumeroCuenta(numeroCuenta).subscribe(
+      exists => {
+        if (exists) {
+          this.generateUniqueAccountNumber(callback); // Recursivamente genera un nuevo número si ya existe
+        } else {
+          callback(numeroCuenta);
+        }
+      },
+      error => {
+        this.snackBar.open('Error al verificar el número de cuenta', 'Cerrar', {
+          duration: 3000
+        });
+      }
+    );
+  }
+  
   generateAccountNumber(): string {
     const randomDigits = Math.floor(100000000 + Math.random() * 900000000).toString();
     return `22${randomDigits}`;
