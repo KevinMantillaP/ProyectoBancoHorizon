@@ -11,17 +11,18 @@ export const getCuentas = async (req: Request, res: Response) => {
 };
 
 export const crearCuenta = async (req: Request, res: Response) => {
-    const nuevaCuenta = new Cuenta({
-        numeroCuenta: req.body.numeroCuenta,
-        tipoCuenta: req.body.tipoCuenta,
-        saldo: req.body.saldo,
-        idCliente: req.body.idCliente
-    });
-
     try {
-        const cuentaGuardada = await nuevaCuenta.save();
-        res.status(201).json(cuentaGuardada);
-    } catch (err: any) {
-        res.status(400).json({ message: err.message });
+      const { numeroCuenta, cedula, saldo, tipo } = req.body;
+      const nuevaCuenta = new Cuenta({
+        numeroCuenta,
+        cedula,
+        saldo,
+        tipo
+      });
+  
+      await nuevaCuenta.save();
+      res.status(201).json({ message: 'Cuenta creada con éxito', cuenta: nuevaCuenta });
+    } catch (error) {
+      res.status(500).json({ message: 'Error al crear la cuenta', error });
     }
 };

@@ -2,14 +2,14 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface ICuenta extends Document {
     numeroCuenta: string;
-    tipoCuenta: string;
+    tipo: string;
     saldo: number;
-    idCliente: string;
+    cedula: string;
 }
 
 const CuentaSchema: Schema = new Schema({
     numeroCuenta: { type: String, required: true, unique: true },
-    tipoCuenta: { type: String, required: true },
+    tipo: { type: String, required: true },
     saldo: { type: Number, required: true },
     cedula: { type: String, required: true, ref: 'Cliente' }
 }, { collection: 'Cuenta' });

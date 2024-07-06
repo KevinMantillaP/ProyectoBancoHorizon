@@ -7,12 +7,12 @@
     <p>Se ha enviado un correo con un código de confirmación a su correo</p>
     <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
       <div class="code-inputs">
-        <input type="text" maxlength="1" formControlName="code1">
-        <input type="text" maxlength="1" formControlName="code2">
-        <input type="text" maxlength="1" formControlName="code3">
-        <input type="text" maxlength="1" formControlName="code4">
-        <input type="text" maxlength="1" formControlName="code5">
-        <input type="text" maxlength="1" formControlName="code6">
+        <input type="text" maxlength="1" formControlName="code1" (input)="autoFocusNext($event, 'code2')" #code1>
+        <input type="text" maxlength="1" formControlName="code2" (input)="autoFocusNext($event, 'code3')" #code2>
+        <input type="text" maxlength="1" formControlName="code3" (input)="autoFocusNext($event, 'code4')" #code3>
+        <input type="text" maxlength="1" formControlName="code4" (input)="autoFocusNext($event, 'code5')" #code4>
+        <input type="text" maxlength="1" formControlName="code5" (input)="autoFocusNext($event, 'code6')" #code5>
+        <input type="text" maxlength="1" formControlName="code6" #code6>
       </div>
       <button type="submit">Siguiente</button>
     </form>

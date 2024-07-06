@@ -122,6 +122,20 @@ small {
     text-decoration: underline;
 }
 
+/* ingresar-credenciales.component.css */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    color: red;
+}
+
+li.valid {
+    color: green;
+}
+
 /* Flexbox for layout */
 body {
     display: flex;

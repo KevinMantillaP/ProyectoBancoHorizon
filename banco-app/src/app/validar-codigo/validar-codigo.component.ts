@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,6 +18,13 @@ export class VerificarCodigoComponent implements OnInit {
   verifyForm: FormGroup;
   correo: string = '';
   cedula: string = '';
+
+  @ViewChild('code1') code1Input!: ElementRef;
+  @ViewChild('code2') code2Input!: ElementRef;
+  @ViewChild('code3') code3Input!: ElementRef;
+  @ViewChild('code4') code4Input!: ElementRef;
+  @ViewChild('code5') code5Input!: ElementRef;
+  @ViewChild('code6') code6Input!: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +46,31 @@ export class VerificarCodigoComponent implements OnInit {
   ngOnInit(): void {
     this.correo = this.route.snapshot.queryParamMap.get('correo') || '';
     this.cedula = this.route.snapshot.queryParamMap.get('cedula') || '';
+  }
+
+  autoFocusNext(event: Event, nextInputId: string) {
+    const input = event.target as HTMLInputElement;
+    if (input.value.length === 1) {
+      switch (nextInputId) {
+        case 'code2':
+          this.code2Input.nativeElement.focus();
+          break;
+        case 'code3':
+          this.code3Input.nativeElement.focus();
+          break;
+        case 'code4':
+          this.code4Input.nativeElement.focus();
+          break;
+        case 'code5':
+          this.code5Input.nativeElement.focus();
+          break;
+        case 'code6':
+          this.code6Input.nativeElement.focus();
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   onSubmit() {

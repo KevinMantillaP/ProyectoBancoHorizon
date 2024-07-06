@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
+import { CuentaService } from '../services/cuenta.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -17,23 +18,24 @@ import { CommonModule } from '@angular/common';
 export class IngresarCredencialesComponent implements OnInit{
   loginForm: FormGroup;
   cedula: string = '';
+  passwordCriteria = {
+    length: false,
+    uppercase: false,
+    number: false,
+    specialChar: false
+  };
 
-  // constructor(private fb: FormBuilder, private route: ActivatedRoute, private usuarioService: UsuarioService, private snackBar: MatSnackBar, private router: Router) {
-  //   this.loginForm = this.fb.group({
-  //     nombreUsuario: ['', Validators.required],
-  //     contraseña: ['', [Validators.required, Validators.minLength(6)]]
-  //   });
-  // }
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
+    private cuentaService: CuentaService,
     private snackBar: MatSnackBar,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
       nombreUsuario: ['', Validators.required],
-      contraseña: ['', [Validators.required, Validators.minLength(6)]],
+      contraseña: ['', [Validators.required, this.passwordValidator.bind(this)]],
       confirmarContraseña: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });
   }
@@ -42,13 +44,45 @@ export class IngresarCredencialesComponent implements OnInit{
     this.route.queryParams.subscribe(params => {
       this.cedula = params['cedula'];
     });
+
+    this.loginForm.get('contraseña')?.valueChanges.subscribe(value => {
+      this.passwordCriteria = {
+        length: value.length >= 6,
+        uppercase: /[A-Z]/.test(value),
+        number: /[0-9]/.test(value),
+        specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(value)
+      };
+    });
   }
+
+  passwordValidator(control: any) {
+    const value = control.value;
+    if (!value) return null;
+
+    const lengthValid = value.length >= 6;
+    const uppercaseValid = /[A-Z]/.test(value);
+    const numberValid = /[0-9]/.test(value);
+    const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+
+    if (lengthValid && uppercaseValid && numberValid && specialCharValid) {
+      return null;
+    } else {
+      return { passwordInvalid: true };
+    }
+  }
+
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('contraseña');
     const confirmPassword = form.get('confirmarContraseña');
     return password && confirmPassword && password.value === confirmPassword.value
       ? null : { 'mismatch': true };
   }
+
+  generateAccountNumber(): string {
+    const randomDigits = Math.floor(100000000 + Math.random() * 900000000).toString();
+    return `22${randomDigits}`;
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
       const idUsuario = Math.floor(Math.random() * 1000000000).toString();   // Generar ID aleatorio
@@ -65,7 +99,27 @@ export class IngresarCredencialesComponent implements OnInit{
           this.snackBar.open('Login de usuario creado con éxito.', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/']); // Redirigir a la página de inicio o donde desees
+          // Crear la cuenta automáticamente después de crear el login
+          const accountData = {
+            numeroCuenta: this.generateAccountNumber(),
+            cedula: this.cedula,
+            saldo: 0,
+            tipo: 'ahorro'
+          };
+
+          this.cuentaService.crearCuenta(accountData).subscribe(
+            accountResponse => {
+              this.snackBar.open('Cuenta creada con éxito.', 'Cerrar', {
+                duration: 3000
+              });
+              this.router.navigate(['/']); // Redirigir a la página de inicio o donde desees
+            },
+            accountError => {
+              this.snackBar.open('Error al crear la cuenta', 'Cerrar', {
+                duration: 3000
+              });
+            }
+          );
         },
         error => {
           this.snackBar.open('Error al crear el login del usuario', 'Cerrar', {
