@@ -34,17 +34,16 @@ export class LoginComponent {
       this.authService.login(nombreUsuario, contraseña).subscribe(
         response => {
           console.log('Inicio de sesión exitoso:', response);
-          this.router.navigate(['/']); // Ajusta la ruta según tus necesidades
+          this.router.navigate(['/visualizacion-saldo']); // Ajusta la ruta según tus necesidades
         },
         error => {
           if (error.status === 401) {
-            this.errorMessage = 'Contraseña incorrecta'; // Mensaje para credenciales incorrectas
-          } if (error.status == 404) {
-            this.errorMessage = 'Usuario incorrecto'
+            this.errorMessage = 'Contraseña incorrecta';
+          } else if (error.status == 404) {
+            this.errorMessage = 'Usuario incorrecto';
+          } else {
+            this.errorMessage = 'Error en el inicio de sesión';
           }
-          // else {
-          //   this.errorMessage = 'Error en el inicio de sesión'; // Otro tipo de error
-          // }
           console.error('Error en el login:', error);
         }
       );

@@ -35,7 +35,15 @@ export class UsuarioService {
   loginUsuario(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
-
+  getCuentasByCedula(cedula: string): Observable<any> {
+    const url = `${this.baseUrl}/cuenta?cedula=${cedula}`;
+    return this.http.get<any>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+  getCurrentUser(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/usuario`); // Ajusta la ruta según tu backend
+  }
   sendVerificationEmail(correo: string): Observable<any> {
     const url = `${this.baseUrl}/email/enviar-verificacion-correo`; // Endpoint para enviar correo de verificación
     return this.http.post(url, { correo });
