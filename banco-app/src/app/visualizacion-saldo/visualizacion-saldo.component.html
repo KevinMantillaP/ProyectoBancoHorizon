@@ -1,0 +1,48 @@
+<div class="header">
+    <h2>Horizon Bank</h2>
+  </div>
+  <div class="content">
+    <div class="welcome">
+        <h2>¡Bienvenid&#64;, {{ usuario.nombre }}!</h2>
+        <p>{{ usuario.nombre }}</p>
+    </div>
+    <hr class="separator">
+    <div class="container">
+        <div class="account-info">
+            <div class="account" *ngFor="let cuenta of cuentas">
+                <p>{{ cuenta.tipoCuenta }}</p>
+                <p>{{ cuenta.numeroCuenta }}</p>
+                <p>{{ cuenta.saldo | currency }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <button (click)="redirectTo('/')">Regresar</button>
+        <button (click)="redirectTo('/')">Actualización de datos</button>
+        <button (click)="redirectTo('/')">Agregar cuenta</button>
+        <button (click)="redirectTo('/')">Cerrar cuenta</button>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-column">
+        <div>Horizon Bank</div>
+    </div>
+    <div class="footer-column">
+        <div class="mi-div">Ayuda y Contacto</div>
+        <div>+593999999999</div>
+        <div><a href="#">Facebook</a></div>
+        <div><a href="#">Instagram</a></div>
+        <div><a href="#">LinkedIn</a></div>
+    </div>
+    <div class="footer-column">
+        <div class="mi-div">Sobre Nosotros</div>
+        <div>Quiénes Somos</div>
+        <div>Trabaja con Nosotros</div>
+        <div>Transparencia</div>
+    </div>
+    <div class="footer-column">
+        <div class="mi-div">Más Servicios</div>
+        <div>Transacciones en Línea</div>
+    </div>
+  </div>
+  

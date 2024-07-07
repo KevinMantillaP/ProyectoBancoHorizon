@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import Cuenta from '../models/Cuenta';
 
 export const getCuentas = async (req: Request, res: Response) => {
+  const { cedula } = req.query;
     try {
-        const cuentas = await Cuenta.find();
+      const cuentas = await Cuenta.find({ cedula });
         res.json(cuentas);
     } catch (err: any) {
         res.status(500).json({ message: err.message });
