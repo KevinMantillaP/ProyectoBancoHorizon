@@ -1,0 +1,50 @@
+<div class="header">
+  <h2>Horizon Bank</h2>
+</div>
+<div class="content">
+  <div class="verify-container"> 
+    <h2>Verificar Código</h2>
+    <p>Ingrese el codigo que se envió a su correo</p>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="code-inputs">
+        <input type="text" maxlength="1" formControlName="code1" (input)="autoFocusNext($event, 'code2')" #code1>
+        <input type="text" maxlength="1" formControlName="code2" (input)="autoFocusNext($event, 'code3')" #code2>
+        <input type="text" maxlength="1" formControlName="code3" (input)="autoFocusNext($event, 'code4')" #code3>
+        <input type="text" maxlength="1" formControlName="code4" (input)="autoFocusNext($event, 'code5')" #code4>
+        <input type="text" maxlength="1" formControlName="code5" (input)="autoFocusNext($event, 'code6')" #code5>
+        <input type="text" maxlength="1" formControlName="code6" #code6>
+      </div>
+      <button type="submit">Verificar Código</button>
+    </form>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-column">
+    <div>Horizon Bank</div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Ayuda y Contacto</div>
+    <div>+593999999999</div>
+    <div>
+      <a href="#">Facebook</a>
+    </div>
+    <div>
+      <a href="#">Instagram</a>
+    </div>
+    <div>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Sobre Nosotros</div>
+    <div>Quienes Somos</div>
+    <div>Trabaja con Nosotros</div>
+    <div>Transparencia</div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Mas Servicios</div>
+    <div>Transacciones en Linea</div>
+  </div>
+</div>
+
+   

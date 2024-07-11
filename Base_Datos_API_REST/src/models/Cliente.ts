@@ -14,6 +14,7 @@ export interface ICliente extends Document {
     calleSecundaria: string;
     verificationCode?: string;
     isVerified?: boolean;
+    recoveryCode?: string;
 }
 
 const ClienteSchema: Schema = new Schema({
@@ -47,7 +48,8 @@ const ClienteSchema: Schema = new Schema({
     callePrincipal: { type: String, required: true },
     calleSecundaria: { type: String, required: true },
     verificationCode: { type: String }, // Campo para almacenar el código de verificación
-    isVerified: { type: Boolean, default: false } 
+    isVerified: { type: Boolean, default: false },
+    recoveryCode: { type: String },
 }, { collection: 'Cliente' });
 
 const Cliente = mongoose.model<ICliente>('Cliente', ClienteSchema);

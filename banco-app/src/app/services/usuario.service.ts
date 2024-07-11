@@ -54,6 +54,18 @@ export class UsuarioService {
     return this.http.post(url, { correo, verificationCode });
   }
 
+  enviarCodigoRecuperacion(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/email/enviar-codigo-recuperacion`, data);
+  }
+
+  verificarCodigoRecuperacion(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/email/verificar-codigo-recuperacion`, data);
+  }
+
+  cambiarPassword(formData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/email/cambiar-password`, formData);
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
     if (error.error instanceof ErrorEvent) {

@@ -18,4 +18,4 @@ export class EmailService {
   verifyCode(correo: string, verificationCode: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/verificar-codigo`, { correo, verificationCode });
   }
-}
+} 
