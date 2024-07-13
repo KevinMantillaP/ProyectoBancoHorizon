@@ -96,3 +96,26 @@ export const loginUsuario = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'Error al iniciar sesión' });
   }
 };
+
+export const actualizarPassword = async (req: Request, res: Response) => {
+  const { nombreUsuario, nuevaPassword } = req.body;
+
+  try {
+    // Buscar el usuario en base a su nombre
+    const loginUsuario = await LoginUsuario.findOne({ nombreUsuario});
+    console.log('Cliente: ', nombreUsuario);
+    if (!loginUsuario) {
+      console.log('Usuario:', nombreUsuario);
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    // Actualizar la contraseña en el objeto LoginUsuario
+    const nuevaPasswordEncrip = await bcrypt.hash(nuevaPassword,10);
+    loginUsuario.contraseña = nuevaPasswordEncrip;
+    await loginUsuario.save();
+
+    return res.status(200).json({ message: 'Contraseña actualizada con éxito' });
+  } catch (error) {
+    console.log('Error al cambiar la contraseña:', error);
+    return res.status(500).json({ message: 'Error al cambiar la contraseña' });
+  }
+};

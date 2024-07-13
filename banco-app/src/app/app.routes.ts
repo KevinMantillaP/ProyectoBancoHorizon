@@ -10,6 +10,7 @@ import { VerificarCodigoRecuperacionComponent } from './verificar-codigo/verific
 import { NuevaPasswordComponent } from './nueva-password/nueva-password.component';
 import { AgregarCuentasComponent } from './agregar-cuentas/agregar-cuentas.component';
 import { TransferenciasComponent } from './transferencias/transferencias.component';
+import {CambioPasswordComponent} from './cambio-password/cambio-password.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'registrar-usuario', component: RegistrarUsuarioComponent},
@@ -22,7 +23,5 @@ export const routes: Routes = [
     { path: 'nueva-contraseña', component: NuevaPasswordComponent },
     { path: 'verificar-codigo-recuperacion/:correo', component: VerificarCodigoRecuperacionComponent },
     { path: 'crear-cuenta', component: AgregarCuentasComponent},
-
-    
-    { path: 'transferencias', component: TransferenciasComponent}
+    {path: 'cambio-password', component: CambioPasswordComponent }
 ];

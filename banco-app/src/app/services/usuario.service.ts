@@ -66,6 +66,7 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/email/cambiar-password`, formData);
   }
 
+
   actualizarSaldoCuenta(numeroCuenta: string, nuevoSaldo: number): Observable<any> {
     const url = `${this.baseUrl}/actualizar-saldo-cuenta`;
     const body = { numeroCuenta, nuevoSaldo };
@@ -79,6 +80,10 @@ export class UsuarioService {
     return this.http.post<any>(url, body).pipe(
       catchError(this.handleError)
     );
+  }
+  
+  actualizarPassword(formData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login/actualizar-password`,formData);
   }
 
   private handleError(error: HttpErrorResponse) {
