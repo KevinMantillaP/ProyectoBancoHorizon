@@ -66,6 +66,10 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/email/cambiar-password`, formData);
   }
 
+  actualizarPassword(formData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login/actualizar-password`,formData);
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
     if (error.error instanceof ErrorEvent) {
