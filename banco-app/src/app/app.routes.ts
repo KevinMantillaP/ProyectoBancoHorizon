@@ -9,8 +9,8 @@ import { RecuperarPasswordComponent } from './recuperar-password/recuperar-passw
 import { VerificarCodigoRecuperacionComponent } from './verificar-codigo/verificar-codigo.component';
 import { NuevaPasswordComponent } from './nueva-password/nueva-password.component';
 import { AgregarCuentasComponent } from './agregar-cuentas/agregar-cuentas.component';
+import { TransferenciasComponent } from './transferencias/transferencias.component';
 import {CambioPasswordComponent} from './cambio-password/cambio-password.component';
-
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'registrar-usuario', component: RegistrarUsuarioComponent},
@@ -22,6 +22,6 @@ export const routes: Routes = [
     { path: 'verificar-codigo-recuperacion', component: VerificarCodigoRecuperacionComponent },
     { path: 'nueva-contraseña', component: NuevaPasswordComponent },
     { path: 'verificar-codigo-recuperacion/:correo', component: VerificarCodigoRecuperacionComponent },
-    { path: 'cambio-password', component: CambioPasswordComponent },
-    { path: 'agregar-cuentas', component: CambioPasswordComponent }
+    { path: 'crear-cuenta', component: AgregarCuentasComponent},
+    {path: 'cambio-password', component: CambioPasswordComponent }
 ];
