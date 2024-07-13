@@ -1,0 +1,79 @@
+<div class="header">
+  <h2>Horizon Bank</h2>
+</div>
+
+<div class="content">
+  <div class="container">
+    <h1>Transferencias</h1>
+    <form (submit)="realizarTransferencia()">
+      <!-- Cuenta Origen Field -->
+      <div>
+        <label for="cuentaOrigen">Cuenta Origen</label>
+        <select id="cuentaOrigen" [(ngModel)]="cuentaOrigen" name="cuentaOrigen" (change)="onCuentaOrigenChange()" required>
+          <option *ngFor="let cuenta of cuentas" [ngValue]="cuenta.numeroCuenta">{{ cuenta.numeroCuenta }}</option>
+        </select>
+        <small *ngIf="!cuentaOrigen">Selecciona una cuenta origen</small>
+      </div>
+      <!-- Saldo de la cuenta Origen -->
+      <div *ngIf="cuentaOrigen">
+        <label>Saldo de la cuenta origen: {{ saldoCuentaOrigen | currency }}</label>
+      </div>
+      <!-- Cuenta Destino Field -->
+      <div>
+        <label for="cuentaDestino">Cuenta Destino</label>
+        <select id="cuentaDestino" [(ngModel)]="cuentaDestino" name="cuentaDestino" required>
+          <option *ngFor="let cuenta of cuentas" [ngValue]="cuenta.numeroCuenta">{{ cuenta.numeroCuenta }}</option>
+        </select>
+        <small *ngIf="!cuentaDestino">Selecciona una cuenta destino</small>
+      </div>
+
+      <!-- Monto Field -->
+      <div>
+        <label for="monto">Monto</label>
+        <input id="monto" type="number" [(ngModel)]="monto" name="monto" placeholder="Monto" required>
+        <small *ngIf="!monto">Ingresa el monto a transferir</small>
+      </div>
+
+      <!-- Descripción Field -->
+      <div>
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3" placeholder="Descripción"></textarea>
+        <small *ngIf="!descripcion">Ingresa la descripción de la transferencia</small>
+      </div>
+
+      <div class="button-container">
+        <button (click)="redirectTo('')">Regresar</button>
+        <button type="submit" [disabled]="!cuentaOrigen || !cuentaDestino || !monto || !descripcion">Transferir</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-column">
+    <div>Horizon Bank</div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Ayuda y Contacto</div>
+    <div>+593999999999</div>
+    <div>
+      <a href="#">Facebook</a>
+    </div>
+    <div>
+      <a href="#">Instagram</a>
+    </div>
+    <div>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Sobre Nosotros</div>
+    <div>Quienes Somos</div>
+    <div>Trabaja con Nosotros</div>
+    <div>Transparencia</div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Mas Servicios</div>
+    <div>Transacciones en Linea</div>
+  </div>
+</div>

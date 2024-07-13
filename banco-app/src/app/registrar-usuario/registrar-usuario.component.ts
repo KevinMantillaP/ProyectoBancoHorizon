@@ -21,8 +21,8 @@ export class RegistrarUsuarioComponent {
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private snackBar: MatSnackBar, private router: Router, private emailService: EmailService) {
     this.registroForm = this.fb.group({
       cedula: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
+      nombres: ['', [Validators.required, this.multipleWordsValidator]],
+      apellidos: ['', [Validators.required, this.multipleWordsValidator]],
       correo: ['', [Validators.required, Validators.email]],
       celular: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       fechaNacimiento: ['', [Validators.required, this.validateAge]],
@@ -32,6 +32,12 @@ export class RegistrarUsuarioComponent {
       calleSecundaria: ['', Validators.required]
     });
   }
+  multipleWordsValidator(control: FormControl) {
+    const value = control.value.trim();
+    const hasMultipleWords = value.split(' ').length > 1;
+    return hasMultipleWords ? null : { singleWord: true };
+  }
+
 
   validateAge(control: FormControl) {
     const today = moment().startOf('day'); // La fecha de hoy a las 00:00

@@ -66,6 +66,21 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/email/cambiar-password`, formData);
   }
 
+  actualizarSaldoCuenta(numeroCuenta: string, nuevoSaldo: number): Observable<any> {
+    const url = `${this.baseUrl}/actualizar-saldo-cuenta`;
+    const body = { numeroCuenta, nuevoSaldo };
+    return this.http.put<any>(url, body).pipe(
+      catchError(this.handleError)
+    );
+  }
+  realizarTransferencia(cuentaOrigen: string, cuentaDestino: string, monto: number): Observable<any> {
+    const url = `${this.baseUrl}/realizar-transferencia`;
+    const body = { cuentaOrigen, cuentaDestino, monto };
+    return this.http.post<any>(url, body).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
     if (error.error instanceof ErrorEvent) {

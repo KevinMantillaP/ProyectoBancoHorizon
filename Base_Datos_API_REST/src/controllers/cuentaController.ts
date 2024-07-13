@@ -55,5 +55,23 @@ export const verificarNumeroCuenta = async (req: Request, res: Response) => {
     }
 };
 
+export const actualizarSaldoCuenta = async (req: Request, res: Response) => {
+  try {
+    const { numeroCuenta, nuevoSaldo } = req.body;
 
+    const cuentaActualizada = await Cuenta.findOneAndUpdate(
+      { numeroCuenta },
+      { saldo: nuevoSaldo },
+      { new: true }
+    );
 
+    if (!cuentaActualizada) {
+      return res.status(404).json({ message: 'Cuenta no encontrada' });
+    }
+
+    res.json({ message: 'Saldo de cuenta actualizado correctamente', cuenta: cuentaActualizada });
+  } catch (error) {
+    console.error('Error al actualizar saldo de cuenta:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};

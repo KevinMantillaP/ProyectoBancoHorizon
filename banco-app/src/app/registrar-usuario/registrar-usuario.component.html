@@ -13,7 +13,7 @@
           <span *ngIf="registroForm.get('cedula')?.errors?.['required']">Cédula es requerida</span>
           <span *ngIf="registroForm.get('cedula')?.errors?.['pattern']">Cédula debe tener 10 dígitos</span>
         </small>
-      </div> 
+      </div>
 
       <!-- Nombres Field -->
       <div>
@@ -21,6 +21,7 @@
         <input id="nombres" formControlName="nombres" placeholder="Nombres">
         <small *ngIf="registroForm.get('nombres')?.invalid && registroForm.get('nombres')?.touched">
           <span *ngIf="registroForm.get('nombres')?.errors?.['required']">Nombres son requeridos</span>
+          <span *ngIf="registroForm.get('nombres')?.errors?.['singleWord']">Debe ingresar los dos nombres</span>
         </small>
       </div>
 
@@ -30,6 +31,7 @@
         <input id="apellidos" formControlName="apellidos" placeholder="Apellidos">
         <small *ngIf="registroForm.get('apellidos')?.invalid && registroForm.get('apellidos')?.touched">
           <span *ngIf="registroForm.get('apellidos')?.errors?.['required']">Apellidos son requeridos</span>
+          <span *ngIf="registroForm.get('apellidos')?.errors?.['singleWord']">Debe ingresar los dos apellidos</span>
         </small>
       </div>
 
@@ -59,7 +61,7 @@
         <input id="correo" formControlName="correo" placeholder="Correo">
         <small *ngIf="registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched">
           <span *ngIf="registroForm.get('correo')?.errors?.['required']">Correo es requerido</span>
-          <span *ngIf="registroForm.get('correo')?.errors?.['correo']">Correo no es válido</span>
+          <span *ngIf="registroForm.get('correo')?.errors?.['email']">Correo no es válido</span>
         </small>
       </div>
 
@@ -98,13 +100,15 @@
           <span *ngIf="registroForm.get('calleSecundaria')?.errors?.['required']">Calle secundaria es requerida</span>
         </small>
       </div>
+
       <div class="button-container">
         <button (click)="redirectTo('')">Regresar</button>
-        <button type="submit">Registrar</button>
+        <button type="submit" [disabled]="!registroForm.valid">Registrar</button>
       </div>
     </form>
   </div>
-</div> 
+</div>
+
 <div class="footer">
   <div class="footer-column">
     <div>Horizon Bank</div>
