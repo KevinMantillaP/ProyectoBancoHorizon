@@ -21,5 +21,7 @@ export const routes: Routes = [
     { path: 'recuperar-contraseña', component: RecuperarPasswordComponent },
     { path: 'verificar-codigo-recuperacion', component: VerificarCodigoRecuperacionComponent },
     { path: 'nueva-contraseña', component: NuevaPasswordComponent },
-    { path: 'verificar-codigo-recuperacion/:correo', component: VerificarCodigoRecuperacionComponent }
+    { path: 'verificar-codigo-recuperacion/:correo', component: VerificarCodigoRecuperacionComponent },
+    { path: 'cambio-password', component: CambioPasswordComponent },
+    { path: 'agregar-cuentas', component: CambioPasswordComponent }
 ];
