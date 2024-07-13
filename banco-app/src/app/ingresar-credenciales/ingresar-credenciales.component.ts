@@ -122,7 +122,7 @@ export class IngresarCredencialesComponent implements OnInit{
             numeroCuenta: this.generateAccountNumber(),
             cedula: this.cedula,
             saldo: 0,
-            tipo: 'ahorro'
+            tipo: 'Ahorro'
           };
 
           this.cuentaService.crearCuenta(accountData).subscribe(

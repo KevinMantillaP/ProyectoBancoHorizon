@@ -1,14 +1,30 @@
 import { Request, Response } from 'express';
 import Cuenta from '../models/Cuenta';
+import Cliente from '../models/Cliente';
 
 export const getCuentas = async (req: Request, res: Response) => {
   const { cedula } = req.query;
-    try {
-      const cuentas = await Cuenta.find({ cedula });
-        res.json(cuentas);
-    } catch (err: any) {
-        res.status(500).json({ message: err.message });
+  try {
+    const cuentas = await Cuenta.find({ cedula });
+    if (cuentas.length > 0) {
+      const cliente = await Cliente.findOne({ cedula });
+      if (cliente) {
+        const response = {
+          nombreCliente: cliente.nombres,
+          cuentas: cuentas.map(cuenta => ({
+            ...cuenta.toObject()
+          }))
+        };
+        res.json(response);
+      } else {
+        res.status(404).json({ message: 'Cliente no encontrado' });
+      }
+    } else {
+      res.status(404).json({ message: 'Cuentas no encontradas' });
     }
+  } catch (err: any) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 export const crearCuenta = async (req: Request, res: Response) => {
