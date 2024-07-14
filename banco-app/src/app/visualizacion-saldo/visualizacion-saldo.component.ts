@@ -19,7 +19,9 @@ export class VisualizacionSaldoComponent implements OnInit {
   selectedAccount: any = null;
   showAccounts: boolean = false;
 
-  constructor(private usuarioService: UsuarioService, private authService: AuthService, private router: Router) { }
+  constructor(private usuarioService: UsuarioService,
+    private authService: AuthService,
+    private router: Router){ }
 
   ngOnInit(): void {
     this.loadUserData();
@@ -56,7 +58,6 @@ export class VisualizacionSaldoComponent implements OnInit {
       this.cuentas.unshift(selectedAccount); // Agregar la cuenta al inicio del arreglo
       this.selectedAccount = selectedAccount; // Actualizar la cuenta seleccionada
     }
-
     this.showAccounts = false; // Ocultar el selector después de cambiar de cuenta
   }
 

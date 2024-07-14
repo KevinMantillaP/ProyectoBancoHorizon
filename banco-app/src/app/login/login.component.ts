@@ -30,10 +30,8 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const { nombreUsuario, contraseña } = this.loginForm.value;
-      console.log('Datos de inicio de sesión:', nombreUsuario, contraseña); // Agrega este console.log
       this.authService.login(nombreUsuario, contraseña).subscribe(
         response => {
-          console.log('Inicio de sesión exitoso:', response);
           this.router.navigate(['/visualizacion-saldo']); // Ajusta la ruta según tus necesidades
         },
         error => {

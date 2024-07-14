@@ -217,3 +217,42 @@ export const cambiarPassword = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'Error al cambiar la contraseña' });
   }
 };
+export const enviarNotificacionTransferencia = async (req: Request, res: Response) => {
+  const { correo, monto, cuentaOrigen, cuentaDestino } = req.body;
+
+  try {
+    // Obtener el access token
+    const accessToken = await oauth2Client.getAccessToken();
+    if (typeof accessToken.token !== 'string') {
+      throw new Error('No se pudo obtener el Access Token');
+    }
+
+    // Configuración del transporte de correo
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: process.env.GMAIL_USER, // Dirección de correo Gmail
+        clientId: process.env.GOOGLE_CLIENT_ID, // Client ID
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Client Secret
+        refreshToken: process.env.GOOGLE_REFRESH_TOKEN, // Refresh Token
+        accessToken: accessToken.token, // El token de acceso obtenido
+      },
+    });
+
+    // Configuración del correo
+    const mailOptions = {
+      from: `Horizon Bank <${process.env.GMAIL_USER}>`, // Nombre y dirección de correo remitente
+      to: correo, // Dirección de correo destinatario
+      subject: 'Notificación de Transferencia',
+      html: `<strong>Se ha transferido un monto de ${monto}$ desde la cuenta ${cuentaOrigen} a la cuenta ${cuentaDestino}</strong>`,
+    };
+
+    // Envía el correo usando nodemailer
+    const result = await transporter.sendMail(mailOptions);
+
+    return res.status(200).json({ message: 'Correo de notificación enviado' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al enviar el correo de notificación' });
+  }
+};

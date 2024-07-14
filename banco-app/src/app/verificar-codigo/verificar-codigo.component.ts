@@ -42,7 +42,6 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.correo = params.get('correo') || '';
-      console.log('Correo obtenido de la URL:', this.correo);
     });
   }
 
@@ -78,9 +77,6 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
         correo: this.correo,
         verificationCode: verificationCode
       };
-
-      console.log('Datos enviados para verificación:', data);
-
       this.usuarioService.verificarCodigoRecuperacion(data).subscribe({
         next: (response) => {
           this.snackBar.open('Código verificado correctamente', 'Cerrar', {

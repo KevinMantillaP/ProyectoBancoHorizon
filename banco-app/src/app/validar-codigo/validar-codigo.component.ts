@@ -81,8 +81,6 @@ export class VerificarCodigoComponent implements OnInit {
                                this.verifyForm.value.code4 +
                                this.verifyForm.value.code5 +
                                this.verifyForm.value.code6;
-      console.log('Código de verificación ingresado:', verificationCode);
-
       this.emailService.verifyCode(this.correo, verificationCode).subscribe(
         () => {
           this.snackBar.open('Código verificado con éxito', 'Cerrar', {

@@ -71,25 +71,16 @@ export const loginUsuario = async (req: Request, res: Response) => {
   const { nombreUsuario, contraseña } = req.body;
 
   try {
-    console.log('Intento de inicio de sesión para:', nombreUsuario); // Agrega este console.log
     // Buscar el usuario por nombreUsuario
     const usuario = await LoginUsuario.findOne({ nombreUsuario });
     if (!usuario) {
-      console.log('Usuario no encontrado para:', nombreUsuario); // Agrega este console.log
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
-    // if (usuario.contraseña !== contraseña) {
-    //   return res.status(401).json({ message: 'Credenciales incorrectas' });
-    // }
-
     // Verificar la contraseña
     const contraseñaValida = await bcrypt.compare(contraseña, usuario.contraseña);
     if (!contraseñaValida) {
-      console.log('Contraseña incorrecta para:', nombreUsuario); // Agrega este console.log
       return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
-
-    console.log('Inicio de sesión exitoso para:', nombreUsuario); // Agrega este console.log
     return res.status(200).json({ message: 'Inicio de sesión exitoso', cedula: usuario.cedula });
   } catch (error) {
     console.error('Error al iniciar sesión:', (error as Error).message);
@@ -103,9 +94,7 @@ export const actualizarPassword = async (req: Request, res: Response) => {
   try {
     // Buscar el usuario en base a su nombre
     const loginUsuario = await LoginUsuario.findOne({ nombreUsuario});
-    console.log('Cliente: ', nombreUsuario);
     if (!loginUsuario) {
-      console.log('Usuario:', nombreUsuario);
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
     // Actualizar la contraseña en el objeto LoginUsuario
@@ -115,7 +104,6 @@ export const actualizarPassword = async (req: Request, res: Response) => {
 
     return res.status(200).json({ message: 'Contraseña actualizada con éxito' });
   } catch (error) {
-    console.log('Error al cambiar la contraseña:', error);
     return res.status(500).json({ message: 'Error al cambiar la contraseña' });
   }
 };

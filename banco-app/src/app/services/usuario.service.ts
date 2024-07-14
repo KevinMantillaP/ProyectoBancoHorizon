@@ -35,15 +35,18 @@ export class UsuarioService {
   loginUsuario(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
+
   getCuentasByCedula(cedula: string): Observable<any> {
     const url = `${this.baseUrl}/cuenta?cedula=${cedula}`;
     return this.http.get<any>(url).pipe(
       catchError(this.handleError)
     );
   }
+
   getCurrentUser(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/usuario`); // Ajusta la ruta según tu backend
   }
+
   sendVerificationEmail(correo: string): Observable<any> {
     const url = `${this.baseUrl}/email/enviar-verificacion-correo`; // Endpoint para enviar correo de verificación
     return this.http.post(url, { correo });
@@ -66,6 +69,9 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/email/cambiar-password`, formData);
   }
 
+  obtenerEmailPorCedula(cedula: string): Observable<{ email: string }> {
+    return this.http.get<{ email: string }>(`${this.baseUrl}/usuario/email?cedula=${cedula}`);
+  }
 
   actualizarSaldoCuenta(numeroCuenta: string, nuevoSaldo: number): Observable<any> {
     const url = `${this.baseUrl}/actualizar-saldo-cuenta`;
@@ -74,6 +80,7 @@ export class UsuarioService {
       catchError(this.handleError)
     );
   }
+  
   realizarTransferencia(cuentaOrigen: string, cuentaDestino: string, monto: number): Observable<any> {
     const url = `${this.baseUrl}/realizar-transferencia`;
     const body = { cuentaOrigen, cuentaDestino, monto };

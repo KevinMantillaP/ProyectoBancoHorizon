@@ -18,7 +18,11 @@ import { EmailService } from '../services/email-validation.service';
 export class RegistrarUsuarioComponent {
   registroForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private snackBar: MatSnackBar, private router: Router, private emailService: EmailService) {
+  constructor(private fb: FormBuilder,
+    private usuarioService: UsuarioService, 
+    private snackBar: MatSnackBar, 
+    private router: Router, 
+    private emailService: EmailService){
     this.registroForm = this.fb.group({
       cedula: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       nombres: ['', [Validators.required, this.multipleWordsValidator]],
@@ -38,7 +42,6 @@ export class RegistrarUsuarioComponent {
     return hasMultipleWords ? null : { singleWord: true };
   }
 
-
   validateAge(control: FormControl) {
     const today = moment().startOf('day'); // La fecha de hoy a las 00:00
     const inputDate = moment(control.value).startOf('day'); // La fecha de nacimiento a las 00:00
@@ -47,7 +50,6 @@ export class RegistrarUsuarioComponent {
 
     return age >= 18 ? null : { ageInvalid: true };
   }
-
 
   onSubmit() {
     if (this.registroForm.valid) {

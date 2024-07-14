@@ -97,3 +97,16 @@ export const eliminarCliente = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
+
+export const obtenerEmailPorCedula = async (req: Request, res: Response) => {
+    const { cedula } = req.query;
+    try {
+        const usuario = await Cliente.findOne({ cedula });
+        if (!usuario) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+        res.json({ email: usuario.correo });
+    } catch (error) {
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+};

@@ -18,4 +18,8 @@ export class EmailService {
   verifyCode(correo: string, verificationCode: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/verificar-codigo`, { correo, verificationCode });
   }
+
+  sendTransferNotification(correo: string, monto: number, cuentaOrigen: string, cuentaDestino: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/enviar-notificacion-transferencia`, { correo, monto, cuentaOrigen, cuentaDestino });
+  }
 } 

@@ -4,6 +4,7 @@ import { UsuarioService } from '../services/usuario.service';
 import { Router,ActivatedRoute  } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { EmailService } from '../services/email-validation.service';
 
 @Component({
   selector: 'app-transferencias',
@@ -22,11 +23,13 @@ export class TransferenciasComponent implements OnInit {
   descripcion: string = '';
   cedula: string | null = null;
   saldoCuentaOrigen: number = 0;
+  emailUsuario: string = '';
 
 
   constructor(
     private transferenciaService: TransferenciaService,
     private usuarioService: UsuarioService,
+    private emailService: EmailService,
     private router: Router,
     private route: ActivatedRoute 
   ) { }
@@ -48,6 +51,16 @@ export class TransferenciasComponent implements OnInit {
             console.error('Error al obtener cuentas:', error);
           }
         );
+
+        // Obtener email por cédula
+        this.usuarioService.obtenerEmailPorCedula(this.cedula).subscribe(
+          (response) => {
+            this.emailUsuario = response.email;
+          },
+          (error) => {
+            console.error('Error al obtener email:', error);
+          }
+        );
       }
     });
   }
@@ -60,14 +73,14 @@ export class TransferenciasComponent implements OnInit {
   onCuentaOrigenChange(): void {
     this.actualizarSaldoCuentaOrigen();
   }
-  
+
   realizarTransferencia(): void {
     const saldoActual = this.cuentas.find(cuenta => cuenta.numeroCuenta === this.cuentaOrigen)?.saldo || 0;
     const saldoRestante = saldoActual - this.monto;
     this.usuarioService.realizarTransferencia(this.cuentaOrigen, this.cuentaDestino, this.monto).subscribe(
       () => {
         console.log('Saldo de cuenta actualizado correctamente en el backend');
-        const descripcion = this.descripcion.trim() === ' ' ? ' ' : this.descripcion;
+        const descripcion = this.descripcion.trim() === '' ? '' : this.descripcion;
         const transferenciaData = {
           idTransferencia: this.generarIdTransferencia(),
           monto: this.monto,
@@ -80,7 +93,16 @@ export class TransferenciasComponent implements OnInit {
         this.transferenciaService.realizarTransferencia(transferenciaData).subscribe(
           (response) => {
             console.log('Transferencia realizada con éxito', response);
-            this.redirectToVisualizarSaldo();
+            // Enviar la notificación de transferencia por correo electrónico
+            this.emailService.sendTransferNotification(this.emailUsuario, this.monto, this.cuentaOrigen, this.cuentaDestino).subscribe(
+              (response) => {
+                console.log('Notificación de transferencia enviada con éxito', response);
+                this.redirectToVisualizarSaldo();
+              },
+              (error) => {
+                console.error('Error al enviar la notificación de transferencia', error);
+              }
+            );
           },
           (error) => {
             console.error('Error al realizar la transferencia', error);
@@ -92,6 +114,7 @@ export class TransferenciasComponent implements OnInit {
       }
     );
   }
+
 
   private generarIdTransferencia(): string {
     const caracteres = '0123456789';

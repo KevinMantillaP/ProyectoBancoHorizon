@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,6 +14,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NuevaPasswordComponent implements OnInit {
   form: FormGroup;
   correo: string = '';
+  passwordCriteria = {
+    length: false,
+    uppercase: false,
+    number: false,
+    specialChar: false
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -23,17 +29,45 @@ export class NuevaPasswordComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.form = this.fb.group({
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]],
+      password: ['', [Validators.required, this.passwordValidator.bind(this)]],
       confirmPassword: ['', Validators.required]
-    }, {
-      validator: this.mustMatch('password', 'confirmPassword')
-    });
+    }, {validator: this.mustMatch('password', 'confirmPassword')});
+  }
+
+  passwordValidator(control: AbstractControl) {
+    const value = control.value;
+    if (!value) {
+      this.passwordCriteria = {
+        length: false,
+        uppercase: false,
+        number: false,
+        specialChar: false
+      };
+      return null;
+    }
+  
+    const lengthValid = value.length >= 6;
+    const uppercaseValid = /[A-Z]/.test(value);
+    const numberValid = /[0-9]/.test(value);
+    const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+  
+    this.passwordCriteria = {
+      length: lengthValid,
+      uppercase: uppercaseValid,
+      number: numberValid,
+      specialChar: specialCharValid
+    };
+  
+    if (lengthValid && uppercaseValid && numberValid && specialCharValid) {
+      return null;
+    } else {
+      return { passwordInvalid: true };
+    }
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.correo = params['correo'] || '';
-      console.log('Correo obtenido de la URL:', this.correo);
     });
   }
 
@@ -59,7 +93,6 @@ export class NuevaPasswordComponent implements OnInit {
         nuevaPassword: this.form.get('password')!.value
       };
   
-      console.log('Datos enviados para cambiar contraseña:', formData);
   
       this.usuarioService.cambiarPassword(formData).subscribe({
         next: (response) => {

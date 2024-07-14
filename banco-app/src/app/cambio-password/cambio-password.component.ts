@@ -76,18 +76,13 @@ export class CambioPasswordComponent implements OnInit{
   onSubmit() {
     if (this.form.valid) {
       const { passwordActual} = this.form.value;
-      console.log('Datos de inicio de sesión:', passwordActual); // Agrega este console.log
       this.authService.verificarPassword(passwordActual).subscribe(
         response => {
-          console.log('Inicio de sesión exitoso:', response);
           if (this.form && this.form.get('passwordNueva') && this.form.valid) {
             const formData = {
               nombreUsuario: this.authService.getUserNombre(),
               nuevaPassword: this.form.get('passwordNueva')!.value
             };
-        
-            console.log('Datos enviados para cambiar contraseña:', formData);
-        
             this.usuarioService.actualizarPassword(formData).subscribe({
               next: (response) => {
                 this.snackBar.open('Contraseña restablecida con éxito', 'Cerrar', {
