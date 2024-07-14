@@ -72,6 +72,65 @@ body {
     font-size: 24px;
 }
 
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.carousel img {
+  width: 1100px;/* Ajusta esta altura máxima según sea necesario */
+  display: block;
+  object-fit: cover;
+  border: 1px solid #9FDDF4;
+}
+
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  color: #7ad2e6; /* Color celeste */
+  border: none;
+  padding: 20px; /* Tamaño aumentado */
+  cursor: pointer;
+  font-size: 6em; /* Tamaño del icono aumentado */
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-button:hover {
+  color: #5ebcd2; /* Un color celeste un poco más oscuro para el hover */
+}
+
+.carousel-button.prev {
+  left: -17px; /* Separación del borde izquierdo */
+}
+
+.carousel-button.next {
+  right: -15px; /* Separación del borde derecho */
+}
+
 /* Why Choose Us Section */
 .why-choose-us {
     text-align: center;

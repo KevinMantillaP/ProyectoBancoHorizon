@@ -26,8 +26,10 @@
                     Saldo inicial es requerido y debe ser un número positivo
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary" [disabled]="cuentaForm.invalid">Agregar Cuenta</button>
+            <div class="button-container">
+                <button type="button" class="btn" (click)="redirectTo('/visualizacion-saldo')">Regresar</button>
+                <button type="submit" class="btn btn-primary" [disabled]="cuentaForm.invalid">Agregar Cuenta</button>
+            </div>
         </form>
     </div>
 </div> <!-- Cierre del contenedor content -->

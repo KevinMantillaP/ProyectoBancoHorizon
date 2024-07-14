@@ -19,9 +19,11 @@ export class VisualizacionSaldoComponent implements OnInit {
   selectedAccount: any = null;
   showAccounts: boolean = false;
 
-  constructor(private usuarioService: UsuarioService,
+  constructor(
+    private usuarioService: UsuarioService,
     private authService: AuthService,
-    private router: Router){ }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadUserData();
@@ -46,31 +48,13 @@ export class VisualizacionSaldoComponent implements OnInit {
     }
   }
 
-  onAccountChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const selectedNumeroCuenta = selectElement.value;
-    const selectedAccountIndex = this.cuentas.findIndex(cuenta => cuenta.numeroCuenta === selectedNumeroCuenta);
-
-    if (selectedAccountIndex !== -1) {
-      const selectedAccount = this.cuentas[selectedAccountIndex];
-      // Mover la cuenta seleccionada al principio del arreglo
-      this.cuentas.splice(selectedAccountIndex, 1); // Eliminar la cuenta de su posición actual
-      this.cuentas.unshift(selectedAccount); // Agregar la cuenta al inicio del arreglo
-      this.selectedAccount = selectedAccount; // Actualizar la cuenta seleccionada
-    }
-    this.showAccounts = false; // Ocultar el selector después de cambiar de cuenta
+  selectAccount(cuenta: any): void {
+    this.selectedAccount = cuenta;
+    this.showAccounts = false;
   }
 
   toggleAccounts(): void {
-    this.showAccounts = !this.showAccounts; // Alternar la visibilidad del selector de cuentas
-    if (this.showAccounts) {
-      setTimeout(() => {
-        const selectElement = document.querySelector('select');
-        if (selectElement) {
-          selectElement.focus();
-        }
-      }, 0);
-    }
+    this.showAccounts = !this.showAccounts;
   }
 
   redirectTo(route: string): void {

@@ -90,4 +90,7 @@ export class AgregarCuentasComponent implements OnInit {
       this.snackBar.open('Por favor complete todos los campos correctamente', 'Cerrar', { duration: 3000 });
     }
   }
+  redirectTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

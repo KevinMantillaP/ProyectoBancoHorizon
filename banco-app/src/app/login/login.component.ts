@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/autenticacion.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaModule, RecaptchaComponent } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +14,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
   imports: [ReactiveFormsModule, CommonModule, RecaptchaModule]
 })
 export class LoginComponent {
+  @ViewChild('captchaRef') captchaRef!: RecaptchaComponent; // Cambiar aquí
   loginForm: FormGroup;
   errorMessage: string = '';
   reCaptchaSiteKey = '6LfpXQ8qAAAAAPVmaTmsOlb2-LhQtV7GzUCxlyxb'; // Reemplaza con tu clave de sitio
@@ -33,7 +34,7 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const { nombreUsuario, contraseña, recaptcha } = this.loginForm.value;
-      
+
       this.authService.login(nombreUsuario, contraseña, recaptcha).subscribe(
         response => {
           this.router.navigate(['/visualizacion-saldo']); // Ajusta la ruta según tus necesidades
@@ -47,6 +48,7 @@ export class LoginComponent {
             this.errorMessage = 'Error en el inicio de sesión';
           }
           console.error('Error en el login:', error);
+          this.resetCaptcha(); // Llamar a resetCaptcha en caso de error
         }
       );
     } else {
@@ -60,6 +62,10 @@ export class LoginComponent {
     } else {
       this.loginForm.patchValue({ recaptcha: '' });
     }
+  }
+
+  resetCaptcha() {
+    this.captchaRef.reset(); // Reiniciar el captcha
   }
 
   redirectTo(route: string) {

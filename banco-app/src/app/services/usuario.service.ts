@@ -93,6 +93,15 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/login/actualizar-password`,formData);
   }
 
+  verificarCorreo(correo: string): Observable<any> {
+    const url = `${this.baseUrl}/verificar-correo?correo=${correo}`;
+    return this.http.get<any>(url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError('Error al verificar el correo.');
+      })
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
     if (error.error instanceof ErrorEvent) {

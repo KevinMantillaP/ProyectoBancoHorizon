@@ -9,7 +9,7 @@ export const getClientes = async (req: Request, res: Response) => {
         res.status(500).json({ message: err.message });
     }
 };
-
+ 
 export const crearCliente = async (req: Request, res: Response) => {
     const { cedula, nombres, apellidos, celular, correo, fechaNacimiento, provincia, ciudad, callePrincipal, calleSecundaria } = req.body;
 
@@ -110,3 +110,16 @@ export const obtenerEmailPorCedula = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 };
+
+export const verificarCorreo = async (req: Request, res: Response) => {
+    const { correo } = req.query;
+    try {
+      const cliente = await Cliente.findOne({ correo });
+      if (cliente) {
+        return res.status(409).json({ message: 'El correo ya está registrado.' });
+      }
+      res.status(200).json({ message: 'El correo está disponible.' });
+    } catch (err: any) {
+      res.status(500).json({ message: err.message });
+    }
+  };

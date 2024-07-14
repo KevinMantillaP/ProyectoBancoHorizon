@@ -36,6 +36,7 @@ export class RegistrarUsuarioComponent {
       calleSecundaria: ['', Validators.required]
     });
   }
+
   multipleWordsValidator(control: FormControl) {
     const value = control.value.trim();
     const hasMultipleWords = value.split(' ').length > 1;
@@ -55,25 +56,38 @@ export class RegistrarUsuarioComponent {
     if (this.registroForm.valid) {
       const correo = this.registroForm.value.correo;
       const cedula = this.registroForm.value.cedula;
-      this.usuarioService.registrarUsuario(this.registroForm.value).subscribe(
+      
+      // Verificar si el correo ya está registrado
+      this.usuarioService.verificarCorreo(correo).subscribe(
         response => {
-          this.emailService.sendVerificationEmail(correo).subscribe(
-            () => {
-              this.snackBar.open('Usuario registrado con éxito. Verifique su correo.', 'Cerrar', {
-                duration: 3000
-              });
-              this.router.navigate(['/verificar-codigo'], { queryParams: { correo, cedula} }, );
+          // Si el correo no está registrado, continuar con el registro
+          this.usuarioService.registrarUsuario(this.registroForm.value).subscribe(
+            response => {
+              this.emailService.sendVerificationEmail(correo).subscribe(
+                () => {
+                  this.snackBar.open('Usuario registrado con éxito. Verifique su correo.', 'Cerrar', {
+                    duration: 3000
+                  });
+                  this.router.navigate(['/verificar-codigo'], { queryParams: { correo, cedula} });
+                },
+                error => {
+                  this.snackBar.open('Error al enviar el correo de verificación', 'Cerrar', {
+                    duration: 3000
+                  });
+                }
+              );
+              this.registroForm.reset();
             },
             error => {
-              this.snackBar.open('Error al enviar el correo de verificación', 'Cerrar', {
+              this.snackBar.open(error, 'Cerrar', { // Mostrar mensaje de error específico
                 duration: 3000
               });
             }
           );
-          this.registroForm.reset();
         },
         error => {
-          this.snackBar.open(error, 'Cerrar', { // Mostrar mensaje de error específico
+          // Si el correo ya está registrado, mostrar mensaje de error
+          this.snackBar.open('El correo ya está registrado.', 'Cerrar', {
             duration: 3000
           });
         }

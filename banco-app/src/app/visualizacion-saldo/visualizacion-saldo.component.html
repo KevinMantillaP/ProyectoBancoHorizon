@@ -9,20 +9,28 @@
   <hr class="separator">
   <div class="container">
     <div class="account-info">
-      <div *ngIf="selectedAccount" class="account-details-wrapper">
+      <div class="account-details-wrapper" (click)="toggleAccounts()" *ngIf="selectedAccount">
         <div class="account-details">
           <p>{{ selectedAccount.tipo }}</p>
           <p>Número de cuenta: {{ selectedAccount.numeroCuenta }}</p>
         </div>
         <div class="account-balance">
           <p><strong>{{ selectedAccount.saldo | currency }}</strong></p>
-          <button (click)="toggleAccounts()"><i class="fas fa-caret-down"></i></button>
+          <button *ngIf="cuentas.length > 1"><i class="fas" [ngClass]="showAccounts ? 'fa-caret-up' : 'fa-caret-down'"></i></button>
         </div>
       </div>
       <div class="showAccounts" *ngIf="showAccounts">
-        <select (change)="onAccountChange($event)">
-          <option *ngFor="let cuenta of cuentas" [value]="cuenta.numeroCuenta">{{ cuenta.numeroCuenta }}</option>
-        </select>
+        <ul>
+          <li *ngFor="let cuenta of cuentas" (click)="selectAccount(cuenta)">
+            <div class="account-details">
+              <p>{{ cuenta.tipo }}</p>
+              <p>{{ cuenta.numeroCuenta }}</p>
+            </div>
+            <div class="account-balance">
+              <p><strong>{{ cuenta.saldo | currency }}</strong></p>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
