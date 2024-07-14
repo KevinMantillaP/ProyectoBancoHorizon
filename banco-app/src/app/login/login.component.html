@@ -16,6 +16,9 @@
         <label for="contraseña">Contraseña</label>
         <input id="contraseña" formControlName="contraseña" type="password">
       </div>
+      <div class="form-captcha">
+        <re-captcha (resolved)="resolved($event)" siteKey="{{ reCaptchaSiteKey }}"></re-captcha>
+      </div>
       <div class="button-container">
         <button type="button" (click)="redirectTo('')">Regresar</button>
         <button type="submit">Ingresar</button> <!-- Aquí está el cambio -->
@@ -41,6 +44,7 @@
       <a href="#">Instagram</a>
     </div>
     <div>
+
       <a href="#">LinkedIn</a>
     </div>
   </div>

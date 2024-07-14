@@ -1,6 +1,6 @@
 // routes/loginUsuarioRoutes.ts
 import { Router } from 'express';
-import { getLoginUsuarios, crearLoginUsuario, actualizarLoginUsuario, eliminarLoginUsuario, loginUsuario, actualizarPassword } from '../controllers/loginUsuarioController';
+import { getLoginUsuarios, crearLoginUsuario, actualizarLoginUsuario, eliminarLoginUsuario, loginUsuario, actualizarPassword, verificarPassword } from '../controllers/loginUsuarioController';
 
 const router = Router();
 
@@ -11,4 +11,5 @@ router.delete('/loginUsuarios/:cedula', eliminarLoginUsuario); // Eliminar un lo
 router.put('/loginUsuarios/:cedula', actualizarLoginUsuario); // Actualizar un login de usuario por cédula
 router.post('/login', loginUsuario);
 router.post('/login/actualizar-password', actualizarPassword);// Cambiar contraseña
+router.post('/verificar-password', verificarPassword);
 export default router;

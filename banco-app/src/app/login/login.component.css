@@ -46,6 +46,11 @@ body {
   color: #1A61A0;
 }
 
+.form-captcha {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .alert {
   padding: 10px;
   background-color: #f44336; /* Red */
