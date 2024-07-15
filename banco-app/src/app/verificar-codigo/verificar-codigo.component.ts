@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class VerificarCodigoRecuperacionComponent implements OnInit {
   form: FormGroup;
   correo: string = '';
+  isProcessing: boolean = false;
   
   @ViewChild('code1') code1Input!: ElementRef;
   @ViewChild('code2') code2Input!: ElementRef;
@@ -72,6 +73,7 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
+      this.isProcessing = true;
       const verificationCode = this.combineCodeInputs();
       const data = {
         correo: this.correo,

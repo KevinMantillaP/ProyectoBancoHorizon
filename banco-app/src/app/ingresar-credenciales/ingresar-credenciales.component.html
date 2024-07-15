@@ -44,7 +44,7 @@
 
                 <div class="button-container">
                     <button (click)="redirectTo('')">Regresar</button>
-                    <button type="submit">Registrar</button>
+                    <button type="submit" [disabled]="isProcessing ">Registrar</button>
                 </div>
             </form>
         </div>

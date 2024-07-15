@@ -17,6 +17,7 @@ import { EmailService } from '../services/email-validation.service';
 })
 export class RegistrarUsuarioComponent {
   registroForm: FormGroup;
+  isProcessing: boolean = false;
 
   constructor(private fb: FormBuilder,
     private usuarioService: UsuarioService, 
@@ -54,6 +55,7 @@ export class RegistrarUsuarioComponent {
 
   onSubmit() {
     if (this.registroForm.valid) {
+      this.isProcessing = true;
       const correo = this.registroForm.value.correo;
       const cedula = this.registroForm.value.cedula;
       // Verificar si el correo ya está registrado

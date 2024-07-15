@@ -19,6 +19,7 @@ export class CambioPasswordComponent implements OnInit {
   cedula: string | null = null;
   emailUsuario: string = '';
   errorMessage: string = '';
+  isProcessing: boolean = false;
   passwordCriteria = {
     length: false,
     uppercase: false,
@@ -94,6 +95,7 @@ export class CambioPasswordComponent implements OnInit {
   
   onSubmit() {
     if (this.form.valid) {
+      this.isProcessing = true;
       const { passwordActual } = this.form.value;
       // Verificar la contraseña actual
       const nombreUsuario = this.authService.getUserNombre();

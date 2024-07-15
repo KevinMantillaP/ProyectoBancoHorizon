@@ -24,7 +24,7 @@ export class TransferenciasComponent implements OnInit {
   cedula: string | null = null;
   saldoCuentaOrigen: number = 0;
   emailUsuario: string = '';
-
+  isProcessing: boolean = false;
 
   constructor(
     private transferenciaService: TransferenciaService,
@@ -74,6 +74,13 @@ export class TransferenciasComponent implements OnInit {
   }
 
   realizarTransferencia(): void {
+    if (this.monto <= 0) {
+      console.error('El monto debe ser un número positivo');
+      return;
+    }
+
+    this.isProcessing = true;
+  
     const saldoActual = this.cuentas.find(cuenta => cuenta.numeroCuenta === this.cuentaOrigen)?.saldo || 0;
     const saldoRestante = saldoActual - this.monto;
     this.usuarioService.realizarTransferencia(this.cuentaOrigen, this.cuentaDestino, this.monto).subscribe(
@@ -112,7 +119,7 @@ export class TransferenciasComponent implements OnInit {
       }
     );
   }
-
+  
   private generarIdTransferencia(): string {
     const caracteres = '0123456789';
     let idTransferencia = '';

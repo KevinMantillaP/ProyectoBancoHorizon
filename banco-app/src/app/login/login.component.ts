@@ -14,10 +14,11 @@ import { RecaptchaModule, RecaptchaComponent } from 'ng-recaptcha';
   imports: [ReactiveFormsModule, CommonModule, RecaptchaModule]
 })
 export class LoginComponent {
-  @ViewChild('captchaRef') captchaRef!: RecaptchaComponent; // Cambiar aquí
+  @ViewChild('captchaRef') captchaRef!: RecaptchaComponent; 
   loginForm: FormGroup;
   errorMessage: string = '';
-  reCaptchaSiteKey = '6LfpXQ8qAAAAAPVmaTmsOlb2-LhQtV7GzUCxlyxb'; // Reemplaza con tu clave de sitio
+  isProcessing: boolean = false;
+  reCaptchaSiteKey = '6LfpXQ8qAAAAAPVmaTmsOlb2-LhQtV7GzUCxlyxb'; 
 
   constructor(
     private fb: FormBuilder,
@@ -33,11 +34,12 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.isProcessing = true;
       const { nombreUsuario, contraseña, recaptcha } = this.loginForm.value;
 
       this.authService.login(nombreUsuario, contraseña, recaptcha).subscribe(
         response => {
-          this.router.navigate(['/visualizacion-saldo']); // Ajusta la ruta según tus necesidades
+          this.router.navigate(['/visualizacion-saldo']); 
         },
         error => {
           if (error.status === 401) {

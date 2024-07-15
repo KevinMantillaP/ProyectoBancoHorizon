@@ -14,6 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NuevaPasswordComponent implements OnInit {
   form: FormGroup;
   correo: string = '';
+  isProcessing: boolean = false;
+
   passwordCriteria = {
     length: false,
     uppercase: false,
@@ -93,7 +95,8 @@ export class NuevaPasswordComponent implements OnInit {
         nuevaPassword: this.form.get('password')!.value
       };
   
-  
+      this.isProcessing = true;
+
       this.usuarioService.cambiarPassword(formData).subscribe({
         next: (response) => {
           this.snackBar.open('Contraseña restablecida con éxito', 'Cerrar', {

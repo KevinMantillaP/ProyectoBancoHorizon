@@ -21,7 +21,7 @@
       </div>
       <div class="button-container">
         <button type="button" (click)="redirectTo('')">Regresar</button>
-        <button type="submit">Ingresar</button> <!-- Aquí está el cambio -->
+        <button type="submit" [disabled]="isProcessing ">Ingresar</button> 
       </div>
       <div class="forgot-credentials">
         <button type="button" (click)="redirectTo('recuperar-contraseña')">¿Olvidaste tu contraseña?</button>

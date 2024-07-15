@@ -13,6 +13,7 @@ import { UsuarioService } from '../services/usuario.service';
 })
 export class RecuperarPasswordComponent {
   form: FormGroup;
+  isProcessing: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +28,7 @@ export class RecuperarPasswordComponent {
 
   onSubmit() {
     if (this.form.valid) {
+      this.isProcessing = true;
       const correo = this.form.value.correo;
       this.usuarioService.enviarCodigoRecuperacion({ correo }).subscribe({
         next: (response) => {
