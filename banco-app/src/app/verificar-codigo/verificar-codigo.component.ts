@@ -103,5 +103,4 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
       this.form.value.code6
     ].join('');
   }
-
 }

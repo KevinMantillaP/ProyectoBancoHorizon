@@ -110,7 +110,6 @@ export class IngresarCredencialesComponent implements OnInit{
         contraseña: this.loginForm.value.contraseña
       };
       
-
       this.usuarioService.crearLoginUsuario(loginData).subscribe(
         response => {
           this.snackBar.open('Login de usuario creado con éxito.', 'Cerrar', {

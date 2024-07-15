@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TransferenciaService {
-  private baseUrl = 'http://localhost:4000/api'; // URL base del backend
+  private baseUrl = 'http://localhost:4000/api'; 
 
   constructor(private http: HttpClient) {}
 

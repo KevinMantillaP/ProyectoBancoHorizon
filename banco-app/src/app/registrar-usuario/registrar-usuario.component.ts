@@ -56,7 +56,6 @@ export class RegistrarUsuarioComponent {
     if (this.registroForm.valid) {
       const correo = this.registroForm.value.correo;
       const cedula = this.registroForm.value.cedula;
-      
       // Verificar si el correo ya está registrado
       this.usuarioService.verificarCorreo(correo).subscribe(
         response => {

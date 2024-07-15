@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CuentaService {
-  private apiUrl = 'http://localhost:4000/api'; // Ajusta esta URL según tu configuración
+  private apiUrl = 'http://localhost:4000/api'; 
 
   constructor(private http: HttpClient) { }
 
