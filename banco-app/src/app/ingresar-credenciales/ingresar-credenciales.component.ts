@@ -120,7 +120,7 @@ export class IngresarCredencialesComponent implements OnInit{
           const accountData = {
             numeroCuenta: this.generateAccountNumber(),
             cedula: this.cedula,
-            saldo: 0,
+            saldo: 100,
             tipo: 'Ahorro'
           };
 
