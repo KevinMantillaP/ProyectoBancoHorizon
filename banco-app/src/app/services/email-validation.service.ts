@@ -22,4 +22,7 @@ export class EmailService {
   sendTransferNotification(correo: string, monto: number, cuentaOrigen: string, cuentaDestino: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/enviar-notificacion-transferencia`, { correo, monto, cuentaOrigen, cuentaDestino });
   }
+  enviarCorreoCambioPassword(correo: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/notificacion-cambio-password`, { correo, });
+  }
 } 

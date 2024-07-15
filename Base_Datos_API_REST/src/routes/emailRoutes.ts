@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { cambiarPassword, enviarCodigoRecuperacion, enviarCodigoVerificacion, verificarCodigo, verificarCodigoRecuperacion, enviarNotificacionTransferencia  } from '../controllers/emailController';
+import { cambiarPassword, enviarCodigoRecuperacion, enviarCodigoVerificacion, verificarCodigo, verificarCodigoRecuperacion, enviarNotificacionTransferencia, enviarNotificacionCambioPassword  } from '../controllers/emailController';
 
 const router = Router();
 
@@ -9,5 +9,6 @@ router.post('/enviar-codigo-recuperacion', enviarCodigoRecuperacion);
 router.post('/verificar-codigo-recuperacion', verificarCodigoRecuperacion);
 router.post('/cambiar-password', cambiarPassword);
 router.post('/enviar-notificacion-transferencia', enviarNotificacionTransferencia);
+router.post('/notificacion-cambio-password', enviarNotificacionCambioPassword);
 
 export default router;

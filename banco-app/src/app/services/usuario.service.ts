@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private baseUrl = 'http://localhost:4000/api'; // Base URL del backend
+  private baseUrl = 'http://localhost:4000/api'; 
 
   constructor(private http: HttpClient) { }
 
@@ -44,7 +44,7 @@ export class UsuarioService {
   }
 
   getCurrentUser(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/usuario`); // Ajusta la ruta según tu backend
+    return this.http.get<any>(`${this.baseUrl}/usuario`); 
   }
 
   sendVerificationEmail(correo: string): Observable<any> {

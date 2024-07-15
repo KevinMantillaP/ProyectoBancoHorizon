@@ -14,7 +14,7 @@
         <input type="text" maxlength="1" formControlName="code5" (input)="autoFocusNext($event, 'code6')" #code5>
         <input type="text" maxlength="1" formControlName="code6" #code6>
       </div>
-      <button type="submit">Verificar Código</button>
+      <button type="submit" [disabled]="isProcessing ">Verificar Código</button>
     </form>
   </div>
 </div>

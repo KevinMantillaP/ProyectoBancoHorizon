@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class AgregarCuentasComponent implements OnInit {
   cuentaForm: FormGroup;
   cedula: string | null = null;
+  isProcessing: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -65,6 +66,7 @@ export class AgregarCuentasComponent implements OnInit {
 
   onSubmit(): void {
     if (this.cuentaForm.valid) {
+      this.isProcessing = true;
       this.generateUniqueAccountNumber((numeroCuenta) => {
         const cuentaData = {
           tipo: this.cuentaForm.value.tipo,

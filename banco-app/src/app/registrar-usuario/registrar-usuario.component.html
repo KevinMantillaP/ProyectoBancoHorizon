@@ -103,7 +103,7 @@
 
       <div class="button-container">
         <button (click)="redirectTo('')">Regresar</button>
-        <button type="submit" [disabled]="!registroForm.valid">Registrar</button>
+        <button type="submit" [disabled]="isProcessing ||!registroForm.valid">Registrar</button>
       </div>
     </form>
   </div>

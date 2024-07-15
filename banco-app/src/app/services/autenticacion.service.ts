@@ -13,10 +13,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-//   login(nombreUsuario: string, contraseña: string): Observable<any> {
-//     return this.http.post<any>(`${this.apiUrl}/login`, { nombreUsuario, contraseña });
-//   }
-// }
 login(nombreUsuario: string, contraseña: string, recaptchaToken: string): Observable<any> {
   this.userNombre = nombreUsuario;//Almacena el nombre de usuario
   console.log('Usuario :',this.userNombre);

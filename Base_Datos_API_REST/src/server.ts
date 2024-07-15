@@ -15,7 +15,6 @@ app.use(express.json());
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = 'mongodb+srv://angelabedon:PoliBanco@banco.2zv7hpl.mongodb.net/?retryWrites=true&w=majority&appName=Banco';
 
-
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('Connected to MongoDB');

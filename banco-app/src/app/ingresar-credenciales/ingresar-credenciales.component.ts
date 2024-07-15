@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 export class IngresarCredencialesComponent implements OnInit{
   loginForm: FormGroup;
   cedula: string = '';
+  isProcessing: boolean = false;
   passwordCriteria = {
     length: false,
     uppercase: false,
@@ -102,6 +103,7 @@ export class IngresarCredencialesComponent implements OnInit{
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.isProcessing = true;
       const idUsuario = Math.floor(Math.random() * 1000000000).toString();   // Generar ID aleatorio
       const loginData = {
         idUsuario,
@@ -110,7 +112,6 @@ export class IngresarCredencialesComponent implements OnInit{
         contraseña: this.loginForm.value.contraseña
       };
       
-
       this.usuarioService.crearLoginUsuario(loginData).subscribe(
         response => {
           this.snackBar.open('Login de usuario creado con éxito.', 'Cerrar', {

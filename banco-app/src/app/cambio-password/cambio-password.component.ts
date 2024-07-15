@@ -5,6 +5,7 @@ import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/autenticacion.service';
 import { CommonModule } from '@angular/common';
+import { EmailService } from '../services/email-validation.service';
 
 @Component({
   selector: 'app-cambio-password',
@@ -15,7 +16,10 @@ import { CommonModule } from '@angular/common';
 })
 export class CambioPasswordComponent implements OnInit {
   form: FormGroup;
+  cedula: string | null = null;
+  emailUsuario: string = '';
   errorMessage: string = '';
+  isProcessing: boolean = false;
   passwordCriteria = {
     length: false,
     uppercase: false,
@@ -27,6 +31,7 @@ export class CambioPasswordComponent implements OnInit {
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
+    private emailService: EmailService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private authService: AuthService,
@@ -72,36 +77,54 @@ export class CambioPasswordComponent implements OnInit {
         specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(value)
       };
     });
+    this.route.queryParams.subscribe(params => {
+      this.cedula = params['cedula'] || null;
+      if (this.cedula) {
+        // Obtener email por cédula
+        this.usuarioService.obtenerEmailPorCedula(this.cedula).subscribe(
+          (response) => {
+            this.emailUsuario = response.email;
+          },
+          (error) => {
+            console.error('Error al obtener email:', error);
+          }
+        );
+      }
+    });
   }
-
+  
   onSubmit() {
     if (this.form.valid) {
+      this.isProcessing = true;
       const { passwordActual } = this.form.value;
-      console.log('Datos de inicio de sesión:', passwordActual); // Agrega este console.log
-
       // Verificar la contraseña actual
       const nombreUsuario = this.authService.getUserNombre();
       if (nombreUsuario) {
         this.authService.verificarPassword(nombreUsuario, passwordActual).subscribe(
           response => {
-            console.log('Verificación de contraseña exitosa:', response);
             if (this.form && this.form.get('passwordNueva') && this.form.valid) {
               const formData = {
                 nombreUsuario,
                 nuevaPassword: this.form.get('passwordNueva')!.value
               };
-
-              console.log('Datos enviados para cambiar contraseña:', formData);
-
-              // Actualizar la contraseña
               this.usuarioService.actualizarPassword(formData).subscribe({
                 next: (response) => {
                   this.snackBar.open('Contraseña restablecida con éxito', 'Cerrar', {
                     duration: 3000
                   });
+
+                  // Enviar el correo electrónico de alerta
+                  this.emailService.enviarCorreoCambioPassword(this.emailUsuario).subscribe(
+                    () => {
+                    },
+                    (error: any) => {
+                      console.error('Error al enviar el correo electrónico:', error);
+                    }
+                  );
+
                   this.router.navigate(['/visualizacion-saldo']);
                 },
-                error: (error) => {
+                error: (error: any) => {
                   this.snackBar.open('Error al cambiar contraseña', 'Cerrar', {
                     duration: 3000
                   });
@@ -112,7 +135,7 @@ export class CambioPasswordComponent implements OnInit {
               console.error('Formulario no válido o control no encontrado.');
             }
           },
-          error => {
+          (error: any) => {
             if (error.status === 401) {
               this.snackBar.open('Contraseña Incorrecta', 'Cerrar', {
                 duration: 3000
@@ -140,6 +163,6 @@ export class CambioPasswordComponent implements OnInit {
   }
 
   redirectTo(route: string): void {
-    this.router.navigate([route]);
+    this.router.navigate(['/visualizacion-saldo'], { queryParams: { cedula: this.cedula } });
   }
 }

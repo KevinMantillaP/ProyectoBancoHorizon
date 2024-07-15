@@ -18,6 +18,7 @@ export class VerificarCodigoComponent implements OnInit {
   verifyForm: FormGroup;
   correo: string = '';
   cedula: string = '';
+  isProcessing: boolean = false;
 
   @ViewChild('code1') code1Input!: ElementRef;
   @ViewChild('code2') code2Input!: ElementRef;
@@ -75,6 +76,7 @@ export class VerificarCodigoComponent implements OnInit {
 
   onSubmit() {
     if (this.verifyForm.valid) {
+      this.isProcessing = true;
       const verificationCode = this.verifyForm.value.code1 +
                                this.verifyForm.value.code2 +
                                this.verifyForm.value.code3 +
