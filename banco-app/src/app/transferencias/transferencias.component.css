@@ -158,4 +158,87 @@ body, html {
       margin-top: 10px;
     }
   }
-  
+  .footer {
+    background-color: #29AECC;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.footer-content .footer-section {
+    flex: 1;
+    margin: 10px;
+    min-width: 150px;
+    /* Ajusta este valor según sea necesario */
+    text-align: left;
+    /* Alinea el texto a la izquierda */
+}
+
+.footer-content .footer-brand {
+    margin: 20px 0 0 0;
+    /* Baja el texto un poco */
+    text-align: center;
+    /* Centra el texto dentro de su contenedor */
+}
+
+.footer-content p {
+    margin: 10;
+    /* Elimina el margen superior del primer párrafo en cada sección */
+    font-size: 16px;
+    /* Asegura que el tamaño de la letra sea consistente */
+}
+
+.footer-content h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    /* Asegura que el tamaño de la letra sea consistente */
+    font-weight: bold;
+    /* Aplica negrita a los títulos */
+}
+
+.footer-content a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    /* Asegura que el tamaño de la letra sea consistente */
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-content .footer-section {
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .btn-primary {
+        padding: 10px;
+    }
+}
