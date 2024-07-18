@@ -1,0 +1,61 @@
+<div class="header">
+  <h2>Horizon Bank</h2>
+</div>
+<div class="content">
+  <div class="container">
+    <h2>Historial de Transferencias</h2>
+    <div class="button-container">
+      <button class="regresar-button" (click)="regresar()">Regresar</button>
+    </div>
+    <div class="filters-container">
+      <label>Filtrar por Tipo:</label>
+      <select [(ngModel)]="filtroTipo" (change)="filtrarPorTipo(filtroTipo)">
+        <option value="todos">Todos</option>
+        <option value="ingreso">Ingresos</option>
+        <option value="egreso">Egresos</option>
+      </select>
+      <label>Seleccionar Fecha:</label>
+      <input type="date" [(ngModel)]="fechaFiltro" (ngModelChange)="filtrarPorFecha(fechaFiltro)">
+      <button *ngIf="fechaFiltro" (click)="filtrarPorFecha(null)">Quitar Filtro</button>
+    </div>
+    <ul>
+      <li *ngFor="let transferencia of transferenciasFiltradas" [ngClass]="{'ingreso': transferencia.tipo === 'ingreso', 'egreso': transferencia.tipo === 'egreso'}">
+        <div>
+          <p>Fecha: {{ transferencia.fecha | date }}</p>
+          <p>Monto: {{ transferencia.monto | currency }}</p>
+          <p>Cuenta Destino: {{ transferencia.cuentaDestino }}</p>
+          <p>Saldo Restante: {{ transferencia.saldoRestante | currency }}</p>
+          <p>Descripción: {{ transferencia.descripcion }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-column">
+    <div>Horizon Bank</div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Ayuda y Contacto</div>
+    <div>+593999999999</div>
+    <div>
+      <a href="#">Facebook</a>
+    </div>
+    <div>
+      <a href="#">Instagram</a>
+    </div>
+    <div>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Sobre Nosotros</div>
+    <div>Quienes Somos</div>
+    <div>Trabaja con Nosotros</div>
+    <div>Transparencia</div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Mas Servicios</div>
+    <div>Transacciones en Linea</div>
+  </div>
+</div>

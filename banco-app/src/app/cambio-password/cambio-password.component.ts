@@ -122,7 +122,7 @@ export class CambioPasswordComponent implements OnInit {
                     }
                   );
 
-                  this.router.navigate(['/visualizacion-saldo']);
+                  this.router.navigate(['']);
                 },
                 error: (error: any) => {
                   this.snackBar.open('Error al cambiar contraseña', 'Cerrar', {
