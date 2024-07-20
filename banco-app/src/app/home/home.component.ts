@@ -1,15 +1,20 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
+import { ChatbotComponent } from '../chatbot/chatbot.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  standalone: true,
+  imports: [ChatbotComponent,CommonModule] // Importa ChatbotComponent aquí
 })
 export class HomeComponent implements OnInit {
   currentSlide = 0;
   totalSlides = 3; // Cambia esto si agregas o quitas imágenes
+
+  showChatbot = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) { }
 
@@ -47,5 +52,9 @@ export class HomeComponent implements OnInit {
 
   redirectTo(route: string) {
     this.router.navigate([route]);
+  }
+
+  closeChatbot() {
+    this.showChatbot = false;
   }
 }

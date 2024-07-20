@@ -6,7 +6,8 @@ import loginUsuarioRoutes from './loginUsuarioRoutes';
 import administradorRoutes from './administradorRoutes';
 import loginAdministradorRoutes from './loginAdministradorRoutes';
 import auditoriaRoutes from './auditoriaRoutes';
-import emailRoutes from './emailRoutes'
+import emailRoutes from './emailRoutes';
+import dialogflowRoutes from './dialogflowRoutes';
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use(administradorRoutes);
 router.use(loginAdministradorRoutes);
 router.use(auditoriaRoutes);
 router.use(emailRoutes);
+router.use(dialogflowRoutes);
 
 export default router;
