@@ -36,21 +36,25 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.isProcessing = true;
       const { nombreUsuario, contraseña, recaptcha } = this.loginForm.value;
-
+  
       this.authService.login(nombreUsuario, contraseña, recaptcha).subscribe(
         response => {
-          this.router.navigate(['/visualizacion-saldo']); 
+          this.router.navigate(['/visualizacion-saldo']);
         },
         error => {
           if (error.status === 401) {
-            this.errorMessage = 'Contraseña incorrecta';
-          } else if (error.status == 404) {
-            this.errorMessage = 'Usuario incorrecto';
+            this.errorMessage = 'Contraseña incorrecta. Verifica tus datos e intenta nuevamente.';
+          } else if (error.status === 404) {
+            this.errorMessage = 'Usuario no encontrado';
+          } else if (error.status === 403) {
+            this.errorMessage = 'Cuenta bloqueada. Intenta de nuevo más tarde.';
           } else {
             this.errorMessage = 'Error en el inicio de sesión';
           }
           console.error('Error en el login:', error);
-          this.resetCaptcha(); // Llamar a resetCaptcha en caso de error
+          this.resetCaptcha(); // Reiniciar captcha en caso de error
+          this.loginForm.reset(); // Resetear el formulario
+          this.isProcessing = false; // Finalizar el proceso
         }
       );
     } else {

@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt';
 import axios from 'axios';
 import LoginUsuario, { ILoginUsuario } from '../models/LoginUsuario';
 
+const MAX_INTENTOS_FALLIDOS = 3;
+const BLOQUEO_TIEMPO = 15 * 60 * 1000; // 15 minutos
 // Obtener todos los login de usuarios
 export const getLoginUsuarios = async (req: Request, res: Response) => {
   try {
@@ -72,33 +74,47 @@ export const loginUsuario = async (req: Request, res: Response) => {
   const { nombreUsuario, contraseña, recaptchaToken } = req.body;
 
   // Verificar el token de reCAPTCHA
-  const secretKey = '6LfpXQ8qAAAAAAP62iG2moRAYa3xoXRWjiNSW1Z1'; // Reemplaza con tu clave secreta de reCAPTCHA
+  const secretKey = '6LfpXQ8qAAAAAAP62iG2moRAYa3xoXRWjiNSW1Z1';
   const verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
 
   try {
-
     const response = await axios.post(verificationUrl);
     const { success, score } = response.data;
 
     if (!success || score < 0.5) {
       return res.status(400).json({ message: 'reCAPTCHA verification failed' });
     }
-    console.log('Intento de inicio de sesión para:', nombreUsuario); // Agrega este console.log
-    // Buscar el usuario por nombreUsuario
+
     const usuario = await LoginUsuario.findOne({ nombreUsuario });
     if (!usuario) {
-      console.log('Usuario no encontrado para:', nombreUsuario); // Agrega este console.log
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
 
-    // Verificar la contraseña
+    // Verificar si la cuenta está bloqueada
+    if (usuario.bloqueoExpiracion && new Date() < usuario.bloqueoExpiracion) {
+      return res.status(403).json({ message: 'Cuenta bloqueada. Intenta de nuevo más tarde.' });
+    }
+
     const contraseñaValida = await bcrypt.compare(contraseña, usuario.contraseña);
     if (!contraseñaValida) {
-      console.log('Contraseña incorrecta para:', nombreUsuario); // Agrega este console.log
+      // Incrementar el contador de intentos fallidos
+      usuario.intentosFallidos += 1;
+
+      // Bloquear la cuenta si se alcanzan los intentos fallidos
+      if (usuario.intentosFallidos >= MAX_INTENTOS_FALLIDOS) {
+        usuario.bloqueoExpiracion = new Date(Date.now() + BLOQUEO_TIEMPO);
+        usuario.intentosFallidos = 0; // Resetear intentos fallidos después de bloquear
+      }
+
+      await usuario.save();
       return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
 
-    console.log('Inicio de sesión exitoso para:', nombreUsuario); // Agrega este console.log
+    // Reiniciar intentos fallidos en caso de éxito
+    usuario.intentosFallidos = 0;
+    usuario.bloqueoExpiracion = null;
+    await usuario.save();
+
     return res.status(200).json({ message: 'Inicio de sesión exitoso', cedula: usuario.cedula });
   } catch (error) {
     console.error('Error al iniciar sesión:', (error as Error).message);
