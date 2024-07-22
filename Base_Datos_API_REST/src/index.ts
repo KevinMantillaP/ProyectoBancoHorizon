@@ -10,6 +10,7 @@ import transferenciaRoutes from './routes/transferenciaRoutes';
 import auditoriaRoutes from './routes/auditoriaRoutes';
 import cuentaRoutes from './routes/cuentaRoutes';
 import emailRoutes from './routes/emailRoutes';
+import dialogflowRoutes from './routes/dialogflowRoutes';
 
 dotenv.config();
 const app = express();
@@ -41,5 +42,6 @@ app.use('/api', transferenciaRoutes);
 app.use('/api', auditoriaRoutes);
 app.use('/api', cuentaRoutes);
 app.use('/api/email', emailRoutes);
+app.use('/api', dialogflowRoutes);
 
 export default app;

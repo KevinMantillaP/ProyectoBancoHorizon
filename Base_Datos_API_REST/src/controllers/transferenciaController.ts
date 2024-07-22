@@ -62,3 +62,22 @@ export const realizarTransferencia = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
+
+export const getTransferenciasByCuenta = async (req: Request, res: Response) => {
+  const { numeroCuenta } = req.params;
+  try {
+    // Obtener transferencias salientes e ingresadas
+    const transferenciasSalientes = await Transferencia.find({ numeroCuenta });
+    const transferenciasIngresadas = await Transferencia.find({ cuentaDestino: numeroCuenta });
+
+    // Combinar ambas listas
+    const transferencias = [...transferenciasSalientes, ...transferenciasIngresadas];
+
+    // Ordenar por fecha en orden descendente
+    transferencias.sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
+
+    res.json(transferencias);
+  } catch (err: any) {
+    res.status(500).json({ message: err.message });
+  }
+};

@@ -4,5 +4,7 @@ const express_1 = require("express");
 const cuentaController_1 = require("../controllers/cuentaController");
 const router = (0, express_1.Router)();
 router.get('/cuenta', cuentaController_1.getCuentas);
-router.post('/cuenta', cuentaController_1.crearCuenta);
+router.post('/crear-cuenta', cuentaController_1.crearCuenta);
+router.get('/verificar-numero-cuenta/:numeroCuenta', cuentaController_1.verificarNumeroCuenta);
+router.put('/actualizar-saldo-cuenta', cuentaController_1.actualizarSaldoCuenta);
 exports.default = router;

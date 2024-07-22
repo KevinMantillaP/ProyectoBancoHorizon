@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const CuentaSchema = new mongoose_1.Schema({
     numeroCuenta: { type: String, required: true, unique: true },
-    tipoCuenta: { type: String, required: true },
+    tipo: { type: String, required: true },
     saldo: { type: Number, required: true },
     cedula: { type: String, required: true, ref: 'Cliente' }
 }, { collection: 'Cuenta' });

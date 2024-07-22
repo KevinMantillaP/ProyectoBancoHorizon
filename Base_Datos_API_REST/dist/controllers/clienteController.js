@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarCliente = exports.actualizarCliente = exports.crearCliente = exports.getClientes = void 0;
+exports.verificarCorreo = exports.obtenerEmailPorCedula = exports.eliminarCliente = exports.actualizarCliente = exports.crearCliente = exports.getClientes = void 0;
 const Cliente_1 = __importDefault(require("../models/Cliente"));
 const getClientes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -44,19 +44,24 @@ const crearCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     if (age < 18) {
         return res.status(400).json({ message: 'El cliente debe tener más de 18 años para registrarse.' });
     }
-    const nuevoCliente = new Cliente_1.default({
-        cedula,
-        nombres,
-        apellidos,
-        celular,
-        correo,
-        fechaNacimiento,
-        provincia,
-        ciudad,
-        callePrincipal,
-        calleSecundaria
-    });
     try {
+        // Verificar si la cédula ya existe
+        const existingCliente = yield Cliente_1.default.findOne({ cedula });
+        if (existingCliente) {
+            return res.status(409).json({ message: 'La cédula ya está registrada.' });
+        }
+        const nuevoCliente = new Cliente_1.default({
+            cedula,
+            nombres,
+            apellidos,
+            celular,
+            correo,
+            fechaNacimiento,
+            provincia,
+            ciudad,
+            callePrincipal,
+            calleSecundaria
+        });
         const clienteGuardado = yield nuevoCliente.save();
         res.status(201).json(clienteGuardado);
     }
@@ -96,3 +101,31 @@ const eliminarCliente = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.eliminarCliente = eliminarCliente;
+const obtenerEmailPorCedula = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { cedula } = req.query;
+    try {
+        const usuario = yield Cliente_1.default.findOne({ cedula });
+        if (!usuario) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+        res.json({ email: usuario.correo });
+    }
+    catch (error) {
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+});
+exports.obtenerEmailPorCedula = obtenerEmailPorCedula;
+const verificarCorreo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { correo } = req.query;
+    try {
+        const cliente = yield Cliente_1.default.findOne({ correo });
+        if (cliente) {
+            return res.status(409).json({ message: 'El correo ya está registrado.' });
+        }
+        res.status(200).json({ message: 'El correo está disponible.' });
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+exports.verificarCorreo = verificarCorreo;

@@ -14,6 +14,7 @@ const loginUsuarioRoutes_1 = __importDefault(require("./routes/loginUsuarioRoute
 const transferenciaRoutes_1 = __importDefault(require("./routes/transferenciaRoutes"));
 const auditoriaRoutes_1 = __importDefault(require("./routes/auditoriaRoutes"));
 const cuentaRoutes_1 = __importDefault(require("./routes/cuentaRoutes"));
+const emailRoutes_1 = __importDefault(require("./routes/emailRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 // Middleware
@@ -39,4 +40,5 @@ app.use('/api', loginUsuarioRoutes_1.default);
 app.use('/api', transferenciaRoutes_1.default);
 app.use('/api', auditoriaRoutes_1.default);
 app.use('/api', cuentaRoutes_1.default);
+app.use('/api/email', emailRoutes_1.default);
 exports.default = app;

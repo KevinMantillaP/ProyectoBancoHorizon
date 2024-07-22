@@ -43,6 +43,12 @@ export class UsuarioService {
     );
   }
 
+  getTransferenciasByNumeroCuenta(numeroCuenta: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/transferencia/${numeroCuenta}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getCurrentUser(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/usuario`); 
   }
@@ -100,6 +106,16 @@ export class UsuarioService {
         return throwError('Error al verificar el correo.');
       })
     );
+  }
+
+  obtenerTransferenciasPaginadas(numeroCuenta: string, pagina: number): Observable<any[]> {
+    const url = `${this.baseUrl}/transferencias?numeroCuenta=${numeroCuenta}&pagina=${pagina}`;
+    return this.http.get<any[]>(url);
+  }
+
+  verificarIngresos(numeroCuenta: string): Observable<any[]> {
+    const url = `${this.baseUrl}/ingresos?numeroCuenta=${numeroCuenta}`;
+    return this.http.get<any[]>(url);
   }
 
   private handleError(error: HttpErrorResponse) {

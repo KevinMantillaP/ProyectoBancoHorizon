@@ -1,6 +1,6 @@
 // routes/transferenciaRoutes.ts
 import { Router } from 'express';
-import { getTransferencias, crearTransferencia, realizarTransferencia } from '../controllers/transferenciaController';
+import { getTransferencias, crearTransferencia, realizarTransferencia, getTransferenciasByCuenta } from '../controllers/transferenciaController';
 
 const router = Router();
 
@@ -8,5 +8,6 @@ const router = Router();
 router.get('/transferencia', getTransferencias);
 router.post('/transferencia', crearTransferencia);
 router.post('/realizar-transferencia', realizarTransferencia);
+router.get('/transferencia/:numeroCuenta', getTransferenciasByCuenta);
 
 export default router;

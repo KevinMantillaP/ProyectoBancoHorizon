@@ -54,7 +54,10 @@ const ClienteSchema = new mongoose_1.Schema({
     provincia: { type: String, required: true },
     ciudad: { type: String, required: true },
     callePrincipal: { type: String, required: true },
-    calleSecundaria: { type: String, required: true }
+    calleSecundaria: { type: String, required: true },
+    verificationCode: { type: String }, // Campo para almacenar el código de verificación
+    isVerified: { type: Boolean, default: false },
+    recoveryCode: { type: String },
 }, { collection: 'Cliente' });
 const Cliente = mongoose_1.default.model('Cliente', ClienteSchema);
 exports.default = Cliente;

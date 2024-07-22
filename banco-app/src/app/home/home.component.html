@@ -28,15 +28,15 @@
     <h2>¿Porqué Elegirnos?</h2>
     <div class="reasons">
       <div class="reason">
-        <img src="assets/img/img1.jpg" alt="Reason 1">
+        <img src="assets/img/img1.jpg" width="300" height="200" alt="Reason 1">
         <p>En Horizon Bank, facilitamos el acceso a tarjetas de crédito y débito que pueden ser utilizadas tanto para compras nacionales como internacionales. Con nuestro sistema seguro y confiable, podrás realizar tus compras con tranquilidad y disfrutar de beneficios exclusivos. Nuestro servicio de atención al cliente está disponible las 24 horas para asistirte en cualquier momento.</p>
       </div>
       <div class="reason piggybank">
-        <img src="assets/img/img2.jpg" alt="Reason 2">
+        <img src="assets/img/img2.jpg" width="300" height="200" alt="Reason 2">
         <p>Horizon Bank se dedica a ayudarte a ahorrar de manera efectiva. Ofrecemos diversas cuentas de ahorro con atractivas tasas de interés que se adaptan a tus necesidades. Además, contamos con herramientas y asesoría personalizada para que puedas alcanzar tus metas financieras a corto y largo plazo. Empieza a ahorrar hoy mismo y asegura tu futuro con nosotros.</p>
       </div>
       <div class="reason">
-        <img src="assets/img/img3.jpg" alt="Reason 3">
+        <img src="assets/img/img3.jpg" width="300" height="200" alt="Reason 3">
         <p>En Horizon Bank, entendemos la importancia de tener acceso rápido y fácil a préstamos y depósitos. Por eso, hemos simplificado nuestros procesos para que puedas obtener financiamiento de manera ágil y sin complicaciones. Nuestros préstamos se adaptan a tus necesidades y te ofrecemos condiciones favorables para que puedas alcanzar tus objetivos. Además, con nuestro sistema de depósitos rápidos, tu dinero estará disponible cuando más lo necesites.</p>
       </div>
     </div>
@@ -117,6 +117,11 @@
       </div>
     </div>
   </div>
+
+  <button (click)="showChatbot = !showChatbot" class="chatbot-toggle">
+    <i class="fas fa-comments"></i>
+  </button>
+  <app-chatbot *ngIf="showChatbot" (close)="closeChatbot()"></app-chatbot>
   
   <div class="footer">
     <div class="footer-column">

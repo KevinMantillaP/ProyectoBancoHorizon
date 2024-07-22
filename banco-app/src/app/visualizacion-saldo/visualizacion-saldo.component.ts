@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/autenticacion.service';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 @Component({
   selector: 'app-visualizacion-saldo',
@@ -22,7 +23,8 @@ export class VisualizacionSaldoComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +57,28 @@ export class VisualizacionSaldoComponent implements OnInit {
 
   toggleAccounts(): void {
     this.showAccounts = !this.showAccounts;
+  }
+
+  viewTransferHistory(numeroCuenta: string, cedula: string | null): void {
+    if (cedula) {
+      this.comparticionParametrosService.setNumeroCuenta(numeroCuenta);
+      this.comparticionParametrosService.setCedula(cedula);
+      this.router.navigate(['/historial-transferencias']);
+    } else {
+      console.error('Cedula no proporcionada');
+    }
+  }
+  
+  onAccountClick(cuenta: any): void {
+    if (this.selectedAccount === cuenta) {
+      if (this.cedula) {
+        this.viewTransferHistory(cuenta.numeroCuenta, this.cedula);
+      } else {
+        console.error('Cedula no proporcionada');
+      }
+    } else {
+      this.selectAccount(cuenta);
+    }
   }
 
   redirectTo(route: string): void {
