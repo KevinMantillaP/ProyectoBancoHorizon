@@ -118,6 +118,10 @@ export class UsuarioService {
     return this.http.get<any[]>(url);
   }
 
+  desbloquearUsuario(correo: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/desbloquear-cuenta`, { correo });
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
     if (error.error instanceof ErrorEvent) {

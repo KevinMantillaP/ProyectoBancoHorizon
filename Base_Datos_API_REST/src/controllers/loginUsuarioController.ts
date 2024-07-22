@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import axios from 'axios';
 import LoginUsuario, { ILoginUsuario } from '../models/LoginUsuario';
+import Cliente from '../models/Cliente'; 
 
 const MAX_INTENTOS_FALLIDOS = 3;
-const BLOQUEO_TIEMPO = 15 * 60 * 1000; // 15 minutos
 // Obtener todos los login de usuarios
 export const getLoginUsuarios = async (req: Request, res: Response) => {
   try {
@@ -91,8 +91,8 @@ export const loginUsuario = async (req: Request, res: Response) => {
     }
 
     // Verificar si la cuenta está bloqueada
-    if (usuario.bloqueoExpiracion && new Date() < usuario.bloqueoExpiracion) {
-      return res.status(403).json({ message: 'Cuenta bloqueada. Intenta de nuevo más tarde.' });
+    if (usuario.bloqueado) {
+      return res.status(403).json({ message: 'Cuenta bloqueada. Contacta al soporte.' });
     }
 
     const contraseñaValida = await bcrypt.compare(contraseña, usuario.contraseña);
@@ -102,7 +102,7 @@ export const loginUsuario = async (req: Request, res: Response) => {
 
       // Bloquear la cuenta si se alcanzan los intentos fallidos
       if (usuario.intentosFallidos >= MAX_INTENTOS_FALLIDOS) {
-        usuario.bloqueoExpiracion = new Date(Date.now() + BLOQUEO_TIEMPO);
+        usuario.bloqueado = true;
         usuario.intentosFallidos = 0; // Resetear intentos fallidos después de bloquear
       }
 
@@ -112,7 +112,6 @@ export const loginUsuario = async (req: Request, res: Response) => {
 
     // Reiniciar intentos fallidos en caso de éxito
     usuario.intentosFallidos = 0;
-    usuario.bloqueoExpiracion = null;
     await usuario.save();
 
     return res.status(200).json({ message: 'Inicio de sesión exitoso', cedula: usuario.cedula });
@@ -162,5 +161,30 @@ export const verificarPassword = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error al verificar la contraseña:', (error as Error).message);
     return res.status(500).json({ message: 'Error al verificar la contraseña' });
+  }
+};
+
+export const desbloquearUsuario = async (req: Request, res: Response) => {
+  const { correo } = req.body;
+
+  try {
+    const cliente = await Cliente.findOne({ correo });
+    if (!cliente) {
+      return res.status(404).json({ message: 'Cliente no encontrado' });
+    }
+
+    const usuario = await LoginUsuario.findOne({ cedula: cliente.cedula });
+    if (!usuario) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Desbloquear el usuario
+    usuario.bloqueado = false;
+    await usuario.save();
+
+    return res.status(200).json({ message: 'Usuario desbloqueado con éxito' });
+  } catch (error) {
+    console.error('Error al desbloquear el usuario:', (error as Error).message);
+    return res.status(500).json({ message: 'Error al desbloquear el usuario' });
   }
 };

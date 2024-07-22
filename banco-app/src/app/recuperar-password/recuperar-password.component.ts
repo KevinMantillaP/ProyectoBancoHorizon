@@ -35,7 +35,7 @@ export class RecuperarPasswordComponent {
           this.snackBar.open('Código de recuperación enviado al correo', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/verificar-codigo-recuperacion', { correo }]);
+          this.router.navigate(['/verificar-codigo-recuperacion', { correo, from: 'recuperar-password' }]);
         }, 
         error: (error) => {
           this.snackBar.open('Error al enviar el correo de recuperación', 'Cerrar', {

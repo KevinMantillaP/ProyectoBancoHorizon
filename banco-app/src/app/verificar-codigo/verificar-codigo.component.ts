@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class VerificarCodigoRecuperacionComponent implements OnInit {
   form: FormGroup;
   correo: string = '';
+  from: string = '';
   isProcessing: boolean = false;
   
   @ViewChild('code1') code1Input!: ElementRef;
@@ -43,6 +44,7 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.correo = params.get('correo') || '';
+      this.from = params.get('from') || '';
     });
   }
 
@@ -84,12 +86,31 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
           this.snackBar.open('Código verificado correctamente', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/nueva-contraseña'], { queryParams: { correo: this.correo } });
+          
+          if (this.from === 'recuperar-password') {
+            this.router.navigate(['/nueva-contraseña'], { queryParams: { correo: this.correo } });
+          } else if (this.from === 'desbloquear-cuenta') {
+            this.usuarioService.desbloquearUsuario(this.correo).subscribe({
+              next: (response) => {
+                this.snackBar.open('Usuario desbloqueado con éxito', 'Cerrar', {
+                  duration: 3000
+                });
+                this.router.navigate(['']);
+              },
+              error: (error) => {
+                this.snackBar.open('Error al desbloquear el usuario', 'Cerrar', {
+                  duration: 3000
+                });
+                this.isProcessing = false;
+              }
+            });
+          }
         },
         error: (error) => {
           this.snackBar.open('Código incorrecto', 'Cerrar', {
             duration: 3000
           });
+          this.isProcessing = false;
         }
       });
     }

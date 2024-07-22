@@ -12,6 +12,8 @@ import { AgregarCuentasComponent } from './agregar-cuentas/agregar-cuentas.compo
 import { TransferenciasComponent } from './transferencias/transferencias.component';
 import {CambioPasswordComponent} from './cambio-password/cambio-password.component';
 import { HistorialTransferenciasComponent } from './historial-transferencias/historial-transferencias.component';
+import { DesbloquearCuentaComponent } from './desbloquear-cuenta/desbloquear-cuenta.component';
+import { DesbloqueasCuentaCodigoComponent } from './desbloqueas-cuenta-codigo/desbloqueas-cuenta-codigo.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'registrar-usuario', component: RegistrarUsuarioComponent},
@@ -27,4 +29,6 @@ export const routes: Routes = [
     { path: 'cambio-contraseña', component: CambioPasswordComponent },
     { path: 'transferencia', component: TransferenciasComponent },
     { path: 'historial-transferencias', component: HistorialTransferenciasComponent},
+    { path: 'desbloquear-cuenta', component: DesbloquearCuentaComponent},
+    { path: 'desbloquear-cuenta-Codigo', component: DesbloqueasCuentaCodigoComponent}
 ];
