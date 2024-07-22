@@ -26,3 +26,4 @@ export const routes: Routes = [
     { path: 'cambio-contraseña', component: CambioPasswordComponent },
     { path: 'transferencia', component: TransferenciasComponent }
 ];
+
