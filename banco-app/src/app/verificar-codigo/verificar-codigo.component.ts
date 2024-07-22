@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 @Component({
   selector: 'app-verificar-codigo',
@@ -29,7 +30,8 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
     private usuarioService: UsuarioService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.form = this.fb.group({
       code1: ['', [Validators.required, Validators.maxLength(1)]],
@@ -42,10 +44,8 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.correo = params.get('correo') || '';
-      this.from = params.get('from') || '';
-    });
+    this.correo = this.comparticionParametrosService.getCorreo() || '';
+    this.from = this.comparticionParametrosService.getFrom() || '';
   }
 
   autoFocusNext(event: Event, nextInputId: string) {
@@ -86,9 +86,9 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
           this.snackBar.open('Código verificado correctamente', 'Cerrar', {
             duration: 3000
           });
-          
+
           if (this.from === 'recuperar-password') {
-            this.router.navigate(['/nueva-contraseña'], { queryParams: { correo: this.correo } });
+            this.router.navigate(['/nueva-contraseña']);
           } else if (this.from === 'desbloquear-cuenta') {
             this.usuarioService.desbloquearUsuario(this.correo).subscribe({
               next: (response) => {
@@ -115,6 +115,7 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
       });
     }
   }
+
 
   combineCodeInputs(): string {
     return [

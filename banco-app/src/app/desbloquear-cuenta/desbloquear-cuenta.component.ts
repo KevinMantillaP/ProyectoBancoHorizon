@@ -4,6 +4,7 @@ import { UsuarioService } from '../services/usuario.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class DesbloquearCuentaComponent {
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.form = this.fb.group({
       correo: ['', [Validators.required, Validators.email]]
@@ -37,7 +39,9 @@ export class DesbloquearCuentaComponent {
           this.snackBar.open('Código de recuperación enviado al correo', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/verificar-codigo-recuperacion', { correo, from: 'desbloquear-cuenta' }]);
+          this.comparticionParametrosService.setCorreo(correo);
+          this.comparticionParametrosService.setFrom('desbloquear-cuenta');
+          this.router.navigate(['/verificar-codigo-recuperacion']);
         }, 
         error: (error) => {
           this.snackBar.open('Error al enviar el correo de recuperación', 'Cerrar', {
