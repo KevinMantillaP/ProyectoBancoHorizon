@@ -42,6 +42,7 @@ export class RecuperarPasswordComponent {
           this.router.navigate(['/verificar-codigo-recuperacion']);
         }, 
         error: (error) => {
+          this.isProcessing = false;
           this.snackBar.open('Error al enviar el correo de recuperación', 'Cerrar', {
             duration: 3000
           });

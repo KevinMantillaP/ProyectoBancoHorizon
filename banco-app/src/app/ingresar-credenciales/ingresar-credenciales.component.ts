@@ -136,6 +136,7 @@ export class IngresarCredencialesComponent implements OnInit{
               this.snackBar.open('Error al crear la cuenta', 'Cerrar', {
                 duration: 3000
               });
+              this.isProcessing = false;
             }
           );
         },
@@ -143,6 +144,7 @@ export class IngresarCredencialesComponent implements OnInit{
           this.snackBar.open('Error al crear el login del usuario', 'Cerrar', {
             duration: 3000
           });
+          this.isProcessing = false;
         }
       );
     } else {

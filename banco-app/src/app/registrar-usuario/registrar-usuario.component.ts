@@ -48,11 +48,11 @@ export class RegistrarUsuarioComponent {
   }
 
   multipleWordsValidator(control: FormControl) {
-    const value = control.value.trim();
+    const value = control.value ? control.value.trim() : '';
     const hasMultipleWords = value.split(' ').length > 1;
     return hasMultipleWords ? null : { singleWord: true };
   }
-
+  
   validateAge(control: FormControl) {
     const today = moment().startOf('day'); // La fecha de hoy a las 00:00
     const inputDate = moment(control.value).startOf('day'); // La fecha de nacimiento a las 00:00
@@ -81,40 +81,48 @@ export class RegistrarUsuarioComponent {
                   this.comparticionParametrosService.setCedula(cedula);
                   this.router.navigate(['/verificar-codigo']);
                   this.comparticionParametrosService.clearFormData();  // Limpiar los datos guardados
+                  this.isProcessing = false;
                 },
                 error => {
-                  this.snackBar.open('Error al enviar el correo de verificación', 'Cerrar', {
-                    duration: 3000
-                  });
+                  this.showError('Error al enviar el correo de verificación');
                 }
               );
               this.registroForm.reset();
             },
             error => {
-              this.snackBar.open(error, 'Cerrar', {
-                duration: 3000
-              });
+              this.showError(error);
             }
           );
         },
         error => {
-          this.snackBar.open('El correo ya está registrado.', 'Cerrar', {
-            duration: 3000
-          });
+          this.showError('El correo ya está registrado.');
         }
       );
     } else {
-      let mensaje = 'Por favor complete todos los campos correctamente:';
-      Object.keys(this.registroForm.controls).forEach(key => {
-        const control = this.registroForm.get(key);
-        if (control && control.invalid && control.touched) {
-          mensaje += `\n- ${key.charAt(0).toUpperCase() + key.slice(1)}`;
-        }
-      });
-      this.snackBar.open(mensaje, 'Cerrar', {
-        duration: 3000
-      });
+      this.showFormErrors();
     }
+  }
+
+  showError(message: string) {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000
+    });
+    this.isProcessing = false;
+  }
+
+  showFormErrors() {
+    this.registroForm.markAllAsTouched(); // Marcar todos los campos como tocados para mostrar errores
+    let mensaje = 'Por favor complete todos los campos correctamente:';
+    Object.keys(this.registroForm.controls).forEach(key => {
+      const control = this.registroForm.get(key);
+      if (control && control.invalid) {
+        mensaje += `\n- ${key.charAt(0).toUpperCase() + key.slice(1)}`;
+      }
+    });
+    this.snackBar.open(mensaje, 'Cerrar', {
+      duration: 3000
+    });
+    this.isProcessing = false;
   }
 
   redirectTo(route: string) {

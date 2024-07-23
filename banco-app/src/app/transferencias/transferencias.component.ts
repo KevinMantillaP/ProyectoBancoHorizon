@@ -105,16 +105,19 @@ export class TransferenciasComponent implements OnInit {
                 this.redirectToVisualizarSaldo();
               },
               (error) => {
+                this.isProcessing = false;
                 console.error('Error al enviar la notificación de transferencia', error);
               }
             );
           },
           (error) => {
+            this.isProcessing = false;
             console.error('Error al realizar la transferencia', error);
           }
         );
       },
       (error) => {
+        this.isProcessing = false;
         console.error('Error al actualizar saldo de cuenta en el backend:', error);
       }
     );

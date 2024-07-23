@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, QueryList, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
@@ -29,7 +29,6 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
-    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private comparticionParametrosService: ComparticionParametrosService
   ) {

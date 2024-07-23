@@ -114,12 +114,12 @@ export class CambioPasswordComponent implements OnInit {
                   this.snackBar.open('Contraseña restablecida con éxito', 'Cerrar', {
                     duration: 3000
                   });
-
                   // Enviar el correo electrónico de alerta
                   this.emailService.enviarCorreoCambioPassword(this.emailUsuario).subscribe(
                     () => {
                     },
                     (error: any) => {
+                      this.isProcessing = false;
                       console.error('Error al enviar el correo electrónico:', error);
                     }
                   );
@@ -127,6 +127,7 @@ export class CambioPasswordComponent implements OnInit {
                   this.router.navigate(['']);
                 },
                 error: (error: any) => {
+                  this.isProcessing = false;
                   this.snackBar.open('Error al cambiar contraseña', 'Cerrar', {
                     duration: 3000
                   });
@@ -138,6 +139,7 @@ export class CambioPasswordComponent implements OnInit {
             }
           },
           (error: any) => {
+            this.isProcessing = false;
             if (error.status === 401) {
               this.snackBar.open('Contraseña Incorrecta', 'Cerrar', {
                 duration: 3000
