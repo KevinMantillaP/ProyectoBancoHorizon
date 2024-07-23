@@ -6,6 +6,7 @@ import { CuentaService } from '../services/cuenta.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 @Component({
   selector: 'app-ingresar-credenciales',
@@ -31,7 +32,8 @@ export class IngresarCredencialesComponent implements OnInit{
     private usuarioService: UsuarioService,
     private cuentaService: CuentaService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.loginForm = this.fb.group({
       nombreUsuario: ['', Validators.required],
@@ -41,9 +43,7 @@ export class IngresarCredencialesComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.cedula = params['cedula'];
-    });
+    this.cedula = this.comparticionParametrosService.getCedula() || '';
 
     this.loginForm.get('contraseña')?.valueChanges.subscribe(value => {
       this.passwordCriteria = {

@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/autenticacion.service';
 import { CommonModule } from '@angular/common';
 import { EmailService } from '../services/email-validation.service';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 @Component({
   selector: 'app-cambio-password',
@@ -35,6 +36,7 @@ export class CambioPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private authService: AuthService,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.form = this.fb.group({
       passwordActual: ['', Validators.required],
@@ -78,7 +80,7 @@ export class CambioPasswordComponent implements OnInit {
       };
     });
     this.route.queryParams.subscribe(params => {
-      this.cedula = params['cedula'] || null;
+      this.cedula = this.comparticionParametrosService.getCedula();
       if (this.cedula) {
         // Obtener email por cédula
         this.usuarioService.obtenerEmailPorCedula(this.cedula).subscribe(

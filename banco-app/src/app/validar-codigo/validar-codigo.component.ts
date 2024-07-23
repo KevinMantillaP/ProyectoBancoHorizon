@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsuarioService } from '../services/usuario.service';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmailService } from '../services/email-validation.service';
@@ -32,7 +32,8 @@ export class VerificarCodigoComponent implements OnInit {
     private emailService: EmailService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.verifyForm = this.fb.group({
       code1: ['', [Validators.required, Validators.maxLength(1)]],
@@ -45,8 +46,8 @@ export class VerificarCodigoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.correo = this.route.snapshot.queryParamMap.get('correo') || '';
-    this.cedula = this.route.snapshot.queryParamMap.get('cedula') || '';
+    this.correo = this.comparticionParametrosService.getCorreo() || '';
+    this.cedula = this.comparticionParametrosService.getCedula() || '';
   }
 
   autoFocusNext(event: Event, nextInputId: string) {
@@ -88,7 +89,9 @@ export class VerificarCodigoComponent implements OnInit {
           this.snackBar.open('Código verificado con éxito', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/ingresar-credenciales'], { queryParams: { cedula: this.cedula } });
+          this.comparticionParametrosService.setCedula(this.cedula);
+          this.router.navigate(['/ingresar-credenciales']);
+          this.comparticionParametrosService.clearFormData(); 
         },
         error => {
           this.snackBar.open('Código de verificación incorrecto', 'Cerrar', {

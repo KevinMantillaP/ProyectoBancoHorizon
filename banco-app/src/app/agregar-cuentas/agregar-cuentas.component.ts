@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 @Component({
   selector: 'app-agregar-cuentas',
@@ -23,7 +24,8 @@ export class AgregarCuentasComponent implements OnInit {
     private cuentaService: CuentaService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.cuentaForm = this.fb.group({
       tipo: ['', Validators.required],
@@ -34,7 +36,7 @@ export class AgregarCuentasComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.cedula = params['cedula'] || null;
+      this.cedula = this.comparticionParametrosService.getCedula();
       if (this.cedula) {
         this.cuentaForm.patchValue({ cedula: this.cedula });
       }

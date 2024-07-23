@@ -9,7 +9,8 @@ export class ComparticionParametrosService {
   private saldo: number | null = null;
   private tipoCuenta: string | null = null;
   private correo: string | null = null;
-  private from: string | null = null; 
+  private from: string | null = null;
+  private formData: any = null;
 
   setNumeroCuenta(numeroCuenta: string): void {
     this.numeroCuenta = numeroCuenta;
@@ -57,5 +58,17 @@ export class ComparticionParametrosService {
 
   getFrom(): string | null {
     return this.from;
+  }
+
+  setFormData(data: any): void {
+    this.formData = data;
+  }
+
+  getFormData(): any {
+    return this.formData;
+  }
+
+  clearFormData(): void {
+    this.formData = null;
   }
 }
