@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsuarioService } from '../services/usuario.service';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 @Component({
   selector: 'app-recuperar-password',
@@ -19,7 +20,8 @@ export class RecuperarPasswordComponent {
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.form = this.fb.group({
       correo: ['', [Validators.required, Validators.email]]
@@ -35,9 +37,12 @@ export class RecuperarPasswordComponent {
           this.snackBar.open('Código de recuperación enviado al correo', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/verificar-codigo-recuperacion', { correo }]);
+          this.comparticionParametrosService.setCorreo(correo);
+          this.comparticionParametrosService.setFrom('recuperar-password');
+          this.router.navigate(['/verificar-codigo-recuperacion']);
         }, 
         error: (error) => {
+          this.isProcessing = false;
           this.snackBar.open('Error al enviar el correo de recuperación', 'Cerrar', {
             duration: 3000
           });

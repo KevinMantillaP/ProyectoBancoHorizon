@@ -33,6 +33,7 @@ export class VisualizacionSaldoComponent implements OnInit {
 
   loadUserData(): void {
     const cedula = this.authService.getUserCedula();
+    console.log('Cédula obtenida:', cedula); // Verifica el valor de la cédula
     if (cedula) {
       this.cedula = cedula;
       this.usuarioService.getCuentasByCedula(cedula).subscribe(
@@ -40,6 +41,7 @@ export class VisualizacionSaldoComponent implements OnInit {
           this.nombreCliente = response.nombreCliente;
           this.cuentas = response.cuentas;
           this.selectedAccount = this.cuentas[0]; // Selección inicial de cuenta
+          console.log('Cuentas obtenidas:', this.cuentas); // Verifica las cuentas obtenidas
         },
         (error) => {
           console.error('Error al obtener cuentas:', error);
@@ -49,6 +51,7 @@ export class VisualizacionSaldoComponent implements OnInit {
       console.error('No se pudo obtener la cédula del usuario autenticado');
     }
   }
+  
 
   selectAccount(cuenta: any): void {
     this.selectedAccount = cuenta;
@@ -57,7 +60,9 @@ export class VisualizacionSaldoComponent implements OnInit {
 
   toggleAccounts(): void {
     this.showAccounts = !this.showAccounts;
+    console.log('Mostrar cuentas:', this.showAccounts); // Verifica el estado de showAccounts
   }
+  
 
   viewTransferHistory(numeroCuenta: string, cedula: string | null): void {
     if (cedula) {
@@ -67,9 +72,12 @@ export class VisualizacionSaldoComponent implements OnInit {
     } else {
       console.error('Cedula no proporcionada');
     }
-  }
+  }  
   
   onAccountClick(cuenta: any): void {
+    console.log('Cuenta clickeada:', cuenta);
+    console.log('Cuenta seleccionada:', this.selectedAccount);
+  
     if (this.selectedAccount === cuenta) {
       if (this.cedula) {
         this.viewTransferHistory(cuenta.numeroCuenta, this.cedula);
@@ -80,8 +88,23 @@ export class VisualizacionSaldoComponent implements OnInit {
       this.selectAccount(cuenta);
     }
   }
-
+  
   redirectTo(route: string): void {
-    this.router.navigate([route], { queryParams: { cedula: this.cedula } });
+    if (this.cedula) {
+      this.comparticionParametrosService.setCedula(this.cedula);
+      this.router.navigate([route]);
+    } else {
+      console.error('Cedula no proporcionada');
+    }
+  }
+
+  redirectToHistorialTransferencias(): void {
+    if (this.selectedAccount && this.cedula) {
+      this.comparticionParametrosService.setNumeroCuenta(this.selectedAccount.numeroCuenta);
+      this.comparticionParametrosService.setCedula(this.cedula);
+      this.router.navigate(['/historial-transferencias']);
+    } else {
+      console.error('No se pudo redirigir al historial de transferencias. Verifica que la cuenta seleccionada y la cédula estén disponibles.');
+    }
   }
 }

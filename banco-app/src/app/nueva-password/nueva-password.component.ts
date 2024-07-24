@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractContro
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 @Component({
   selector: 'app-nueva-password',
@@ -28,7 +29,8 @@ export class NuevaPasswordComponent implements OnInit {
     private usuarioService: UsuarioService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.form = this.fb.group({
       password: ['', [Validators.required, this.passwordValidator.bind(this)]],
@@ -47,19 +49,19 @@ export class NuevaPasswordComponent implements OnInit {
       };
       return null;
     }
-  
+
     const lengthValid = value.length >= 6;
     const uppercaseValid = /[A-Z]/.test(value);
     const numberValid = /[0-9]/.test(value);
     const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(value);
-  
+
     this.passwordCriteria = {
       length: lengthValid,
       uppercase: uppercaseValid,
       number: numberValid,
       specialChar: specialCharValid
     };
-  
+
     if (lengthValid && uppercaseValid && numberValid && specialCharValid) {
       return null;
     } else {
@@ -68,9 +70,7 @@ export class NuevaPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.correo = params['correo'] || '';
-    });
+    this.correo = this.comparticionParametrosService.getCorreo() || '';
   }
 
   mustMatch(controlName: string, matchingControlName: string) {
@@ -89,12 +89,12 @@ export class NuevaPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form && this.form.get('password') && this.form.valid) {
+    if (this.form.valid) {
       const formData = {
         correo: this.correo,
         nuevaPassword: this.form.get('password')!.value
       };
-  
+
       this.isProcessing = true;
 
       this.usuarioService.cambiarPassword(formData).subscribe({
@@ -105,9 +105,11 @@ export class NuevaPasswordComponent implements OnInit {
           this.router.navigate(['/login']);
         },
         error: (error) => {
+          this.isProcessing = false;
           this.snackBar.open('Error al cambiar contraseña', 'Cerrar', {
             duration: 3000
           });
+          this.isProcessing = false;
         }
       });
     } else {

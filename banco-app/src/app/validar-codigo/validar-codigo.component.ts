@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsuarioService } from '../services/usuario.service';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { EmailService } from '../services/email-validation.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -31,22 +31,27 @@ export class VerificarCodigoComponent implements OnInit {
     private fb: FormBuilder,
     private emailService: EmailService,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.verifyForm = this.fb.group({
-      code1: ['', [Validators.required, Validators.maxLength(1)]],
-      code2: ['', [Validators.required, Validators.maxLength(1)]],
-      code3: ['', [Validators.required, Validators.maxLength(1)]],
-      code4: ['', [Validators.required, Validators.maxLength(1)]],
-      code5: ['', [Validators.required, Validators.maxLength(1)]],
-      code6: ['', [Validators.required, Validators.maxLength(1)]]
+      code1: ['', [Validators.required, Validators.maxLength(1), this.singleCharValidator]],
+      code2: ['', [Validators.required, Validators.maxLength(1), this.singleCharValidator]],
+      code3: ['', [Validators.required, Validators.maxLength(1), this.singleCharValidator]],
+      code4: ['', [Validators.required, Validators.maxLength(1), this.singleCharValidator]],
+      code5: ['', [Validators.required, Validators.maxLength(1), this.singleCharValidator]],
+      code6: ['', [Validators.required, Validators.maxLength(1), this.singleCharValidator]]
     });
   }
 
   ngOnInit(): void {
-    this.correo = this.route.snapshot.queryParamMap.get('correo') || '';
-    this.cedula = this.route.snapshot.queryParamMap.get('cedula') || '';
+    this.correo = this.comparticionParametrosService.getCorreo() || '';
+    this.cedula = this.comparticionParametrosService.getCedula() || '';
+  }
+
+  singleCharValidator(control: FormControl) {
+    const value = control.value ? control.value.trim() : '';
+    return value.length === 1 ? null : { invalidChar: true };
   }
 
   autoFocusNext(event: Event, nextInputId: string) {
@@ -88,12 +93,15 @@ export class VerificarCodigoComponent implements OnInit {
           this.snackBar.open('Código verificado con éxito', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/ingresar-credenciales'], { queryParams: { cedula: this.cedula } });
+          this.comparticionParametrosService.setCedula(this.cedula);
+          this.router.navigate(['/ingresar-credenciales']);
+          this.comparticionParametrosService.clearFormData(); 
         },
         error => {
           this.snackBar.open('Código de verificación incorrecto', 'Cerrar', {
             duration: 3000
           });
+          this.isProcessing = false;
         }
       );
     } else {

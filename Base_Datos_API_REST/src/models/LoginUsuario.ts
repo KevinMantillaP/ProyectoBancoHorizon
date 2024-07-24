@@ -7,7 +7,7 @@ export interface ILoginUsuario extends Document {
   contraseña: string;
   cedula: string;
   intentosFallidos: number;
-  bloqueoExpiracion: Date | null;
+  bloqueado: boolean;
 }
 
 const LoginUsuarioSchema: Schema = new Schema({
@@ -16,7 +16,7 @@ const LoginUsuarioSchema: Schema = new Schema({
   contraseña: { type: String, required: true },
   cedula: { type: String, required: true, ref: 'Cliente' },
   intentosFallidos: { type: Number, default: 0 },
-  bloqueoExpiracion: { type: Date, default: null }
+  bloqueado: { type: Boolean, default: false }
 }, { collection: 'LoginUsuario' });
 
 const LoginUsuario = mongoose.model<ILoginUsuario>('LoginUsuario', LoginUsuarioSchema);

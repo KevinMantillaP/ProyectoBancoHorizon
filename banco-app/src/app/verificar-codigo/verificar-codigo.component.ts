@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, QueryList, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 @Component({
   selector: 'app-verificar-codigo',
@@ -14,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class VerificarCodigoRecuperacionComponent implements OnInit {
   form: FormGroup;
   correo: string = '';
+  from: string = '';
   isProcessing: boolean = false;
   
   @ViewChild('code1') code1Input!: ElementRef;
@@ -27,8 +29,8 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
-    private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private comparticionParametrosService: ComparticionParametrosService
   ) {
     this.form = this.fb.group({
       code1: ['', [Validators.required, Validators.maxLength(1)]],
@@ -41,9 +43,8 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.correo = params.get('correo') || '';
-    });
+    this.correo = this.comparticionParametrosService.getCorreo() || '';
+    this.from = this.comparticionParametrosService.getFrom() || '';
   }
 
   autoFocusNext(event: Event, nextInputId: string) {
@@ -84,16 +85,36 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
           this.snackBar.open('Código verificado correctamente', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigate(['/nueva-contraseña'], { queryParams: { correo: this.correo } });
+
+          if (this.from === 'recuperar-password') {
+            this.router.navigate(['/nueva-contraseña']);
+          } else if (this.from === 'desbloquear-cuenta') {
+            this.usuarioService.desbloquearUsuario(this.correo).subscribe({
+              next: (response) => {
+                this.snackBar.open('Usuario desbloqueado con éxito', 'Cerrar', {
+                  duration: 3000
+                });
+                this.router.navigate(['']);
+              },
+              error: (error) => {
+                this.snackBar.open('Error al desbloquear el usuario', 'Cerrar', {
+                  duration: 3000
+                });
+                this.isProcessing = false;
+              }
+            });
+          }
         },
         error: (error) => {
           this.snackBar.open('Código incorrecto', 'Cerrar', {
             duration: 3000
           });
+          this.isProcessing = false;
         }
       });
     }
   }
+
 
   combineCodeInputs(): string {
     return [
