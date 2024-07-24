@@ -5,6 +5,7 @@ import { Router,ActivatedRoute  } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmailService } from '../services/email-validation.service';
+import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 
 @Component({
   selector: 'app-transferencias',
@@ -31,37 +32,36 @@ export class TransferenciasComponent implements OnInit {
     private usuarioService: UsuarioService,
     private emailService: EmailService,
     private router: Router,
-    private route: ActivatedRoute 
+    private route: ActivatedRoute,
+    private comparticionParametrosService: ComparticionParametrosService
   ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.cedula = params['cedula'] || null;
-      if (this.cedula) {
-        this.usuarioService.getCuentasByCedula(this.cedula).subscribe(
-          (response) => {
-            this.cuentas = response.cuentas;
-            if (this.cuentas.length > 0) {
-              this.cuentaOrigen = this.cuentas[0].numeroCuenta; // Selección inicial de cuenta origen
-              this.cuentaDestino = this.cuentas[0].numeroCuenta; // Selección inicial de cuenta destino
-              this.actualizarSaldoCuentaOrigen();
-            }
-          },
-          (error) => {
-            console.error('Error al obtener cuentas:', error);
+    this.cedula = this.comparticionParametrosService.getCedula();
+    if (this.cedula) {
+      this.usuarioService.getCuentasByCedula(this.cedula).subscribe(
+        (response) => {
+          this.cuentas = response.cuentas;
+          if (this.cuentas.length > 0) {
+            this.cuentaOrigen = this.cuentas[0].numeroCuenta; // Selección inicial de cuenta origen
+            this.cuentaDestino = this.cuentas[0].numeroCuenta; // Selección inicial de cuenta destino
+            this.actualizarSaldoCuentaOrigen();
           }
-        );
-        // Obtener email por cédula
-        this.usuarioService.obtenerEmailPorCedula(this.cedula).subscribe(
-          (response) => {
-            this.emailUsuario = response.email;
-          },
-          (error) => {
-            console.error('Error al obtener email:', error);
-          }
-        );
-      }
-    });
+        },
+        (error) => {
+          console.error('Error al obtener cuentas:', error);
+        }
+      );
+      // Obtener email por cédula
+      this.usuarioService.obtenerEmailPorCedula(this.cedula).subscribe(
+        (response) => {
+          this.emailUsuario = response.email;
+        },
+        (error) => {
+          console.error('Error al obtener email:', error);
+        }
+      );
+    }
   }
 
   actualizarSaldoCuentaOrigen(): void {
