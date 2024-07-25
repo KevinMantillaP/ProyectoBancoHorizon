@@ -4,7 +4,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface ITransferencia extends Document {
   idTransferencia: string;
   monto: number;
-  fecha: Date;
+  fecha: string;
   cuentaDestino: string;
   numeroCuenta: string;
   saldoRestante: number;
@@ -14,7 +14,7 @@ export interface ITransferencia extends Document {
 const TransferenciaSchema: Schema = new Schema({
   idTransferencia: { type: String, required: true, unique: true },
   monto: { type: Number, required: true },
-  fecha: { type: Date, required: true },
+  fecha: { type: String, required: true },
   cuentaDestino: { type: String, required: true },
   numeroCuenta: { type: String, required: true, ref: 'Cuenta' },
   saldoRestante: { type: Number, required: true },

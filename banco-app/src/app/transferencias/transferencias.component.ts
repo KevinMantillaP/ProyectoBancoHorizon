@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmailService } from '../services/email-validation.service';
 import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
+import moment from 'moment';
+import 'moment-timezone';
 
 @Component({
   selector: 'app-transferencias',
@@ -89,12 +91,13 @@ export class TransferenciasComponent implements OnInit {
         const transferenciaData = {
           idTransferencia: this.generarIdTransferencia(),
           monto: this.monto,
-          fecha: new Date(),
+          fecha: moment().tz('America/Guayaquil').format(),
           cuentaDestino: this.cuentaDestino,
           numeroCuenta: this.cuentaOrigen,
           saldoRestante: saldoRestante,
           descripcion: descripcion
         };
+        console.log(transferenciaData);
         this.transferenciaService.realizarTransferencia(transferenciaData).subscribe(
           (response) => {
             console.log('Transferencia realizada con éxito', response);

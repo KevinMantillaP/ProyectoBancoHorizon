@@ -5,7 +5,6 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import Cliente from '../models/Cliente';
 import LoginUsuario from '../models/LoginUsuario';
-import { loginUsuario } from './loginUsuarioController';
 
 // Cargar las variables de entorno desde el archivo .env
 dotenv.config();
