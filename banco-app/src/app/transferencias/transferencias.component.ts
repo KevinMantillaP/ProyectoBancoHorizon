@@ -107,11 +107,12 @@ export class TransferenciasComponent implements OnInit {
     const saldoRestante = saldoActual - this.monto;
     this.usuarioService.realizarTransferencia(this.cuentaOrigen, this.cuentaDestino, this.monto).subscribe(
       () => {
+        const fecha = moment().tz('America/Guayaquil').format();
         const descripcion = this.descripcion.trim() === '' ? '' : this.descripcion;
         const transferenciaData = {
           idTransferencia: this.generarIdTransferencia(),
           monto: this.monto,
-          fecha: moment().tz('America/Guayaquil').format(),
+          fecha: fecha,
           cuentaDestino: this.cuentaDestino,
           numeroCuenta: this.cuentaOrigen,
           saldoRestante: saldoRestante,
@@ -122,7 +123,7 @@ export class TransferenciasComponent implements OnInit {
           (response) => {
             console.log('Transferencia realizada con éxito', response);
             // Enviar la notificación de transferencia por correo electrónico
-            this.emailService.sendTransferNotification(this.emailUsuario, this.monto, this.cuentaOrigen, this.cuentaDestino).subscribe(
+            this.emailService.sendTransferNotification(this.emailUsuario, this.monto, this.cuentaOrigen, this.cuentaDestino, fecha).subscribe(
               (response) => {
                 console.log('Notificación de transferencia enviada con éxito', response);
                 this.snackBar.open('Transferencia realizada con éxito', 'Cerrar', {

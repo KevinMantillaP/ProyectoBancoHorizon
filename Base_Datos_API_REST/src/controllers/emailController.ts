@@ -5,6 +5,16 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import Cliente from '../models/Cliente';
 import LoginUsuario from '../models/LoginUsuario';
+import * as path from 'path';
+import * as fs from 'fs';
+
+const htmlWithVariables = (htmlTemplate: string, variables: { [key: string]: string }) => {
+  return Object.keys(variables).reduce((html, key) => {
+    const regex = new RegExp(`{{${key}}}`, 'g');
+    return html.replace(regex, variables[key]);
+  }, htmlTemplate);
+};
+
 
 // Cargar las variables de entorno desde el archivo .env
 dotenv.config();
@@ -217,38 +227,44 @@ export const cambiarPassword = async (req: Request, res: Response) => {
   }
 };
 export const enviarNotificacionTransferencia = async (req: Request, res: Response) => {
-  const { correo, monto, cuentaOrigen, cuentaDestino } = req.body;
+  const { correo, monto, cuentaOrigen, cuentaDestino, fecha } = req.body;
 
   try {
-    // Obtener el access token
     const accessToken = await oauth2Client.getAccessToken();
-    if (typeof accessToken.token !== 'string') {
+    if (!accessToken.token) {
       throw new Error('No se pudo obtener el Access Token');
     }
 
-    // Configuración del transporte de correo
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         type: 'OAuth2',
-        user: process.env.GMAIL_USER, // Dirección de correo Gmail
-        clientId: process.env.GOOGLE_CLIENT_ID, // Client ID
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Client Secret
-        refreshToken: process.env.GOOGLE_REFRESH_TOKEN, // Refresh Token
-        accessToken: accessToken.token, // El token de acceso obtenido
+        user: process.env.GMAIL_USER,
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+        accessToken: accessToken.token,
       },
     });
 
-    // Configuración del correo
+    const filePath = path.join(__dirname, '../templates/notificacionTransferencia.html');
+    const htmlTemplate = fs.readFileSync(filePath, 'utf-8');
+
+    const htmlContent = htmlWithVariables(htmlTemplate, {
+      monto: monto.toFixed(2),
+      cuentaOrigen,
+      cuentaDestino,
+      fecha
+    });
+
     const mailOptions = {
-      from: `Horizon Bank <${process.env.GMAIL_USER}>`, // Nombre y dirección de correo remitente
-      to: correo, // Dirección de correo destinatario
+      from: `Horizon Bank <${process.env.GMAIL_USER}>`,
+      to: correo,
       subject: 'Notificación de Transferencia',
-      html: `<strong>Se ha transferido un monto de ${monto}$ desde la cuenta ${cuentaOrigen} a la cuenta ${cuentaDestino}</strong>`,
+      html: htmlContent,
     };
 
-    // Envía el correo usando nodemailer
-    const result = await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
 
     return res.status(200).json({ message: 'Correo de notificación enviado' });
   } catch (error) {

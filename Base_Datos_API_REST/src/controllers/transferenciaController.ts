@@ -15,7 +15,6 @@ export const getTransferencias = async (req: Request, res: Response) => {
 // Crear una nueva transferencia
 export const crearTransferencia = async (req: Request, res: Response) => {
   const fechaStr = req.body.fecha; // La fecha recibida como string en formato ISO 8601
-  console.log('Fecha recibida en el backend:', fechaStr);
 
   // No convertir la fecha, almacenarla directamente como string
   const nuevaTransferencia: ITransferencia = new Transferencia({
@@ -27,7 +26,6 @@ export const crearTransferencia = async (req: Request, res: Response) => {
     saldoRestante: req.body.saldoRestante,
     descripcion: req.body.descripcion
   });
-  console.log('Nueva transferencia creada:', nuevaTransferencia);
 
   try {
     const transferenciaGuardada = await nuevaTransferencia.save();
