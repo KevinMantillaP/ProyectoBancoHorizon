@@ -1,13 +1,14 @@
 import { Component, OnInit  } from '@angular/core';
 import { TransferenciaService } from '../services/transferencia.service';
 import { UsuarioService } from '../services/usuario.service';
-import { Router,ActivatedRoute  } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmailService } from '../services/email-validation.service';
 import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 import moment from 'moment';
 import 'moment-timezone';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-transferencias',
@@ -34,8 +35,8 @@ export class TransferenciasComponent implements OnInit {
     private usuarioService: UsuarioService,
     private emailService: EmailService,
     private router: Router,
-    private route: ActivatedRoute,
-    private comparticionParametrosService: ComparticionParametrosService
+    private comparticionParametrosService: ComparticionParametrosService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -105,11 +106,17 @@ export class TransferenciasComponent implements OnInit {
             this.emailService.sendTransferNotification(this.emailUsuario, this.monto, this.cuentaOrigen, this.cuentaDestino).subscribe(
               (response) => {
                 console.log('Notificación de transferencia enviada con éxito', response);
+                this.snackBar.open('Transferencia realizada con éxito', 'Cerrar', {
+                  duration: 3000, // Duración de la notificación
+                });
                 this.redirectToVisualizarSaldo();
               },
               (error) => {
                 this.isProcessing = false;
                 console.error('Error al enviar la notificación de transferencia', error);
+                this.snackBar.open('Error al enviar la notificación de transferencia', 'Cerrar', {
+                  duration: 3000, // Duración de la notificación
+                });
               }
             );
           },
