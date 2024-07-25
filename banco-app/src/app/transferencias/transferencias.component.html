@@ -20,54 +20,34 @@
       <!-- Cuenta Destino Field -->
       <div>
         <label for="cuentaDestino">Cuenta Destino</label>
-        <select id="cuentaDestino" [(ngModel)]="cuentaDestino" name="cuentaDestino" required>
-          <option *ngFor="let cuenta of cuentas" [ngValue]="cuenta.numeroCuenta">{{ cuenta.numeroCuenta }}</option>
-        </select>
-        <small *ngIf="!cuentaDestino">Selecciona una cuenta destino</small>
+        <input id="cuentaDestino" type="text" [(ngModel)]="cuentaDestino" name="cuentaDestino" (blur)="buscarTitularCuentaDestino()" placeholder="Número de cuenta destino" required>
+        <button type="button" (click)="buscarTitularCuentaDestino()" aria-label="Buscar cuenta">
+          <mat-icon>search</mat-icon> <!-- Utiliza un ícono de búsqueda -->
+        </button>
+        <div *ngIf="nombreTitular && apellidoTitular">
+          <p><strong>La cuenta pertenece a: {{ nombreTitular }} {{ apellidoTitular }}</strong></p>
+        </div>
+        <small *ngIf="!cuentaDestino">Ingresa un número de cuenta destino</small>
       </div>
-
       <!-- Monto Field -->
       <div>
         <label for="monto">Monto</label>
         <input id="monto" type="number" [(ngModel)]="monto" name="monto" placeholder="Monto" min="1" required>
         <small *ngIf="!monto || monto <= 0">Ingresa un monto válido a transferir</small>
       </div>
-
       <!-- Descripción Field -->
       <div>
         <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3" placeholder="Descripción"></textarea>
+        <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3" placeholder="Pago Luz, etc."></textarea>
         <small *ngIf="!descripcion">Ingresa la descripción de la transferencia</small>
       </div>
-
       <div class="button-container">
-        <button (click)="redirectTo('')">Regresar</button>
+        <button (click)="redirectToVisualizarSaldo()">Regresar</button>
         <button type="submit" [disabled]="isProcessing || !cuentaOrigen || !cuentaDestino || !monto || monto <= 0 || !descripcion">Transferir</button>
       </div>
     </form>
   </div>
 </div>
-<footer class="footer">
-  <div class="footer-content">
-      <div class="footer-section">
-          <p class="footer-brand">Horizon Bank</p>
-      </div>
-      <div class="footer-section">
-          <h4>Ayuda y Contacto</h4>
-          <p>+593999999999</p>
-          <p><a href="#">Facebook</a></p>
-          <p><a href="#">Instagram</a></p>
-          <p><a href="#">LinkedIn</a></p>
-      </div>
-      <div class="footer-section">
-          <h4>Sobre Nosotros</h4>
-          <p><a href="#">Quiénes Somos</a></p>
-          <p><a href="#">Trabaja con Nosotros</a></p>
-          <p><a href="#">Transparencia</a></p>
-      </div>
-      <div class="footer-section">
-          <h4>Más Servicios</h4>
-          <p><a href="#">Transacciones en Línea</a></p>
-      </div>
-  </div>
+<footer>
+  <button (click)="redirectToVisualizarSaldo()">Visualizar Saldo</button>
 </footer>

@@ -122,6 +122,13 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/desbloquear-cuenta`, { correo });
   }
 
+  getClienteByNumeroCuenta(numeroCuenta: string): Observable<any> {
+    const url = `${this.baseUrl}/cuentas/cliente/${numeroCuenta}`;
+    return this.http.get<any>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
     if (error.error instanceof ErrorEvent) {
