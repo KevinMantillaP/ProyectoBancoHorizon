@@ -1,10 +1,10 @@
 <header class="header">
-  <h1>Horizon Bank</h1>
+  <h2>Horizon Bank</h2>
 </header>
-<div class="content">
+<div class="content" [class.blurred]="mostrarConfirmacion">
   <div class="container">
     <h1>Transferencias</h1>
-    <form (submit)="realizarTransferencia()">
+    <form (submit)="confirmarTransferencia()">
       <!-- Cuenta Origen Field -->
       <div>
         <label for="cuentaOrigen">Cuenta Origen</label>
@@ -39,15 +39,51 @@
       <div>
         <label for="descripcion">Descripción</label>
         <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3" placeholder="Pago Luz, etc."></textarea>
-        <small *ngIf="!descripcion">Ingresa la descripción de la transferencia</small>
+        <small *ngIf="descripcion.trim() === ''">Opcional</small>
       </div>
+      <!-- Submit Button -->
       <div class="button-container">
-        <button (click)="redirectToVisualizarSaldo()">Regresar</button>
-        <button type="submit" [disabled]="isProcessing || !cuentaOrigen || !cuentaDestino || !monto || monto <= 0 || !descripcion">Transferir</button>
+        <button type="submit" [disabled]="isProcessing">Confirmar Transferencia</button>
       </div>
     </form>
   </div>
 </div>
-<footer>
-  <button (click)="redirectToVisualizarSaldo()">Visualizar Saldo</button>
-</footer>
+<div class="overlay" *ngIf="mostrarConfirmacion">
+  <div class="ventana-confirmacion">
+    <h2>Confirmar Transferencia</h2>
+    <p>Cuenta Origen: {{ cuentaOrigen }}</p>
+    <p>Cuenta Destino: {{ cuentaDestino }}</p>
+    <p>Destinatario: {{ nombreTitular }} {{ apellidoTitular }}</p>
+    <p>Monto: {{ monto | currency }}</p>
+    <button (click)="realizarTransferencia()" [disabled]="isProcessing">Confirmar</button>
+    <button (click)="cancelarConfirmacion()">Cancelar</button>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-column">
+    <div>Horizon Bank</div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Ayuda y Contacto</div>
+    <div>+593999999999</div>
+    <div>
+      <a href="#">Facebook</a>
+    </div>
+    <div>
+      <a href="#">Instagram</a>
+    </div>
+    <div>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Sobre Nosotros</div>
+    <div>Quienes Somos</div>
+    <div>Trabaja con Nosotros</div>
+    <div>Transparencia</div>
+  </div>
+  <div class="footer-column">
+    <div class="mi-div">Mas Servicios</div>
+    <div>Transacciones en Linea</div>
+  </div>
+</div>

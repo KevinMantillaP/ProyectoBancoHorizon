@@ -31,6 +31,7 @@ export class TransferenciasComponent implements OnInit {
   isProcessing: boolean = false;
   nombreTitular: string = '';
   apellidoTitular: string = '';
+  mostrarConfirmacion: boolean = false; // Nuevo estado para la ventana de confirmación
 
   constructor(
     private transferenciaService: TransferenciaService,
@@ -93,6 +94,16 @@ export class TransferenciasComponent implements OnInit {
         }
       );
     }
+  }
+
+  confirmarTransferencia(): void {
+    // Asegúrate de obtener el titular de la cuenta destino antes de mostrar la confirmación
+    this.buscarTitularCuentaDestino();
+    this.mostrarConfirmacion = true;
+  }
+
+  cancelarConfirmacion(): void {
+    this.mostrarConfirmacion = false;
   }
 
   realizarTransferencia(): void {
