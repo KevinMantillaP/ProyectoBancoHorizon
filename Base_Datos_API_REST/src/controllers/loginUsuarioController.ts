@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import axios from 'axios';
 import LoginUsuario, { ILoginUsuario } from '../models/LoginUsuario';
-import Cliente from '../models/Cliente'; 
+import Cliente from '../models/Cliente';
 
 const MAX_INTENTOS_FALLIDOS = 3;
 // Obtener todos los login de usuarios
@@ -126,12 +126,12 @@ export const actualizarPassword = async (req: Request, res: Response) => {
 
   try {
     // Buscar el usuario en base a su nombre
-    const loginUsuario = await LoginUsuario.findOne({ nombreUsuario});
+    const loginUsuario = await LoginUsuario.findOne({ nombreUsuario });
     if (!loginUsuario) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
     // Actualizar la contraseña en el objeto LoginUsuario
-    const nuevaPasswordEncrip = await bcrypt.hash(nuevaPassword,10);
+    const nuevaPasswordEncrip = await bcrypt.hash(nuevaPassword, 10);
     loginUsuario.contraseña = nuevaPasswordEncrip;
     await loginUsuario.save();
 
@@ -186,5 +186,34 @@ export const desbloquearUsuario = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error al desbloquear el usuario:', (error as Error).message);
     return res.status(500).json({ message: 'Error al desbloquear el usuario' });
+  }
+};
+
+export const cambiarNombreUsuarioPorCorreo = async (req: Request, res: Response) => {
+  const { correo, nuevoNombreUsuario } = req.body;
+
+  try {
+    // Buscar el cliente por correo para obtener la cédula
+    const cliente = await Cliente.findOne({ correo });
+    if (!cliente) {
+      return res.status(404).json({ message: 'Cliente no encontrado' });
+    }
+
+    // Buscar el usuario de login por cédula
+    const usuario = await LoginUsuario.findOne({ cedula: cliente.cedula });
+    if (!usuario) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Actualizar el nombre de usuario
+    usuario.nombreUsuario = nuevoNombreUsuario;
+
+    // Guardar los cambios en la base de datos
+    await usuario.save();
+
+    return res.status(200).json({ message: 'Nombre de usuario actualizado con éxito', usuario });
+  } catch (error) {
+    console.error('Error al cambiar el nombre de usuario:', (error as Error).message);
+    return res.status(500).json({ message: 'Error al cambiar el nombre de usuario' });
   }
 };

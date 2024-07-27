@@ -1,1 +1,49 @@
-<p>ingresar-correo-recuperacion-usuario works!</p>
+<div class="header">
+  <h2>Horizon Bank</h2>
+</div>
+<div class="content">
+  <div class="container">
+    <h3>Actualizar Nombre de Usuario</h3>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nuevoNombreUsuario">Nuevo Nombre de Usuario:</label>
+        <input id="nuevoNombreUsuario" formControlName="nuevoNombreUsuario" type="text" required />
+      </div>
+      <div class="form-group">
+        <label for="confirmarNombreUsuario">Confirmar Nombre de Usuario:</label>
+        <input id="confirmarNombreUsuario" formControlName="confirmarNombreUsuario" type="text" required />
+      </div>
+      <div class="button-container">
+        <button type="submit" [disabled]="isProcessing">Actualizar</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-column">
+    <div>Horizon Bank</div>
+  </div>
+  <div class="footer-column">
+    <div>Ayuda y Contacto</div>
+    <div>+593999999999</div>
+    <div>
+      <a href="#">Facebook</a>
+    </div>
+    <div>
+      <a href="#">Instagram</a>
+    </div>
+    <div>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-column">
+    <div>Sobre Nosotros</div>
+    <div>Quienes Somos</div>
+    <div>Trabaja con Nosotros</div>
+    <div>Transparencia</div>
+  </div>
+  <div class="footer-column">
+    <div>Más Servicios</div>
+    <div>Transacciones en Línea</div>
+  </div>
+</div>

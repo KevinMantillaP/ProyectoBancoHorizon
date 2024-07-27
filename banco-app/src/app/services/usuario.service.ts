@@ -128,7 +128,9 @@ export class UsuarioService {
       catchError(this.handleError)
     );
   }
-
+  cambiarNombreUsuarioPorCorreo(correo: string, nuevoNombreUsuario: string): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/usuarios/cambiar-nombre-por-correo`, { correo, nuevoNombreUsuario });
+  }
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
     if (error.error instanceof ErrorEvent) {

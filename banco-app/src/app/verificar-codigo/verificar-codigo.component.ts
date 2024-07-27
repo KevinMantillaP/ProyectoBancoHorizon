@@ -103,6 +103,8 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
                 this.isProcessing = false;
               }
             });
+          } else if (this.from === 'envio-usuario-recuperacion-usuario') {
+            this.router.navigate(['/recuperacion-usuario']);
           }
         },
         error: (error) => {
@@ -111,9 +113,9 @@ export class VerificarCodigoRecuperacionComponent implements OnInit {
           });
           this.isProcessing = false;
         }
-      });
-    }
-  }
+      });
+    }
+  }
 
 
   combineCodeInputs(): string {
