@@ -311,3 +311,39 @@ export const enviarNotificacionCambioPassword = async (req: Request, res: Respon
     return res.status(500).json({ message: 'Error al enviar el correo de notificación' });
   }
 };
+export const enviarNotificacionRecuperacionUsuario = async (req: Request, res: Response) => {
+  const { correo, fecha, nuevoNombreUsuario } = req.body;
+  try {
+    const accessToken = await oauth2Client.getAccessToken();
+    if (!accessToken.token) {
+      throw new Error('No se pudo obtener el Access Token');
+    }
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: process.env.GMAIL_USER,
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+        accessToken: accessToken.token,
+      },
+    });
+    const filePath = path.join(__dirname, '../templates/notificacionRecupercionUsuario.html');
+    const htmlTemplate = fs.readFileSync(filePath, 'utf-8');
+    const htmlContent = htmlWithVariables(htmlTemplate, {
+      fecha,
+      nuevoNombreUsuario
+    });
+    const mailOptions = {
+      from: `Horizon Bank <${process.env.GMAIL_USER}>`,
+      to: correo,
+      subject: 'Notificación de Cambio de Nombre de Usuario',
+      html: htmlContent,
+    };
+    await transporter.sendMail(mailOptions);
+    return res.status(200).json({ message: 'Correo de notificación enviado' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al enviar el correo de notificación' });
+  }
+};

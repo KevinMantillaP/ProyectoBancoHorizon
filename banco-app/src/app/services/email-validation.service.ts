@@ -25,4 +25,7 @@ export class EmailService {
   enviarCorreoCambioPassword(correo: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/notificacion-cambio-password`, { correo, });
   }
+  sendRecuperacionUsuarioNotification(correo: string, fecha: string, nuevoNombreUsuario: string,): Observable<any> {
+    return this.http.post(`${this.baseUrl}/notificacion-Recupercio-Usuario`, { correo, fecha, nuevoNombreUsuario});
+  }
 } 
