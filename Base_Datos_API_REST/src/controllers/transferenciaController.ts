@@ -14,10 +14,13 @@ export const getTransferencias = async (req: Request, res: Response) => {
 
 // Crear una nueva transferencia
 export const crearTransferencia = async (req: Request, res: Response) => {
+  const fechaStr = req.body.fecha; // La fecha recibida como string en formato ISO 8601
+
+  // No convertir la fecha, almacenarla directamente como string
   const nuevaTransferencia: ITransferencia = new Transferencia({
     idTransferencia: req.body.idTransferencia,
     monto: req.body.monto,
-    fecha: req.body.fecha,
+    fecha: fechaStr, // Guardar directamente el string
     cuentaDestino: req.body.cuentaDestino,
     numeroCuenta: req.body.numeroCuenta,
     saldoRestante: req.body.saldoRestante,
@@ -26,8 +29,10 @@ export const crearTransferencia = async (req: Request, res: Response) => {
 
   try {
     const transferenciaGuardada = await nuevaTransferencia.save();
+    console.log('Transferencia guardada en la base de datos:', transferenciaGuardada);
     res.status(201).json(transferenciaGuardada);
   } catch (err: any) {
+    console.log('Error al guardar la transferencia:', err);
     res.status(400).json({ message: err.message });
   }
 };

@@ -18,6 +18,9 @@
       <input type="date" [(ngModel)]="fechaFiltro" (ngModelChange)="filtrarPorFecha(fechaFiltro)">
       <button *ngIf="fechaFiltro" (click)="filtrarPorFecha(null)">Quitar Filtro</button>
     </div>
+    <div *ngIf="transferenciasFiltradas.length === 0">
+      <p>No hay transferencias para mostrar.</p>
+    </div>
     <ul>
       <li *ngFor="let transferencia of transferenciasFiltradas" [ngClass]="{'ingreso': transferencia.tipo === 'ingreso', 'egreso': transferencia.tipo === 'egreso'}">
         <div>

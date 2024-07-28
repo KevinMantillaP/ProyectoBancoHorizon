@@ -13,6 +13,8 @@ import { TransferenciasComponent } from './transferencias/transferencias.compone
 import {CambioPasswordComponent} from './cambio-password/cambio-password.component';
 import { HistorialTransferenciasComponent } from './historial-transferencias/historial-transferencias.component';
 import { DesbloquearCuentaComponent } from './desbloquear-cuenta/desbloquear-cuenta.component';
+import { EnvioUsuarioRecuperacionUsuarioComponent } from './envio-usuario-recuperacion-usuario/envio-usuario-recuperacion-usuario.component';
+import { IngresarCorreoRecuperacionUsuarioComponent } from './ingresar-correo-recuperacion-usuario/ingresar-correo-recuperacion-usuario.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -30,5 +32,7 @@ export const routes: Routes = [
     { path: 'transferencia', component: TransferenciasComponent },
     { path: 'historial-transferencias', component: HistorialTransferenciasComponent},
     { path: 'desbloquear-cuenta', component: DesbloquearCuentaComponent},
+    { path: 'Correo-recuperacion-usuario', component: EnvioUsuarioRecuperacionUsuarioComponent},
+    { path: 'recuperacion-usuario', component: IngresarCorreoRecuperacionUsuarioComponent},
 ];
 

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
-import { ActivatedRoute, Router  } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import moment from 'moment'; // Asegúrate de que moment esté instalado
 
 @Component({
   selector: 'app-historial-transferencias',
@@ -24,7 +26,8 @@ export class HistorialTransferenciasComponent implements OnInit {
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private router: Router,
-    private comparticionParametrosService: ComparticionParametrosService
+    private comparticionParametrosService: ComparticionParametrosService,
+    private snackBar: MatSnackBar // Añadir MatSnackBar para notificaciones
   ) {}
 
   ngOnInit(): void {
@@ -63,10 +66,28 @@ export class HistorialTransferenciasComponent implements OnInit {
 
   filtrarPorFecha(fecha: Date | null): void {
     this.fechaFiltro = fecha;
+
     if (fecha) {
-      this.transferenciasFiltradas = this.transferencias.filter(transferencia =>
-        new Date(transferencia.fecha).toDateString() === fecha.toDateString()
-      );
+      const fechaFiltroInicio = moment(fecha).startOf('day').toDate();
+      const fechaFiltroFin = moment(fecha).endOf('day').toDate();
+
+      if (fecha > new Date()) {
+        this.snackBar.open('La fecha ingresada es futura. No se pueden mostrar registros.', 'Cerrar', {
+          duration: 5000,
+        });
+        this.transferenciasFiltradas = []; // Limpia las transferencias filtradas
+      } else {
+        this.transferenciasFiltradas = this.transferencias.filter(transferencia => {
+          const transferenciaFecha = new Date(transferencia.fecha);
+          return transferenciaFecha >= fechaFiltroInicio && transferenciaFecha <= fechaFiltroFin;
+        });
+
+        if (this.transferenciasFiltradas.length === 0) {
+          this.snackBar.open('No se encontraron registros para la fecha seleccionada.', 'Cerrar', {
+            duration: 5000,
+          });
+        }
+      }
     } else {
       this.transferenciasFiltradas = [...this.transferencias];
     }

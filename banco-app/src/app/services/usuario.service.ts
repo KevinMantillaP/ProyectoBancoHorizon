@@ -7,7 +7,8 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private baseUrl = 'http://localhost:4000/api'; 
+  //private baseUrl = 'http://localhost:4000/api'; 
+  private baseUrl = 'https://base-datos-api-rest.vercel.app/api'; 
 
   constructor(private http: HttpClient) { }
 
@@ -122,6 +123,15 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/desbloquear-cuenta`, { correo });
   }
 
+  getClienteByNumeroCuenta(numeroCuenta: string): Observable<any> {
+    const url = `${this.baseUrl}/cuentas/cliente/${numeroCuenta}`;
+    return this.http.get<any>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+  cambiarNombreUsuarioPorCorreo(correo: string, nuevoNombreUsuario: string): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/usuarios/cambiar-nombre-por-correo`, { correo, nuevoNombreUsuario });
+  }
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
     if (error.error instanceof ErrorEvent) {

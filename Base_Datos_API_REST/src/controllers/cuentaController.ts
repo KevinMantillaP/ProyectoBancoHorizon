@@ -75,3 +75,27 @@ export const actualizarSaldoCuenta = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
+export const getClienteByNumeroCuenta = async (req: Request, res: Response) => {
+  const { numeroCuenta } = req.params;
+  try {
+    const cuenta = await Cuenta.findOne({ numeroCuenta });
+    if (!cuenta) {
+      return res.status(404).json({ message: 'Cuenta no encontrada' });
+    }
+
+    const cliente = await Cliente.findOne({ cedula: cuenta.cedula });
+    if (!cliente) {
+      return res.status(404).json({ message: 'Cliente no encontrado' });
+    }
+
+    const response = {
+      nombreCliente: cliente.nombres,
+      apellidosCliente: cliente.apellidos,
+      cuenta: cuenta.toObject()
+    };
+
+    res.json(response);
+  } catch (err: any) {
+    res.status(500).json({ message: err.message });
+  }
+};
