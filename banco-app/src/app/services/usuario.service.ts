@@ -7,7 +7,8 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private baseUrl = 'http://localhost:4000/api'; 
+  //private baseUrl = 'http://localhost:4000/api'; 
+  private baseUrl = 'https://base-datos-api-rest.vercel.app/api'; 
 
   constructor(private http: HttpClient) { }
 
