@@ -31,7 +31,7 @@ export class TransferenciasComponent implements OnInit {
   isProcessing: boolean = false;
   nombreTitular: string = '';
   apellidoTitular: string = '';
-  mostrarConfirmacion: boolean = false; // Nuevo estado para la ventana de confirmación
+  mostrarConfirmacion: boolean = false;
 
   constructor(
     private transferenciaService: TransferenciaService,
@@ -49,22 +49,28 @@ export class TransferenciasComponent implements OnInit {
         (response) => {
           this.cuentas = response.cuentas;
           if (this.cuentas.length > 0) {
-            this.cuentaOrigen = this.cuentas[0].numeroCuenta; // Selección inicial de cuenta origen
-            this.cuentaDestino = this.cuentas[0].numeroCuenta; // Selección inicial de cuenta destino
+            this.cuentaOrigen = this.cuentas[0].numeroCuenta;
+            this.cuentaDestino = this.cuentas[0].numeroCuenta;
             this.actualizarSaldoCuentaOrigen();
           }
         },
         (error) => {
           console.error('Error al obtener cuentas:', error);
+          this.snackBar.open('Error al obtener cuentas', 'Cerrar', {
+            duration: 3000,
+          });
         }
       );
-      // Obtener email por cédula
+
       this.usuarioService.obtenerEmailPorCedula(this.cedula).subscribe(
         (response) => {
           this.emailUsuario = response.email;
         },
         (error) => {
           console.error('Error al obtener email:', error);
+          this.snackBar.open('Error al obtener email', 'Cerrar', {
+            duration: 3000,
+          });
         }
       );
     }
@@ -81,23 +87,32 @@ export class TransferenciasComponent implements OnInit {
 
   buscarTitularCuentaDestino(): void {
     if (this.cuentaDestino) {
-      // Obtén el cliente usando el número de cuenta destino
       this.usuarioService.getClienteByNumeroCuenta(this.cuentaDestino).subscribe(
         (response) => {
-          this.nombreTitular = response.nombreCliente || 'No disponible';
-          this.apellidoTitular = response.apellidosCliente || 'No disponible';
+          if (response) {
+            this.nombreTitular = response.nombreCliente || 'No disponible';
+            this.apellidoTitular = response.apellidosCliente || 'No disponible';
+          } else {
+            this.nombreTitular = 'Cuenta no encontrada';
+            this.apellidoTitular = '';
+            this.snackBar.open('La cuenta destino no existe', 'Cerrar', {
+              duration: 3000,
+            });
+          }
         },
         (error) => {
           console.error('Error al buscar el cliente:', error);
           this.nombreTitular = 'Error al buscar';
           this.apellidoTitular = '';
+          this.snackBar.open('No existe la cuenta destino', 'Cerrar', {
+            duration: 3000,
+          });
         }
       );
     }
   }
 
   confirmarTransferencia(): void {
-    // Asegúrate de obtener el titular de la cuenta destino antes de mostrar la confirmación
     this.buscarTitularCuentaDestino();
     this.mostrarConfirmacion = true;
   }
@@ -108,13 +123,23 @@ export class TransferenciasComponent implements OnInit {
 
   realizarTransferencia(): void {
     if (this.monto <= 0) {
-      console.error('El monto debe ser un número positivo');
+      this.snackBar.open('El monto debe ser un número positivo', 'Cerrar', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    const saldoActual = this.cuentas.find(cuenta => cuenta.numeroCuenta === this.cuentaOrigen)?.saldo || 0;
+    if (this.monto > saldoActual) {
+      this.snackBar.open('Monto excede el saldo disponible', 'Cerrar', {
+        duration: 3000,
+      });
+      this.isProcessing = false;
       return;
     }
 
     this.isProcessing = true;
 
-    const saldoActual = this.cuentas.find(cuenta => cuenta.numeroCuenta === this.cuentaOrigen)?.saldo || 0;
     const saldoRestante = saldoActual - this.monto;
     this.usuarioService.realizarTransferencia(this.cuentaOrigen, this.cuentaDestino, this.monto).subscribe(
       () => {
@@ -129,16 +154,14 @@ export class TransferenciasComponent implements OnInit {
           saldoRestante: saldoRestante,
           descripcion: descripcion
         };
-        console.log(transferenciaData);
         this.transferenciaService.realizarTransferencia(transferenciaData).subscribe(
           (response) => {
             console.log('Transferencia realizada con éxito', response);
-            // Enviar la notificación de transferencia por correo electrónico
             this.emailService.sendTransferNotification(this.emailUsuario, this.monto, this.cuentaOrigen, this.cuentaDestino, fecha).subscribe(
               (response) => {
                 console.log('Notificación de transferencia enviada con éxito', response);
                 this.snackBar.open('Transferencia realizada con éxito', 'Cerrar', {
-                  duration: 3000, // Duración de la notificación
+                  duration: 3000,
                 });
                 this.redirectToVisualizarSaldo();
               },
@@ -146,7 +169,7 @@ export class TransferenciasComponent implements OnInit {
                 this.isProcessing = false;
                 console.error('Error al enviar la notificación de transferencia', error);
                 this.snackBar.open('Error al enviar la notificación de transferencia', 'Cerrar', {
-                  duration: 3000, // Duración de la notificación
+                  duration: 3000,
                 });
               }
             );
@@ -154,6 +177,9 @@ export class TransferenciasComponent implements OnInit {
           (error) => {
             this.isProcessing = false;
             console.error('Error al realizar la transferencia', error);
+            this.snackBar.open('Error al realizar la transferencia', 'Cerrar', {
+              duration: 3000,
+            });
           }
         );
       },
