@@ -15,9 +15,12 @@
           <p>Número de cuenta: {{ selectedAccount.numeroCuenta }}</p>
         </div>
         <div class="account-balance">
-          <p><strong>{{ selectedAccount.saldo | currency }}</strong></p>
+          <p><strong>{{ mostrarSaldo ? (selectedAccount.saldo | currency) : '****' }}</strong></p>
           <button *ngIf="cuentas.length > 1" (click)="toggleAccounts()">
             <i class="fas" [ngClass]="showAccounts ? 'fa-caret-up' : 'fa-caret-down'"></i>
+          </button>
+          <button (click)="toggleSaldo()">
+            <i class="fas" [ngClass]="mostrarSaldo ? 'fa-eye-slash' : 'fa-eye'"></i>
           </button>
         </div>
       </div>
@@ -29,12 +32,11 @@
               <p>{{ cuenta.numeroCuenta }}</p>
             </div>
             <div class="account-balance">
-              <p><strong>{{ cuenta.saldo | currency }}</strong></p>
+              <p><strong>{{ mostrarSaldo ? (cuenta.saldo | currency) : '****' }}</strong></p>
             </div>
           </li>
         </ul>
       </div>
-      
     </div>
   </div>
   <div class="button-container">

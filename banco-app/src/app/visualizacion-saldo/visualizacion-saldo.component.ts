@@ -19,6 +19,7 @@ export class VisualizacionSaldoComponent implements OnInit {
   cedula: string | null = null;
   selectedAccount: any = null;
   showAccounts: boolean = false;
+  mostrarSaldo: boolean = false; // Inicialmente, el saldo no se muestra
 
   constructor(
     private usuarioService: UsuarioService,
@@ -33,7 +34,6 @@ export class VisualizacionSaldoComponent implements OnInit {
 
   loadUserData(): void {
     const cedula = this.authService.getUserCedula();
-    console.log('Cédula obtenida:', cedula); // Verifica el valor de la cédula
     if (cedula) {
       this.cedula = cedula;
       this.usuarioService.getCuentasByCedula(cedula).subscribe(
@@ -41,7 +41,6 @@ export class VisualizacionSaldoComponent implements OnInit {
           this.nombreCliente = response.nombreCliente;
           this.cuentas = response.cuentas;
           this.selectedAccount = this.cuentas[0]; // Selección inicial de cuenta
-          console.log('Cuentas obtenidas:', this.cuentas); // Verifica las cuentas obtenidas
         },
         (error) => {
           console.error('Error al obtener cuentas:', error);
@@ -51,18 +50,14 @@ export class VisualizacionSaldoComponent implements OnInit {
       console.error('No se pudo obtener la cédula del usuario autenticado');
     }
   }
-  
-
-  selectAccount(cuenta: any): void {
-    this.selectedAccount = cuenta;
-    this.showAccounts = false;
-  }
 
   toggleAccounts(): void {
     this.showAccounts = !this.showAccounts;
-    console.log('Mostrar cuentas:', this.showAccounts); // Verifica el estado de showAccounts
   }
-  
+
+  toggleSaldo(): void {
+    this.mostrarSaldo = !this.mostrarSaldo;
+  }
 
   viewTransferHistory(numeroCuenta: string, cedula: string | null): void {
     if (cedula) {
@@ -72,12 +67,9 @@ export class VisualizacionSaldoComponent implements OnInit {
     } else {
       console.error('Cedula no proporcionada');
     }
-  }  
-  
+  }
+
   onAccountClick(cuenta: any): void {
-    console.log('Cuenta clickeada:', cuenta);
-    console.log('Cuenta seleccionada:', this.selectedAccount);
-  
     if (this.selectedAccount === cuenta) {
       if (this.cedula) {
         this.viewTransferHistory(cuenta.numeroCuenta, this.cedula);
@@ -85,10 +77,10 @@ export class VisualizacionSaldoComponent implements OnInit {
         console.error('Cedula no proporcionada');
       }
     } else {
-      this.selectAccount(cuenta);
+      this.selectedAccount = cuenta;
     }
   }
-  
+
   redirectTo(route: string): void {
     if (this.cedula) {
       this.comparticionParametrosService.setCedula(this.cedula);
