@@ -1,3 +1,4 @@
+HTML 
 <header class="header">
   <h2>Horizon Bank</h2>
 </header>
@@ -43,11 +44,13 @@
       </div>
       <!-- Submit Button -->
       <div class="button-container">
+        <button (click)="redirectToVisualizarSaldo()">Regresar</button>
         <button type="submit" [disabled]="isProcessing">Confirmar Transferencia</button>
       </div>
     </form>
   </div>
 </div>
+<!-- Confirmación -->
 <div class="overlay" *ngIf="mostrarConfirmacion">
   <div class="ventana-confirmacion">
     <h2>Confirmar Transferencia</h2>
@@ -59,6 +62,7 @@
     <button (click)="cancelarConfirmacion()">Cancelar</button>
   </div>
 </div>
+
 <div class="footer">
   <div class="footer-column">
     <div>Horizon Bank</div>
