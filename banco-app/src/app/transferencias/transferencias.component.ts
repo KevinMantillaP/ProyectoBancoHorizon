@@ -32,6 +32,8 @@ export class TransferenciasComponent implements OnInit {
   nombreTitular: string = '';
   apellidoTitular: string = '';
   mostrarConfirmacion: boolean = false;
+  codigoVerificacion: string = ''; // Nuevo campo para el código de verificación
+  codigoIngresado: string = ''; // Campo para el código ingresado por el usuario
 
   constructor(
     private transferenciaService: TransferenciaService,
@@ -114,7 +116,17 @@ export class TransferenciasComponent implements OnInit {
 
   confirmarTransferencia(): void {
     this.buscarTitularCuentaDestino();
-    this.mostrarConfirmacion = true;
+    this.emailService.sendVerificationEmail(this.emailUsuario).subscribe(
+      () => {
+        this.mostrarConfirmacion = true;
+      },
+      (error) => {
+        console.error('Error al enviar el código de verificación:', error);
+        this.snackBar.open('Error al enviar el código de verificación', 'Cerrar', {
+          duration: 3000,
+        });
+      }
+    );
   }
 
   cancelarConfirmacion(): void {
@@ -140,52 +152,63 @@ export class TransferenciasComponent implements OnInit {
 
     this.isProcessing = true;
 
-    const saldoRestante = saldoActual - this.monto;
-    this.usuarioService.realizarTransferencia(this.cuentaOrigen, this.cuentaDestino, this.monto).subscribe(
+    this.emailService.verifyCode(this.emailUsuario, this.codigoIngresado).subscribe(
       () => {
-        const fecha = moment().tz('America/Guayaquil').format();
-        const descripcion = this.descripcion.trim() === '' ? '' : this.descripcion;
-        const transferenciaData = {
-          idTransferencia: this.generarIdTransferencia(),
-          monto: this.monto,
-          fecha: fecha,
-          cuentaDestino: this.cuentaDestino,
-          numeroCuenta: this.cuentaOrigen,
-          saldoRestante: saldoRestante,
-          descripcion: descripcion
-        };
-        this.transferenciaService.realizarTransferencia(transferenciaData).subscribe(
-          (response) => {
-            console.log('Transferencia realizada con éxito', response);
-            this.emailService.sendTransferNotification(this.emailUsuario, this.monto, this.cuentaOrigen, this.cuentaDestino, fecha).subscribe(
+        const saldoRestante = saldoActual - this.monto;
+        this.usuarioService.realizarTransferencia(this.cuentaOrigen, this.cuentaDestino, this.monto).subscribe(
+          () => {
+            const fecha = moment().tz('America/Guayaquil').format();
+            const descripcion = this.descripcion.trim() === '' ? '' : this.descripcion;
+            const transferenciaData = {
+              idTransferencia: this.generarIdTransferencia(),
+              monto: this.monto,
+              fecha: fecha,
+              cuentaDestino: this.cuentaDestino,
+              numeroCuenta: this.cuentaOrigen,
+              saldoRestante: saldoRestante,
+              descripcion: descripcion
+            };
+            this.transferenciaService.realizarTransferencia(transferenciaData).subscribe(
               (response) => {
-                console.log('Notificación de transferencia enviada con éxito', response);
-                this.snackBar.open('Transferencia realizada con éxito', 'Cerrar', {
-                  duration: 3000,
-                });
-                this.redirectToVisualizarSaldo();
+                console.log('Transferencia realizada con éxito', response);
+                this.emailService.sendTransferNotification(this.emailUsuario, this.monto, this.cuentaOrigen, this.cuentaDestino, fecha).subscribe(
+                  (response) => {
+                    console.log('Notificación de transferencia enviada con éxito', response);
+                    this.snackBar.open('Transferencia realizada con éxito', 'Cerrar', {
+                      duration: 3000,
+                    });
+                    this.redirectToVisualizarSaldo();
+                  },
+                  (error) => {
+                    this.isProcessing = false;
+                    console.error('Error al enviar la notificación de transferencia', error);
+                    this.snackBar.open('Error al enviar la notificación de transferencia', 'Cerrar', {
+                      duration: 3000,
+                    });
+                  }
+                );
               },
               (error) => {
                 this.isProcessing = false;
-                console.error('Error al enviar la notificación de transferencia', error);
-                this.snackBar.open('Error al enviar la notificación de transferencia', 'Cerrar', {
+                console.error('Error al realizar la transferencia', error);
+                this.snackBar.open('Error al realizar la transferencia', 'Cerrar', {
                   duration: 3000,
                 });
               }
             );
           },
           (error) => {
+            console.error('Error en la transferencia:', error);
             this.isProcessing = false;
-            console.error('Error al realizar la transferencia', error);
-            this.snackBar.open('Error al realizar la transferencia', 'Cerrar', {
-              duration: 3000,
-            });
           }
         );
       },
       (error) => {
-        console.error('Error en la transferencia:', error);
         this.isProcessing = false;
+        console.error('Código de verificación incorrecto', error);
+        this.snackBar.open('Código de verificación incorrecto', 'Cerrar', {
+          duration: 3000,
+        });
       }
     );
   }
