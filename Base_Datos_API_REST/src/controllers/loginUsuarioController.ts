@@ -217,3 +217,27 @@ export const cambiarNombreUsuarioPorCorreo = async (req: Request, res: Response)
     return res.status(500).json({ message: 'Error al cambiar el nombre de usuario' });
   }
 };
+export const obtenerCorreoPorNombreUsuario = async (req: Request, res: Response) => {
+  const { nombreUsuario } = req.query;
+
+  try {
+    // Buscar el LoginUsuario por nombreUsuario
+    const loginUsuario = await LoginUsuario.findOne({ nombreUsuario });
+
+    if (!loginUsuario) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Buscar el Cliente por cedula obtenida del LoginUsuario
+    const cliente = await Cliente.findOne({ cedula: loginUsuario.cedula });
+
+    if (!cliente) {
+      return res.status(404).json({ error: 'Cliente no encontrado' });
+    }
+
+    return res.status(200).json({ correo: cliente.correo });
+  } catch (error) {
+    console.error('Error al obtener el correo por nombre de usuario:', (error as Error).message);
+    return res.status(500).json({ message: 'Error al obtener el correo' });
+  }
+};

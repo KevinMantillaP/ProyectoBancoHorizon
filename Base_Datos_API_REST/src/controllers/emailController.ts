@@ -8,11 +8,20 @@ import LoginUsuario from '../models/LoginUsuario';
 import * as path from 'path';
 import * as fs from 'fs';
 
-const htmlWithVariables = (htmlTemplate: string, variables: { [key: string]: string }) => {
-  return Object.keys(variables).reduce((html, key) => {
+// const htmlWithVariables = (htmlTemplate: string, variables: { [key: string]: string }) => {
+//   return Object.keys(variables).reduce((html, key) => {
+//     const regex = new RegExp(`{{${key}}}`, 'g');
+//     return html.replace(regex, variables[key]);
+//   }, htmlTemplate);
+// };
+
+export const htmlWithVariables = (template: string, variables: { [key: string]: string }): string => {
+  let result = template;
+  for (const key in variables) {
     const regex = new RegExp(`{{${key}}}`, 'g');
-    return html.replace(regex, variables[key]);
-  }, htmlTemplate);
+    result = result.replace(regex, variables[key]);
+  }
+  return result;
 };
 
 
@@ -345,5 +354,48 @@ export const enviarNotificacionRecuperacionUsuario = async (req: Request, res: R
     return res.status(200).json({ message: 'Correo de notificación enviado' });
   } catch (error) {
     return res.status(500).json({ message: 'Error al enviar el correo de notificación' });
+  }
+};
+
+export const enviarNotificacionIngresoSistema = async (req: Request, res: Response) => {
+  const { correo, fecha, ip, ubicacion } = req.body;
+
+  try {
+    const accessToken = await oauth2Client.getAccessToken();
+    if (!accessToken.token) {
+      throw new Error('No se pudo obtener el Access Token');
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: process.env.GMAIL_USER,
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+        accessToken: accessToken.token,
+      },
+    });
+
+    const filePath = path.join(__dirname, '../templates/notificacionIngresoSistema.html');
+    const htmlTemplate = fs.readFileSync(filePath, 'utf-8');
+    const htmlContent = htmlWithVariables(htmlTemplate, {
+      fecha,
+      ip,
+      ubicacion
+    });
+
+    const mailOptions = {
+      from: `Horizon Bank <${process.env.GMAIL_USER}>`,
+      to: correo,
+      subject: 'Notificación de Ingreso al Sistema',
+      html: htmlContent,
+    };
+
+    await transporter.sendMail(mailOptions);
+    return res.status(200).json({ message: 'Correo de notificación enviado' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al enviar el correo de notificación'});
   }
 };

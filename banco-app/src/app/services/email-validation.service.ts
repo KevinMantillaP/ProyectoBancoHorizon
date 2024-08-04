@@ -29,4 +29,8 @@ export class EmailService {
   sendRecuperacionUsuarioNotification(correo: string, fecha: string, nuevoNombreUsuario: string,): Observable<any> {
     return this.http.post(`${this.baseUrl}/notificacion-Recupercio-Usuario`, { correo, fecha, nuevoNombreUsuario});
   }
+  enviarNotificacionIngreso(correo: string, fecha: string, ip: string, ubicacion: string) {
+    const body = { correo, fecha, ip, ubicacion };
+    return this.http.post(`${this.baseUrl}/notificacion-Ingreso-Sistema`, body);
+  }
 } 
