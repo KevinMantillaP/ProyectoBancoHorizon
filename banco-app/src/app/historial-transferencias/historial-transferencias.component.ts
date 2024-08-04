@@ -5,7 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import moment from 'moment'; // Asegúrate de que moment esté instalado
+import moment from 'moment';
+import 'moment-timezone';
 
 @Component({
   selector: 'app-historial-transferencias',
@@ -19,15 +20,16 @@ export class HistorialTransferenciasComponent implements OnInit {
   transferenciasFiltradas: any[] = [];
   numeroCuenta: string | null = null;
   cedula: string | null = null;
-  filtroTipo: string = 'todos'; // por defecto, mostrar todas las transacciones
-  fechaFiltro: Date | null = null; // fecha seleccionada para filtrar
+  filtroTipo: string = 'todos';
+  fechaInicio: string = ''; // Modificado a string para manejar fechas en formato ISO
+  fechaFin: string = ''; // Modificado a string para manejar fechas en formato ISO
 
   constructor(
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private router: Router,
     private comparticionParametrosService: ComparticionParametrosService,
-    private snackBar: MatSnackBar // Añadir MatSnackBar para notificaciones
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,11 @@ export class HistorialTransferenciasComponent implements OnInit {
     } else {
       console.error('Número de cuenta no proporcionado');
     }
+
+    // Inicializa las fechas por defecto usando moment
+    const ahora = moment().tz('America/Guayaquil');
+    this.fechaFin = ahora.format('YYYY-MM-DD');
+    this.fechaInicio = ahora.subtract(30, 'days').format('YYYY-MM-DD');
   }
 
   obtenerTransferencias(): void {
@@ -64,26 +71,34 @@ export class HistorialTransferenciasComponent implements OnInit {
     }
   }
 
-  filtrarPorFecha(fecha: Date | null): void {
-    this.fechaFiltro = fecha;
+  filtrarPorFechas(): void {
+    if (this.fechaInicio && this.fechaFin) {
+      const fechaInicio = moment(this.fechaInicio).startOf('day').toDate();
+      const fechaFin = moment(this.fechaFin).endOf('day').toDate();
 
-    if (fecha) {
-      const fechaFiltroInicio = moment(fecha).startOf('day').toDate();
-      const fechaFiltroFin = moment(fecha).endOf('day').toDate();
-
-      if (fecha > new Date()) {
-        this.snackBar.open('La fecha ingresada es futura. No se pueden mostrar registros.', 'Cerrar', {
+      if (fechaInicio > fechaFin) {
+        this.snackBar.open('La fecha de inicio no puede ser mayor que la fecha de fin.', 'Cerrar', {
           duration: 5000,
         });
-        this.transferenciasFiltradas = []; // Limpia las transferencias filtradas
+        this.transferenciasFiltradas = [];
+      } else if (fechaInicio > new Date()) {
+        this.snackBar.open('La fecha de inicio es futura. No se pueden mostrar registros.', 'Cerrar', {
+          duration: 5000,
+        });
+        this.transferenciasFiltradas = [];
+      } else if (fechaFin > new Date()) {
+        this.snackBar.open('La fecha de fin es futura. No se pueden mostrar registros.', 'Cerrar', {
+          duration: 5000,
+        });
+        this.transferenciasFiltradas = [];
       } else {
         this.transferenciasFiltradas = this.transferencias.filter(transferencia => {
           const transferenciaFecha = new Date(transferencia.fecha);
-          return transferenciaFecha >= fechaFiltroInicio && transferenciaFecha <= fechaFiltroFin;
+          return transferenciaFecha >= fechaInicio && transferenciaFecha <= fechaFin;
         });
 
         if (this.transferenciasFiltradas.length === 0) {
-          this.snackBar.open('No se encontraron registros para la fecha seleccionada.', 'Cerrar', {
+          this.snackBar.open('No se encontraron registros para el rango de fechas seleccionado.', 'Cerrar', {
             duration: 5000,
           });
         }
