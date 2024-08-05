@@ -11,6 +11,15 @@ export class ComparticionParametrosService {
   private correo: string | null = null;
   private from: string | null = null;
   private formData: any = null;
+  private transferenciaData: any = {};
+
+  setTransferenciaData(data: any): void {
+    this.transferenciaData = data;
+  }
+
+  getTransferenciaData(): any {
+    return this.transferenciaData;
+  }
 
   setNumeroCuenta(numeroCuenta: string): void {
     this.numeroCuenta = numeroCuenta;

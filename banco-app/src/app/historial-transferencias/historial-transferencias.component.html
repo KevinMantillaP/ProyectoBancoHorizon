@@ -14,9 +14,11 @@
         <option value="ingreso">Ingresos</option>
         <option value="egreso">Egresos</option>
       </select>
-      <label>Seleccionar Fecha:</label>
-      <input type="date" [(ngModel)]="fechaFiltro" (ngModelChange)="filtrarPorFecha(fechaFiltro)">
-      <button *ngIf="fechaFiltro" (click)="filtrarPorFecha(null)">Quitar Filtro</button>
+      <label>Seleccionar Rango de Fechas:</label>
+      <input type="date" [(ngModel)]="fechaInicio" (ngModelChange)="filtrarPorFechas()">
+      <input type="date" [(ngModel)]="fechaFin" (ngModelChange)="filtrarPorFechas()">
+      <button *ngIf="fechaInicio || fechaFin" (click)="filtrarPorFechas()">Aplicar Filtro</button>
+      <button *ngIf="fechaInicio || fechaFin" (click)="fechaInicio = fechaFin = ''; filtrarPorFechas()">Quitar Filtro</button>
     </div>
     <div *ngIf="transferenciasFiltradas.length === 0">
       <p>No hay transferencias para mostrar.</p>
@@ -26,7 +28,7 @@
         <div>
           <p>Fecha: {{ transferencia.fecha | date }}</p>
           <p>Monto: {{ transferencia.monto | currency }}</p>
-          <p>Cuenta Origen: {{ transferencia.cuentaDestino }}</p>
+          <p>Cuenta: {{ transferencia.tipo === 'ingreso' ? transferencia.numeroCuenta : transferencia.cuentaDestino }}</p>
           <p>Descripción: {{ transferencia.descripcion }}</p>
         </div>
       </li>

@@ -15,6 +15,7 @@ import { HistorialTransferenciasComponent } from './historial-transferencias/his
 import { DesbloquearCuentaComponent } from './desbloquear-cuenta/desbloquear-cuenta.component';
 import { EnvioUsuarioRecuperacionUsuarioComponent } from './envio-usuario-recuperacion-usuario/envio-usuario-recuperacion-usuario.component';
 import { IngresarCorreoRecuperacionUsuarioComponent } from './ingresar-correo-recuperacion-usuario/ingresar-correo-recuperacion-usuario.component';
+import { ComprobanteTransaccionComponent } from './comprobante-transaccion/comprobante-transaccion.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -34,5 +35,6 @@ export const routes: Routes = [
     { path: 'desbloquear-cuenta', component: DesbloquearCuentaComponent},
     { path: 'Correo-recuperacion-usuario', component: EnvioUsuarioRecuperacionUsuarioComponent},
     { path: 'recuperacion-usuario', component: IngresarCorreoRecuperacionUsuarioComponent},
+    { path: 'comprobante-transaccion', component: ComprobanteTransaccionComponent },
 ];
 

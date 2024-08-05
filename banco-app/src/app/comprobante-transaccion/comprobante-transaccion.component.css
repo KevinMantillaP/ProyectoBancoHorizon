@@ -1,0 +1,140 @@
+/* Estilos generales */
+body, html {
+    font-family: 'Arial', sans-serif;
+    background-color: #99f1fd; /* Fondo celeste */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #29AECC; /* Color azul */
+    color: #fff; 
+    padding: 10px 0;
+    margin: 0;
+    text-align: center;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background: #99f1fd; /* Fondo celeste */
+    display: flex;
+    justify-content: center; /* Centramos el contenido dentro del contenedor */
+}
+
+#comprobante {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #ffffff; /* Fondo blanco del comprobante */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#comprobante h2 {
+    color: #1A61A0; /* Color azul para los títulos */
+    text-align: center;
+}
+
+#comprobante p {
+    margin: 10px 0;
+}
+
+#descripcion {
+    background-color: #f5f5dc; /* Color beige */
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* Centramos los botones */
+}
+
+.button-container button {
+    padding: 10px 20px; /* Ajuste del padding para un mejor acabado */
+    background-color: #1A61A0; /* Color azul */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Efecto de transición */
+}
+
+.button-container button:hover {
+    background-color: #29AECC; /* Color azul claro en hover */
+}
+
+.button-container button i {
+    margin-right: 8px; /* Espacio entre el icono y el texto */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .button-container button {
+        width: 100%; /* Botones en ancho completo en pantallas pequeñas */
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .button-container button {
+        width: 45%; /* Botones en ancho del 45% en pantallas medianas */
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .button-container button {
+        width: 45%; /* Botones en ancho del 45% en pantallas grandes */
+    }
+}
+
+@media (min-width: 1281px) {
+    .button-container button {
+        width: 30%; /* Botones en ancho del 30% en pantallas extra grandes */
+    }
+}
+
+/* Footer styling */
+.footer {
+    background-color: #29AECC;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+  
+  .footer-column {
+    padding: 10px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea el contenido de cada columna a la izquierda */
+  }
+  
+  .mi-div {
+    font-weight: bold;
+  }
+  
+  .footer a {
+    color: #F7F4E7;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  

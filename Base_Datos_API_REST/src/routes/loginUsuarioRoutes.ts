@@ -1,6 +1,6 @@
 // routes/loginUsuarioRoutes.ts
 import { Router } from 'express';
-import { getLoginUsuarios, crearLoginUsuario, actualizarLoginUsuario, eliminarLoginUsuario, loginUsuario, desbloquearUsuario, actualizarPassword, verificarPassword,cambiarNombreUsuarioPorCorreo} from '../controllers/loginUsuarioController';
+import { getLoginUsuarios, crearLoginUsuario, actualizarLoginUsuario, obtenerCorreoPorNombreUsuario, eliminarLoginUsuario, loginUsuario, desbloquearUsuario, actualizarPassword, verificarPassword,cambiarNombreUsuarioPorCorreo} from '../controllers/loginUsuarioController';
 
 const router = Router();
 
@@ -14,4 +14,5 @@ router.post('/login/actualizar-password', actualizarPassword);// Cambiar contras
 router.post('/verificar-password', verificarPassword);
 router.post('/desbloquear-cuenta', desbloquearUsuario);
 router.patch('/usuarios/cambiar-nombre-por-correo', cambiarNombreUsuarioPorCorreo);
+router.get('/obtener-correo', obtenerCorreoPorNombreUsuario);
 export default router;
