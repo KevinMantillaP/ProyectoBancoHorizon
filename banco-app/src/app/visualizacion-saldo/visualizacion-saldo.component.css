@@ -228,3 +228,44 @@ body {
     font-size: 14px;
   }
 }
+
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgb(255,255,240);
+  background: linear-gradient(180deg, rgba(255,255,240,1) 40%, rgba(41,174,204,1) 100%);
+  padding-top: 20px;
+}
+
+.sidebar button {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #1a61a0;
+  background: none;
+  border: none;
+  display: block;
+  width: 80%;
+  text-align: left;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background-color: #29aecc;
+  color: white;
+  width: 85%;
+}
+
+.sidebar button.active {
+  background-color: #99f1fd;
+  color: #1a61a0;
+}
+
+.content {
+  margin-left: 200px;
+  padding: 20px;
+}

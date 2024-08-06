@@ -37,3 +37,4 @@ export const routes: Routes = [
     { path: 'recuperacion-usuario', component: IngresarCorreoRecuperacionUsuarioComponent},
     { path: 'comprobante-transaccion', component: ComprobanteTransaccionComponent },
 ];
+

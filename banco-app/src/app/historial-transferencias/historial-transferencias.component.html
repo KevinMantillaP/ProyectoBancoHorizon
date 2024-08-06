@@ -1,12 +1,16 @@
 <div class="header">
   <h2>Horizon Bank</h2>
 </div>
+<div class="sidebar">
+  <button (click)="redirectTo('/')">Cerrar Sesion</button>
+  <button (click)="redirectTo('visualizacion-saldo')">Visualizacion de saldo</button>
+  <button (click)="redirectTo('cambio-contraseña')">Cambiar Contraseña</button>
+  <button (click)="redirectTo('crear-cuenta')">Crear Cuenta</button>
+  <button (click)="redirectTo('transferencia')">Transferencia</button>
+</div>
 <div class="content">
   <div class="container">
     <h2>Historial de Transferencias</h2>
-    <div class="button-container">
-      <button class="regresar-button" (click)="regresar()">Regresar</button>
-    </div>
     <div class="filters-container">
       <label>Filtrar por Tipo:</label>
       <select [(ngModel)]="filtroTipo" (change)="filtrarPorTipo(filtroTipo)">

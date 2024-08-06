@@ -2,6 +2,12 @@
   <h2>Horizon Bank</h2>
 </header>
 <div class="content" [class.blurred]="mostrarConfirmacion">
+  <div class="sidebar">
+    <button (click)="redirectTo('/')">Cerrar Sesion</button>
+    <button (click)="redirectTo('visualizacion-saldo')">Visualizacion de saldo</button>
+    <button (click)="redirectTo('cambio-contraseña')">Cambiar Contraseña</button>
+    <button (click)="redirectTo('crear-cuenta')">Crear Cuenta</button>
+  </div>
   <div class="container">
     <h1>Transferencias</h1>
     <form (submit)="confirmarTransferencia()">
@@ -43,7 +49,6 @@
       </div>
       <!-- Submit Button -->
       <div class="button-container">
-        <button (click)="redirectToVisualizarSaldo()">Regresar</button>
         <button type="submit" [disabled]="isProcessing">Confirmar Transferencia</button>
       </div>
     </form>
