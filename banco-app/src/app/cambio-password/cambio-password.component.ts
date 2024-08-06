@@ -165,8 +165,15 @@ export class CambioPasswordComponent implements OnInit {
       });
     }
   }
+  
+
 
   redirectTo(route: string): void {
-    this.router.navigate(['/visualizacion-saldo'], { queryParams: { cedula: this.cedula } });
+    if (this.cedula) {
+      this.comparticionParametrosService.setCedula(this.cedula);
+      this.router.navigate([route]);
+    } else {
+      console.error('Cedula no proporcionada');
+    }
   }
 }

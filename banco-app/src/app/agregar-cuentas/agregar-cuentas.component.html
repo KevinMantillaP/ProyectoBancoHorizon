@@ -1,7 +1,12 @@
 <header class="header">
     <h1>Horizon Bank</h1>
 </header>
-
+<div class="sidebar">
+    <button (click)="redirectTo('/')">Cerrar Sesion</button>
+    <button (click)="redirectTo('visualizacion-saldo')">Visualizacion de saldo</button>
+    <button (click)="redirectTo('cambio-contraseña')">Cambio de Contraseña</button>
+    <button (click)="redirectTo('transferencia')">Transferencia</button>
+  </div>
 <div class="content"> <!-- Añadido el contenedor content -->
     <div class="container">
         <h2>Agregar Cuenta Adicional</h2>
@@ -17,6 +22,7 @@
                     Tipo de cuenta es requerido
                 </div>
             </div>
+            
 
             <div class="form-group">
                 <label for="saldoInicial">Saldo Inicial</label>
@@ -27,7 +33,6 @@
                 </div>
             </div>
             <div class="button-container">
-                <button type="button" class="btn" (click)="redirectTo('/visualizacion-saldo')">Regresar</button>
                 <button type="submit" class="btn btn-primary" [disabled]="cuentaForm.invalid || isProcessing">Agregar Cuenta</button>
             </div>
         </form>
