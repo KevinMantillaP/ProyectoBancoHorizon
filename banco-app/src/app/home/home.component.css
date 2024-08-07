@@ -74,30 +74,30 @@ body {
 
 .carousel {
   position: relative;
-  width: 100%;
+  width: 100vw;
+  margin: 0 auto;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .carousel-container {
   display: flex;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease-in-out;
 }
 
 .carousel-slide {
-  min-width: 100%;
-  display: flex;
+  min-width: 100vw;
+  /*display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: hidden;*/
+  box-sizing: border-box;
+  position: relative;
 }
 
 .carousel img {
-  width: 1100px;/* Ajusta esta altura máxima según sea necesario */
-  display: block;
+  width: 100%;/* Ajusta esta altura máxima según sea necesario */
+  height: 600px;
   object-fit: cover;
   border: 1px solid #9FDDF4;
 }
