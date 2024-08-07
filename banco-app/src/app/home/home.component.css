@@ -5,7 +5,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #F7F4E7;
+    background-color: #EDF6FF;
 }
 
 .container {
@@ -37,7 +37,7 @@ body {
 }
 
 .buttons-container button {
-    background-color: #29AECC;
+    background-color: #00AEEF;
     color: white;
     border: 3px solid white;
     padding: 10px 20px;
@@ -50,7 +50,7 @@ body {
 
 .buttons-container button:hover {
     background-color: white;
-    color: #29AECC;
+    color: #00AEEF;
     font-weight: bold;
 }
 
@@ -99,7 +99,7 @@ body {
   width: 100%;/* Ajusta esta altura máxima según sea necesario */
   height: 600px;
   object-fit: cover;
-  border: 1px solid #9FDDF4;
+  border: 1px solid #00AEEF;
 }
 
 
@@ -142,7 +142,7 @@ body {
 }
 
 .carousel-indicator.active {
-  background-color: #ffcc00; /* Color del indicador activo */
+  background-color: #005EB8; /* Color del indicador activo */
   transform: scale(1.2);
 }
 
@@ -162,6 +162,27 @@ body {
   text-align: center;
 }
 
+.carousel-text {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 300px;
+}
+
+.carousel-text h1 {
+  font-size: 24px;
+  margin: 0 0 10px 0;
+}
+
+.carousel-text p {
+  font-size: 16px;
+  margin: 0;
+}
+
 .carousel-indicators {
   position: absolute;
   bottom: 20px;
@@ -174,16 +195,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
 /* Why Choose Us Section */
 .why-choose-us {
     text-align: center;
@@ -191,7 +202,7 @@ body {
 }
 
 .why-choose-us h2 {
-    color: #29AECC;
+    color: #005EB8;
     margin-bottom: 40px;
     font-weight: bold;
 }
@@ -203,7 +214,7 @@ body {
 }
 
 .reason {
-    background-color: #8ADBE5;
+    background-color: #005EB8;
     width: 90%;
     margin-bottom: 20px;
     padding: 10px;
@@ -337,7 +348,7 @@ body {
     list-style: none;
     padding: 0;
   }
-  
+
   .branch-details ul li {
     margin: 5px 0;
   }
@@ -359,14 +370,14 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
   }
-  
+
   .chatbot-toggle:hover {
     background: #24b0bc;
   }
-  
+
   /* Footer styling */
 .footer {
-    background-color: #29AECC;
+    background-color: #00AEEF;
     color: #fff;
     padding: 20px 0;
     text-align: center;
@@ -390,9 +401,9 @@ body {
 .mi-div {
     font-weight: bold;
   }
-  
 
-.footer a {
+
+  .footer a {
     color: #F7F4E7;
     text-decoration: none;
     margin: 0 10px;
@@ -407,19 +418,19 @@ body {
     .service-card {
       width: 90%;
     }
-  
+
     .branch {
       flex-direction: column;
     }
-  
+
     .branch img {
       width: 100%;
       margin: 0 0 20px 0;
     }
-  
+
     .branch-details {
       width: 100%;
       text-align: center;
     }
   }
-  
+
