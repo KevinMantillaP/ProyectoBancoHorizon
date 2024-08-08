@@ -4,40 +4,46 @@ body {
     margin: 0;
     padding: 0;
     background-color: #EDF6FF;
+    margin-bottom: 0;
 }
-
 .container {
     width: 80%;
     margin: 0 auto;
 }
-
 /* Header */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #00AEEF;
-    padding: 20px;
+    padding:  20px;
     position: static;
     top: 0;
     z-index: 1000;
+    height: 55px;
 }
-
-.header .logo h1 {
-    color: white;
-    margin: 0;
-    font-size: 44px;
+.left-items {
+  display: flex;
+  align-items: center;
+  width: 20%; /* Ajustar según necesidad */
+  /* Añadir estilo adicional si es necesario */
+}
+.header .logo {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centrar verticalmente el contenido */
 }
 .logo img{
-  height: 40px;
+  height: 300px;
+  width: auto;
   margin-right: 10px;
+  margin-bottom: 20px;
 }
-
 .buttons-container {
     display: flex;
     gap: 10px;
 }
-
 .buttons-container button {
     background-color: #00AEEF;
     color: white;
@@ -60,8 +66,6 @@ body {
 .buttons-container button:focus {
     outline: none;
 }
-
-
 /* Banner */
 .banner {
     /* Cambia el color de fondo según la imagen de referencia */
@@ -69,25 +73,20 @@ body {
     padding: 100px 20px;
     text-align: center;
 }
-
 .banner h2 {
     color: black;
     font-size: 24px;
 }
-
 .carousel {
   position: relative;
   width: 100vw;
   margin: 0 auto;
-  overflow: hidden;
-  margin-top: 6px;
+  overflow: hidden; 
 }
-
 .carousel-container {
   display: flex;
   transition: transform 0.5s ease-in-out;
 }
-
 .carousel-slide {
   min-width: 100vw;
   /*display: flex;
@@ -97,15 +96,12 @@ body {
   box-sizing: border-box;
   position: relative;
 }
-
 .carousel img {
   width: 100%;/* Ajusta esta altura máxima según sea necesario */
   height: 600px;
   object-fit: cover;
   border: 1px solid #00AEEF;
 }
-
-
 .carousel-button {
   position: absolute;
   top: 50%;
@@ -125,11 +121,9 @@ body {
 .carousel-button:hover {
   color: #5ebcd2; /* Un color celeste un poco más oscuro para el hover */
 }
-
 .carousel-button.prev {
   left: -17px; /* Separación del borde izquierdo */
 }
-
 .carousel-button.next {
   right: -15px; /* Separación del borde derecho */
 }
@@ -164,7 +158,6 @@ body {
   border-radius: 10px;
   text-align: center;
 }
-
 .carousel-text {
   position: absolute;
   top: 20%;
@@ -175,17 +168,14 @@ body {
   border-radius: 10px;
   max-width: 300px;
 }
-
 .carousel-text h1 {
   font-size: 24px;
   margin: 0 0 10px 0;
 }
-
 .carousel-text p {
   font-size: 16px;
   margin: 0;
 }
-
 .carousel-indicators {
   position: absolute;
   bottom: 20px;
@@ -195,8 +185,6 @@ body {
   justify-content: center;
   gap: 10px;
 }
-
-
 
 /* Why Choose Us Section */
 .why-choose-us {
@@ -209,16 +197,14 @@ body {
     margin-bottom: 40px;
     font-weight: bold;
 }
-
 .reasons {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-
 .reason {
     background-color: #005EB8;
-    width: 90%;
+    width: 94%;
     margin-bottom: 20px;
     padding: 10px;
     box-sizing: border-box;
@@ -229,45 +215,49 @@ body {
     gap: 20px;
     border-radius: 5px;
 }
-
 .reason.piggybank {
     flex-direction: row-reverse;
 }
-
 .reason p {
     color: white;
     margin: 0;
     text-align: justify;
 }
-
 .reason img {
     width: 25%; /* Ancho completo para imágenes */
     height: auto;
     border-radius: 5px; /* Opcional: Agregar borde redondeado a las imágenes */
 }
-
 /* Servicios Section */
+.servicio{text-align: center;
+  padding: 50px 20px;
+}
+.servicio h2 {
+  color: #005EB8;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
 .services {
     text-align: center;
     padding: 50px 20px;
-    background-color: #8ADBE5;
-  }
-  
+    background-color: #00AEEF;
+    border-radius: 10px;/*#8ADBE5*/
+    width: 90%; /* Ajusta el ancho según sea necesario */
+    margin: 0 auto; /* Centra el contenedor */
+  } 
   .services h2 {
     color: white;
     margin-bottom: 40px;
     font-weight: bold;
   }
-  
   .service-cards {
     display: flex;
-    /* flex-wrap: wrap; */
     justify-content: space-around;
-    background-color: #8ADBE5;
+    background-color: #00AEEF/*#8ADBE5*/;
     align-items: baseline;
     flex-wrap: wrap;
+
   }
-  
   .service-card {
     background-color: #8ADBE5;
     width: 20%;
@@ -278,14 +268,13 @@ body {
     border-radius: 5px;
     border: 4px solid white;
     margin: 10px;
+    
   }
-  
   .service-card h3 {
     color: white;
     margin-bottom: 10px;
     font-size: 20px;
   }
-  
   .service-card p {
     color: white;
     margin: 0;
@@ -293,26 +282,23 @@ body {
     font-size: 15px;
     padding: 15px;
   }
-  
   .service-card img {
     width: 100px;
     height: 100px;
     margin-bottom: 10px;
     padding: 15px;
   }
-  
   /* Sucursales Section */
   .branches {
     text-align: center;
     padding: 50px 20px;
   }
-  
   .branches h2 {
-    color: #29AECC;
+    color: #005EB8;
     margin-bottom: 40px;
     font-weight: bold;
   }
-  
+
   .branch {
     display: flex;
     flex-wrap: wrap;
@@ -340,6 +326,7 @@ body {
     color: #1A61A0;
     margin-bottom: 10px;
     font-size: 22px;
+    font-weight: bold;
   }
   
   .branch-details p, .branch-details ul {
@@ -382,7 +369,7 @@ body {
 .footer {
     background-color: #00AEEF;
     color: #fff;
-    padding: 20px 0;
+    padding: 10px 0;
     text-align: center;
     width: 100%;
     flex-shrink: 0;
@@ -391,17 +378,23 @@ body {
     justify-content: space-around;
     align-items: flex-start;
     overflow: hidden;
+    margin-bottom: 0;
 }
-
 .footer-column {
-    padding: 10px;
+    padding: 5px 0;
     min-width: 200px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinea el contenido de cada columna a la izquierda */
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0px;
+   /* Alinea el contenido de cada columna a la izquierda */
 }
-footer img{
-  max-width: 100%;
+.footer-column .img{
+  margin-bottom: 0;
+  margin-top: -10px;
+  
+  
 }
 .social-media {
   margin-top: 10px;
@@ -413,7 +406,6 @@ footer img{
   color: white;
   text-decoration: none;
 }
-
 .footer .social-media a img {
   width: 24px; /* Ajusta el tamaño de los íconos */
   height: 24px;
@@ -421,23 +413,19 @@ footer img{
   object-fit: contain;
 
 }
-
-
-.mi-div {
+.footer-column .mi-div {
+  margin-left: 20px; /* Ajusta el valor según sea necesario */
+  
     font-weight: bold;
   }
-
-
   .footer a {
     color: #F7F4E7;
     text-decoration: none;
     margin: 0 10px;
 }
-
 .footer a:hover {
     text-decoration: underline;
 }
-
   /* Responsive Design */
   @media (max-width: 768px) {
     .service-card {
@@ -458,4 +446,3 @@ footer img{
       text-align: center;
     }
   }
-
