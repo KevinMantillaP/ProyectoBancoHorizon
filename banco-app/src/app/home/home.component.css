@@ -1,5 +1,3 @@
-/* home.component.css */
-
 /* Global styles */
 body {
     font-family: Arial, sans-serif;
@@ -30,6 +28,10 @@ body {
     margin: 0;
     font-size: 44px;
 }
+.logo img{
+  height: 40px;
+  margin-right: 10px;
+}
 
 .buttons-container {
     display: flex;
@@ -58,6 +60,7 @@ body {
 .buttons-container button:focus {
     outline: none;
 }
+
 
 /* Banner */
 .banner {
@@ -397,6 +400,28 @@ body {
     flex-direction: column;
     align-items: flex-start; /* Alinea el contenido de cada columna a la izquierda */
 }
+footer img{
+  max-width: 100%;
+}
+.social-media {
+  margin-top: 10px;
+}
+.footer .social-media a {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  color: white;
+  text-decoration: none;
+}
+
+.footer .social-media a img {
+  width: 24px; /* Ajusta el tamaño de los íconos */
+  height: 24px;
+  margin-right: 10px;
+  object-fit: contain;
+
+}
+
 
 .mi-div {
     font-weight: bold;
