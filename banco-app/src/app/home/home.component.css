@@ -137,12 +137,10 @@ body {
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
-
 .carousel-indicator.active {
   background-color: #005EB8; /* Color del indicador activo */
   transform: scale(1.2);
 }
-
 .carousel-indicator:hover {
   background-color: #aaa;
   transform: scale(1.1);
@@ -191,7 +189,6 @@ body {
     text-align: center;
     padding: 50px 20px;
 }
-
 .why-choose-us h2 {
     color: #005EB8;
     margin-bottom: 40px;
@@ -214,6 +211,12 @@ body {
     text-align: left;
     gap: 20px;
     border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el efecto 3D */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+.reason:hover {
+  transform: translateY(-5px); /* Eleva la caja al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Aumenta la sombra en hover */
 }
 .reason.piggybank {
     flex-direction: row-reverse;
@@ -244,6 +247,7 @@ body {
     border-radius: 10px;/*#8ADBE5*/
     width: 90%; /* Ajusta el ancho según sea necesario */
     margin: 0 auto; /* Centra el contenedor */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   } 
   .services h2 {
     color: white;
@@ -268,8 +272,14 @@ body {
     border-radius: 5px;
     border: 4px solid white;
     margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
     
   }
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+}
   .service-card h3 {
     color: white;
     margin-bottom: 10px;
@@ -292,6 +302,7 @@ body {
   .branches {
     text-align: center;
     padding: 50px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   }
   .branches h2 {
     color: #005EB8;
@@ -309,6 +320,7 @@ body {
     border: 5px solid #8ADBE5;
     margin: 15px;
     border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   }
   
   .branch img {
@@ -381,7 +393,7 @@ body {
     margin-bottom: 0;
 }
 .footer-column {
-    padding: 5px 0;
+    padding:  0;
     min-width: 200px;
     display: flex;
     flex-direction: column;
@@ -391,10 +403,10 @@ body {
    /* Alinea el contenido de cada columna a la izquierda */
 }
 .footer-column .img{
+  height: 70px;
   margin-bottom: 0;
-  margin-top: -10px;
-  
-  
+  transform: translateY(-10px); 
+
 }
 .social-media {
   margin-top: 10px;
