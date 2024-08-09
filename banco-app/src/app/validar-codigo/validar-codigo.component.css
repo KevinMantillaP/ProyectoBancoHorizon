@@ -251,6 +251,34 @@ body, html {
   flex-direction: column;
   min-height: 100vh;
 }
+.page-container::before,
+.page-container::after,
+.page-container .circle {
+    content: '';
+    position: absolute;
+    background-color: #1273EB; /* Color de los círculos */
+    border-radius: 50%;
+}
+.page-container::before {
+    width: 100px; /* Tamaño del círculo más grande */
+    height: 100px;
+    top: 50px; /* Ajusta según la posición deseada */
+    left: 50px; /* Ajusta según la posición deseada */
+}
+
+.page-container::after {
+    width: 70px; /* Tamaño del círculo mediano */
+    height: 70px;
+    top: 150px; /* Ajusta según la posición deseada */
+    left: 150px; /* Ajusta según la posición deseada */
+}
+
+.page-container .circle {
+    width: 50px; /* Tamaño del círculo más pequeño */
+    height: 50px;
+    top: 220px; /* Ajusta según la posición deseada */
+    left: 220px; /* Ajusta según la posición deseada */
+}
 
 .header .logo {
   flex-grow: 1;
@@ -299,7 +327,6 @@ body, html {
   border: 1px solid #ced4da;
   border-radius: .25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-
 }
 .verify-container:hover{
     transform: translateY(-5px); /* Eleva la caja al pasar el mouse */
@@ -310,21 +337,18 @@ body, html {
   font-family: 'Magdelin Alt Bold';
   font-size: 50px;
 }
-
 .verify-container p {
   margin-bottom: 20px;
-  color: #1A61A0; 
+  color:     #22395D;
   font-family: 'Magdelin Alt Bold';
   font-size: 20px;
 }
-
 .code-inputs {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
 }
-
 .code-inputs input {
   width: 50px;
   height: 50px;
@@ -335,9 +359,7 @@ body, html {
   border-radius: 5px;
   text-align: center;
   box-sizing: border-box;
-
 }
-
 .verify-container button {
   width: 50%;
   padding: 10px;

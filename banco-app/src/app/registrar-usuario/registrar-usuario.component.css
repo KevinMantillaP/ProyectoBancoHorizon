@@ -272,20 +272,80 @@ body, html {
     height: 55px;
 }
 .fondo{
-    width: 100%px;
+    max-width: 800px;
     height: 600px;
     margin: 0 auto;
     padding: 30px;
-    display: flex;
+    display: block;
     justify-content: space-between;
-    align-items: center;
     background-color: white;
     position: absolute;
     left: 300px; /* Ajusta esta distancia según la posición deseada */
     top: 400px; /* Ajusta esta distancia según la posición deseada */
     text-align: center;
-    
+}
+.fondo h1{
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    display: block;
+}
 
+
+.fondo::before {
+    content: '';
+    position: absolute;
+    width: 100px; /* Ancho de la línea */
+    height: 2px; /* Altura de la línea */
+    background-color: #1273EB; /* Color de la línea */
+    top: 50%; /* Posición vertical */
+    left: 10%; /* Posición horizontal */
+}
+.fondo::after {
+    content: '';
+    position: absolute;
+    height: 150px; /* Altura de la línea */
+    width: 2px; /* Ancho de la línea */
+    background-color: #1273EB; /* Color de la línea */
+    top: 20%; /* Posición vertical */
+    right: 5%; /* Posición horizontal */
+}
+
+
+.fondo .semi-circle {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    border-radius: 50px 50px 0 0;
+    background-color: #1273EB;
+    top: 70%;
+    left: 15%;
+}
+.header::after {
+    content: '';
+    position: absolute; /* fixed*/
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #1273EB; /* Color del círculo */
+    top: 20px; /* Ajusta la distancia desde la parte superior */
+    left: 20px; /* Ajusta la distancia desde la parte derecha */
+    z-index: 0; /* Coloca el círculo detrás del contenido principal */
+  }
+
+
+.fondo p{
+    color: #22395D;
+    margin-top: 0; /* Asegura que no haya espacio extra arriba del párrafo */
+    display: block; 
+    font-family: 'Magdelin Alt Regular';
+    font-size: 25px;
+}
+.fondo img{
+    
+    bottom: 400px; /* Ajusta este valor según la distancia que desees desde el borde inferior */
+    left: 10px; /* Ajusta este valor según la distancia que desees desde el borde izquierdo */
+    max-width: 800px; /* Ajusta el tamaño del logo según sea necesario */
+    height: 200px;
 }
 .content {
     flex: 1 0 auto;
