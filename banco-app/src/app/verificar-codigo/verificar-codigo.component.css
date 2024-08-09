@@ -407,6 +407,35 @@ body, html {
     text-align: center;
     box-sizing: border-box;
 }
+.page-container::before,
+.page-container::after,
+.page-container .circle {
+    content: '';
+    position: absolute;
+    background-color: #1273EB; /* Color de los círculos */
+    border-radius: 50%;
+}
+.page-container::before {
+    width: 100px; /* Tamaño del círculo más grande */
+    height: 100px;
+    top: 50px; /* Ajusta según la posición deseada */
+    left: 50px; /* Ajusta según la posición deseada */
+}
+
+.page-container::after {
+    width: 70px; /* Tamaño del círculo mediano */
+    height: 70px;
+    top: 150px; /* Ajusta según la posición deseada */
+    left: 150px; /* Ajusta según la posición deseada */
+}
+
+.page-container .circle {
+    width: 50px; /* Tamaño del círculo más pequeño */
+    height: 50px;
+    top: 220px; /* Ajusta según la posición deseada */
+    left: 220px; /* Ajusta según la posición deseada */
+}
+
   
 
   
