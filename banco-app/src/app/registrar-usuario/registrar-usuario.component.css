@@ -271,7 +271,6 @@ body, html {
     z-index: 1000;
     height: 55px;
 }
-
 .fondo{
     width: 100%px;
     height: 600px;
@@ -288,12 +287,6 @@ body, html {
     
 
 }
-
-
-
-
-
-
 .content {
     flex: 1 0 auto;
     display: flex;
