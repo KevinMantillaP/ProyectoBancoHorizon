@@ -1,27 +1,40 @@
 /* General styling */
 body, html {
     font-family: 'Arial', sans-serif;
-    background-color: #99f1fd;
+    background-color: white;
     margin: 0;
     padding: 0;
     height: 100%;
 }
-
-.header {
-    background-color: #29AECC;
-    color: #fff; 
-    padding: 10px 0;
-    margin: 0;
-    text-align: center;
+.header .logo {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centrar verticalmente el contenido */
+  }
+  .logo img{
+    height: 400px;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #00AEEF;
+    padding:  40px;
+    position: static;
+    top: 0;
+    z-index: 1000;
+    height: 55px;
 }
-
 .content {
     flex: 1 0 auto;
     padding: 20px;
-    background: #99f1fd;
+    background: #fff;
     display: flex; 
 }
- 
 .container {
     width: 100%;
     max-width: 600px;
@@ -29,10 +42,18 @@ body, html {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
     margin-bottom: 20px; /* Añadir espacio para el footer */
+    border: solid rgba(7, 29, 73, 0.8); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra para el efecto 3D */
+transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
 }
+.container:hover {
+transform: translateY(-5px); /* Eleva la caja al pasar el mouse */
+box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+border-color: rgba(7, 29, 73, 0.6);  /* Aumenta la sombra en hover */
+}
+
 
 h1 {
     text-align: center;
