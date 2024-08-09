@@ -44,20 +44,20 @@ body, html {
     border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 20px; /* Añadir espacio para el footer */
-    border: solid rgba(7, 29, 73, 0.8); 
+    border: 8px solid rgba(7, 29, 73, 0.8); 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra para el efecto 3D */
 transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
 }
 .container:hover {
 transform: translateY(-5px); /* Eleva la caja al pasar el mouse */
 box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-border-color: rgba(7, 29, 73, 0.6);  /* Aumenta la sombra en hover */
+border-color: #00AEEF;  /* Aumenta la sombra en hover */
 }
 
 
 h1 {
     text-align: center;
-    color: #1A61A0;
+    color:#00AEEF; 
 }
 
 form div {
@@ -108,9 +108,9 @@ small {
 
 /* Footer styling */
 .footer {
-    background-color: #29AECC;
+    background-color: #00AEEF;
     color: #fff;
-    padding: 20px 0;
+    padding: 10px 0;
     text-align: center;
     width: 100%;
     flex-shrink: 0;
@@ -119,31 +119,61 @@ small {
     justify-content: space-around;
     align-items: flex-start;
     overflow: hidden;
+    margin-bottom: 0;
+    font-family: 'Magdelin Alt Regular';
+    font-size:  20px;
+    
 }
-
 .footer-column {
-    padding: 10px;
+    padding:  0;
     min-width: 200px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinea el contenido de cada columna a la izquierda */
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0px;
+    font-family: 'Magdelin Alt Regular';
+    font-size:  20px;
+   /* Alinea el contenido de cada columna a la izquierda */
 }
+.footer-column .img{
+  height: 70px;
+  margin-bottom: 0;
+  transform: translateY(-10px); 
 
-.mi-div {
+}
+.social-media {
+  margin-top: 10px;
+}
+.footer .social-media a {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  color: white;
+  text-decoration: none;
+  font-family: 'Magdelin Alt Regular';
+    font-size:  20px;
+}
+.footer .social-media a img {
+  width: 24px; /* Ajusta el tamaño de los íconos */
+  height: 24px;
+  margin-right: 10px;
+  object-fit: contain;
+
+}
+.footer-column .mi-div {
+  margin-left: 20px; /* Ajusta el valor según sea necesario */
+  margin-bottom: 10px;
     font-weight: bold;
   }
-  
-
-.footer a {
+  .footer a {
     color: #F7F4E7;
     text-decoration: none;
     margin: 0 10px;
 }
-
 .footer a:hover {
     text-decoration: underline;
 }
-
 /* Flexbox for layout */
 body {
     display: flex;
