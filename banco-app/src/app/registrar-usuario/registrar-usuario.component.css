@@ -57,7 +57,7 @@ border-color: #00AEEF;  /* Aumenta la sombra en hover */
 
 h1 {
     text-align: center;
-    color:#00AEEF; 
+    color: rgba(7, 29, 73, 0.8); 
 }
 
 form div {
