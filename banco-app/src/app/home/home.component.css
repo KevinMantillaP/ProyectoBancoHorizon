@@ -1,4 +1,244 @@
 /* Global styles */
+@font-face {
+  font-family: 'Magdelin Alt Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Regular.woff'),  format('woff');
+  }
+@font-face {
+  font-family: 'Magdelin Alt Regular Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Regular Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Thin';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Thin.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Thin Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Thin Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt ExtraLight';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt ExtraLight.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt ExtraLight Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt ExtraLight Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Light';
+  font-style: normal;
+  font-weight: normal;
+  src:url('/assets/fonts/Magdelin Alt Light.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Light Italic';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Alt Light Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Text';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Text.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Text Italic';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Alt Text Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Medium';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Medium.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Medium Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Medium Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt SemiBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt SemiBold.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt SemiBold Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt SemiBold Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Bold.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Bold Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Bold Italic.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt ExtraBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt ExtraBold.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt ExtraBold Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt ExtraBold Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Black';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Alt Black.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Alt Black Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Alt Black Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Regular';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Regular.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Regular Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Regular Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Thin';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Thin.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Thin Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Thin Italic.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin ExtraLight';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin ExtraLight.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin ExtraLight Italic';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin ExtraLight Italic.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Light';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Light.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Light Italic';
+  font-style: normal;
+  font-weight: normal;
+  src:url('/assets/fonts/Magdelin Light Italic.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Text';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Text.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Text Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Text Italic.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Medium';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Medium.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Medium Italic';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Medium Italic.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin SemiBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin SemiBold.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin SemiBold Italic';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin SemiBold Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Bold.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Bold Italic';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Bold Italic.woff'), format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin ExtraBold';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin ExtraBold.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin ExtraBold Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin ExtraBold Italic.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Black';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('/assets/fonts/Magdelin Black.woff') ,format('woff');
+  }
+  @font-face {
+  font-family: 'Magdelin Black Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/Magdelin Black Italic.woff'), format('woff');
+  }
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -47,12 +287,13 @@ body {
 .buttons-container button {
     background-color: #00AEEF;
     color: white;
+    font-family: 'Magdelin Alt Text';
     border: 3px solid white;
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -162,17 +403,24 @@ body {
   left: 10%;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
+  font-size: 40px;
   padding: 20px;
   border-radius: 10px;
   max-width: 300px;
 }
 .carousel-text h1 {
-  font-size: 24px;
+  font-size: 34px;
   margin: 0 0 10px 0;
+  font-family: 'Magdelin SemiBold';
 }
 .carousel-text p {
-  font-size: 16px;
+  font-size: 26px;
+  font-family: 'Magedlin Alt Light';
   margin: 0;
+  text-align: left;
+  text-justify: inter-word;
+  word-spacing: 0.05em; 
+
 }
 .carousel-indicators {
   position: absolute;
@@ -193,6 +441,8 @@ body {
     color: #005EB8;
     margin-bottom: 40px;
     font-weight: bold;
+    font-family: 'Magdelin Alt Black';
+    font-size: 50px;
 }
 .reasons {
     display: flex;
@@ -225,6 +475,8 @@ body {
     color: white;
     margin: 0;
     text-align: justify;
+    font-family: 'Magdelin Alt Regular';
+    font-size: 25px;
 }
 .reason img {
     width: 25%; /* Ancho completo para imágenes */
@@ -237,8 +489,10 @@ body {
 }
 .servicio h2 {
   color: #005EB8;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  font-family: 'Magdelin Alt Bold';
   font-weight: bold;
+  font-size: 60px;
 }
 .services {
     text-align: center;
@@ -249,18 +503,12 @@ body {
     margin: 0 auto; /* Centra el contenedor */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   } 
-  .services h2 {
-    color: white;
-    margin-bottom: 40px;
-    font-weight: bold;
-  }
   .service-cards {
     display: flex;
     justify-content: space-around;
     background-color: #00AEEF/*#8ADBE5*/;
     align-items: baseline;
     flex-wrap: wrap;
-
   }
   .service-card {
     background-color: #8ADBE5;
@@ -274,7 +522,6 @@ body {
     margin: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s, box-shadow 0.3s;
-    
   }
   .service-card:hover {
     transform: translateY(-10px);
@@ -283,14 +530,17 @@ body {
   .service-card h3 {
     color: white;
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 30px;
+    font-family: 'Magdelin Alt Regular';
   }
   .service-card p {
     color: white;
     margin: 0;
     text-align: justify;
-    font-size: 15px;
+    font-size: 20px;
     padding: 15px;
+    font-family: 'Magdelin Alt Regular';
+
   }
   .service-card img {
     width: 100px;
@@ -308,8 +558,10 @@ body {
     color: #005EB8;
     margin-bottom: 40px;
     font-weight: bold;
-  }
+    font-family: 'Magdelin Alt Bold';
+    font-size:70px;
 
+  }
   .branch {
     display: flex;
     flex-wrap: wrap;
@@ -337,13 +589,17 @@ body {
   .branch-details h3 {
     color: #1A61A0;
     margin-bottom: 10px;
-    font-size: 22px;
+    font-size: 32px;
     font-weight: bold;
+    font-family: 'Magdelin Alt Bold';
+
   }
   
   .branch-details p, .branch-details ul {
     color: #333;
     margin: 0;
+    font-family: 'Magdelin Alt Text';
+    font-size: 18px;
   }
   
   .branch-details ul {
@@ -391,6 +647,9 @@ body {
     align-items: flex-start;
     overflow: hidden;
     margin-bottom: 0;
+    font-family: 'Magdelin Alt Regular';
+    font-size:  20px;
+    
 }
 .footer-column {
     padding:  0;
@@ -400,6 +659,8 @@ body {
     align-items: flex-start;
     justify-content: center;
     margin: 0px;
+    font-family: 'Magdelin Alt Regular';
+    font-size:  20px;
    /* Alinea el contenido de cada columna a la izquierda */
 }
 .footer-column .img{
@@ -417,6 +678,8 @@ body {
   margin: 5px 0;
   color: white;
   text-decoration: none;
+  font-family: 'Magdelin Alt Regular';
+    font-size:  20px;
 }
 .footer .social-media a img {
   width: 24px; /* Ajusta el tamaño de los íconos */
@@ -427,7 +690,7 @@ body {
 }
 .footer-column .mi-div {
   margin-left: 20px; /* Ajusta el valor según sea necesario */
-  
+  margin-bottom: 10px;
     font-weight: bold;
   }
   .footer a {
