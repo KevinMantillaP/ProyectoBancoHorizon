@@ -1,6 +1,19 @@
-<header class="header">
-  <h2>Horizon Bank</h2>
-</header>
+
+<div class="header">
+  <div class="logo">
+    <!--<h1>Horizon Bank</h1>-->
+    <img src="assets/sello1.png" alt="icon">
+  </div>
+</div>
+<div class="sidebar-wrapper">
+  <div class="sidebar">
+    <button (click)="redirectTo('/')">Cerrar Sesion</button>
+    <button (click)="redirectTo('visualizacion-saldo')">Visualizacion de saldo</button>
+    <button (click)="redirectTo('cambio-contraseña')">Cambiar Contraseña</button>
+    <button (click)="redirectTo('crear-cuenta')">Crear Cuenta</button>
+  </div>
+</div>
+
 <div class="content" [class.blurred]="mostrarConfirmacion">
   <div class="container">
     <h1>Transferencias</h1>
@@ -43,7 +56,6 @@
       </div>
       <!-- Submit Button -->
       <div class="button-container">
-        <button (click)="redirectToVisualizarSaldo()">Regresar</button>
         <button type="submit" [disabled]="isProcessing">Confirmar Transferencia</button>
       </div>
     </form>
@@ -63,34 +75,5 @@
     </div>
     <button (click)="realizarTransferencia()" [disabled]="isProcessing">Confirmar</button>
     <button (click)="cancelarConfirmacion()">Cancelar</button>
-  </div>
-</div>
-
-<div class="footer">
-  <div class="footer-column">
-    <div>Horizon Bank</div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Ayuda y Contacto</div>
-    <div>+593999999999</div>
-    <div>
-      <a href="#">Facebook</a>
-    </div>
-    <div>
-      <a href="#">Instagram</a>
-    </div>
-    <div>
-      <a href="#">LinkedIn</a>
-    </div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Sobre Nosotros</div>
-    <div>Quienes Somos</div>
-    <div>Trabaja con Nosotros</div>
-    <div>Transparencia</div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Mas Servicios</div>
-    <div>Transacciones en Linea</div>
   </div>
 </div>

@@ -108,7 +108,12 @@ export class HistorialTransferenciasComponent implements OnInit {
     }
   }
 
-  regresar(): void {
-    this.router.navigate(['/visualizacion-saldo']);
+  redirectTo(route: string): void {
+    if (this.cedula) {
+      this.comparticionParametrosService.setCedula(this.cedula);
+      this.router.navigate([route]);
+    } else {
+      console.error('Cedula no proporcionada');
+    }
   }
 }
