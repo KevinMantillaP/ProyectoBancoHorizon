@@ -8,6 +8,8 @@ import { catchError } from 'rxjs/operators';
 })
 export class UsuarioService {
   private baseUrl = 'http://localhost:4000/api'; 
+  private ipifyUrl = 'https://api.ipify.org?format=json';
+  //private baseUrl = 'https://base-datos-api-rest.vercel.app/api'; 
 
   constructor(private http: HttpClient) { }
 
@@ -120,6 +122,27 @@ export class UsuarioService {
 
   desbloquearUsuario(correo: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/desbloquear-cuenta`, { correo });
+  }
+
+  getClienteByNumeroCuenta(numeroCuenta: string): Observable<any> {
+    const url = `${this.baseUrl}/cuentas/cliente/${numeroCuenta}`;
+    return this.http.get<any>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+  cambiarNombreUsuarioPorCorreo(correo: string, nuevoNombreUsuario: string): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/usuarios/cambiar-nombre-por-correo`, { correo, nuevoNombreUsuario });
+  }
+
+  obtenerIP(): Observable<any> {
+    return this.http.get<any>(this.ipifyUrl);
+  }
+
+  obtenerCorreoPorNombreUsuario(nombreUsuario: string): Observable<{ correo: string }> {
+    const url = `${this.baseUrl}/obtener-correo?nombreUsuario=${nombreUsuario}`;
+    return this.http.get<{ correo: string }>(url).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -1,48 +1,70 @@
-<div class="header">
-  <h2>Horizon Bank</h2>
-</div>
-<div class="content">
-  <div class="verify-container">
-    <h2>Ingrese el Código</h2>
-    <p>Se ha enviado un correo con un código de confirmación a su correo</p>
-    <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
-      <div class="code-inputs">
-        <input type="text" maxlength="1" formControlName="code1" (input)="autoFocusNext($event, 'code2')" #code1>
-        <input type="text" maxlength="1" formControlName="code2" (input)="autoFocusNext($event, 'code3')" #code2>
-        <input type="text" maxlength="1" formControlName="code3" (input)="autoFocusNext($event, 'code4')" #code3>
-        <input type="text" maxlength="1" formControlName="code4" (input)="autoFocusNext($event, 'code5')" #code4>
-        <input type="text" maxlength="1" formControlName="code5" (input)="autoFocusNext($event, 'code6')" #code5>
-        <input type="text" maxlength="1" formControlName="code6" #code6>
-      </div>
-      <button type="submit" [disabled]="isProcessing ">Siguiente</button>
-    </form>
+<div class="page-container">
+  <div class="circle"></div>
+
+  <div class="header">
+    <div class="logo">
+      <!--<h1>Horizon Bank</h1>-->
+      <img src="assets/sello1.png" alt="icon">
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="verify-container">
+      <h2>Ingrese el Código</h2>
+      <p>Se ha enviado un correo con un código de confirmación a su correo</p>
+      <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+        <div class="code-inputs">
+          <input type="text" maxlength="1" formControlName="code1" (input)="autoFocusNext($event, 'code2')" #code1>
+          <input type="text" maxlength="1" formControlName="code2" (input)="autoFocusNext($event, 'code3')" #code2>
+          <input type="text" maxlength="1" formControlName="code3" (input)="autoFocusNext($event, 'code4')" #code3>
+          <input type="text" maxlength="1" formControlName="code4" (input)="autoFocusNext($event, 'code5')" #code4>
+          <input type="text" maxlength="1" formControlName="code5" (input)="autoFocusNext($event, 'code6')" #code5>
+          <input type="text" maxlength="1" formControlName="code6" #code6>
+        </div>
+        <button type="submit" [disabled]="isProcessing ">Siguiente</button>
+      </form>
+    </div>
   </div>
 </div>
+
+
+
 <div class="footer">
   <div class="footer-column">
-    <div>Horizon Bank</div>
+    <img src="assets/sello1.png" width="250"  alt="icon">
   </div>
   <div class="footer-column">
-    <div class="mi-div">Ayuda y Contacto</div>
-    <div>+593999999999</div>
-    <div>
-      <a href="#">Facebook</a>
-    </div>
-    <div>
-      <a href="#">Instagram</a>
-    </div>
-    <div>
-      <a href="#">LinkedIn</a>
+
+    <div class="mi-div">Contacto y Ayuda</div>
+    <div class="social-media">
+    <a href="#" target="_blank">
+      <img src="assets/social/telefono.png" alt="LinkedIn">
+      (02) 2999000</a>
+      <a href="#" target="_blank">
+        <img src="assets/social/celular.png" alt="LinkedIn">
+        (+593) 987654321</a>
+  </div>
+   <div class="social-media" >                 
+   <a href="https://www.facebook.com/" target="_blank">
+    <img src="assets/social/facebook.png" alt="Facebook"> Facebook</a>
+    <a href="#" target="_blank">
+      <img src="assets/social/instagram.png" alt="Instagram">
+      Instagram
+    </a>
+    <a href="#" target="_blank">
+      <img src="assets/social/linkedin.png" alt="LinkedIn">
+      LinkedIn
+    </a>
     </div>
   </div>
   <div class="footer-column">
     <div class="mi-div">Sobre Nosotros</div>
-    <div>Quienes Somos</div>
+    <div>¿Quienes Somos?</div>
     <div>Trabaja con Nosotros</div>
-    <div>Transparencia</div>
+    <div>Trasparencia</div>
   </div>
   <div class="footer-column">
-    <div class="mi-div">Mas Servicios</div>
-    <div>Transacciones en Linea</div>
+    <div class="mi-div">Más Servicios</div>
+    <div>Políticas de Privacidad</div>
   </div>
 </div>

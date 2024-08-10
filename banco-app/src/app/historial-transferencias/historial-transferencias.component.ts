@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
-import { ActivatedRoute, Router  } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import moment from 'moment';
+import 'moment-timezone';
 
 @Component({
   selector: 'app-historial-transferencias',
@@ -17,14 +20,16 @@ export class HistorialTransferenciasComponent implements OnInit {
   transferenciasFiltradas: any[] = [];
   numeroCuenta: string | null = null;
   cedula: string | null = null;
-  filtroTipo: string = 'todos'; // por defecto, mostrar todas las transacciones
-  fechaFiltro: Date | null = null; // fecha seleccionada para filtrar
+  filtroTipo: string = 'todos';
+  fechaInicio: string = ''; // Modificado a string para manejar fechas en formato ISO
+  fechaFin: string = ''; // Modificado a string para manejar fechas en formato ISO
 
   constructor(
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private router: Router,
-    private comparticionParametrosService: ComparticionParametrosService
+    private comparticionParametrosService: ComparticionParametrosService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +40,11 @@ export class HistorialTransferenciasComponent implements OnInit {
     } else {
       console.error('Número de cuenta no proporcionado');
     }
+
+    // Inicializa las fechas por defecto usando moment
+    const ahora = moment().tz('America/Guayaquil');
+    this.fechaFin = ahora.format('YYYY-MM-DD');
+    this.fechaInicio = ahora.subtract(30, 'days').format('YYYY-MM-DD');
   }
 
   obtenerTransferencias(): void {
@@ -61,18 +71,49 @@ export class HistorialTransferenciasComponent implements OnInit {
     }
   }
 
-  filtrarPorFecha(fecha: Date | null): void {
-    this.fechaFiltro = fecha;
-    if (fecha) {
-      this.transferenciasFiltradas = this.transferencias.filter(transferencia =>
-        new Date(transferencia.fecha).toDateString() === fecha.toDateString()
-      );
+  filtrarPorFechas(): void {
+    if (this.fechaInicio && this.fechaFin) {
+      const fechaInicio = moment(this.fechaInicio).startOf('day').toDate();
+      const fechaFin = moment(this.fechaFin).endOf('day').toDate();
+
+      if (fechaInicio > fechaFin) {
+        this.snackBar.open('La fecha de inicio no puede ser mayor que la fecha de fin.', 'Cerrar', {
+          duration: 5000,
+        });
+        this.transferenciasFiltradas = [];
+      } else if (fechaInicio > new Date()) {
+        this.snackBar.open('La fecha de inicio es futura. No se pueden mostrar registros.', 'Cerrar', {
+          duration: 5000,
+        });
+        this.transferenciasFiltradas = [];
+      } else if (fechaFin > new Date()) {
+        this.snackBar.open('La fecha de fin es futura. No se pueden mostrar registros.', 'Cerrar', {
+          duration: 5000,
+        });
+        this.transferenciasFiltradas = [];
+      } else {
+        this.transferenciasFiltradas = this.transferencias.filter(transferencia => {
+          const transferenciaFecha = new Date(transferencia.fecha);
+          return transferenciaFecha >= fechaInicio && transferenciaFecha <= fechaFin;
+        });
+
+        if (this.transferenciasFiltradas.length === 0) {
+          this.snackBar.open('No se encontraron registros para el rango de fechas seleccionado.', 'Cerrar', {
+            duration: 5000,
+          });
+        }
+      }
     } else {
       this.transferenciasFiltradas = [...this.transferencias];
     }
   }
 
-  regresar(): void {
-    this.router.navigate(['/visualizacion-saldo']);
+  redirectTo(route: string): void {
+    if (this.cedula) {
+      this.comparticionParametrosService.setCedula(this.cedula);
+      this.router.navigate([route]);
+    } else {
+      console.error('Cedula no proporcionada');
+    }
   }
 }

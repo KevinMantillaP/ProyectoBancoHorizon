@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class CuentaService {
   private apiUrl = 'http://localhost:4000/api'; 
+  //private apiUrl = 'https://base-datos-api-rest.vercel.app/api'; 
 
   constructor(private http: HttpClient) { }
 

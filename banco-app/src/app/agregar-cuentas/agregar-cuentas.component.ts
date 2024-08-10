@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
+import { AuthService } from '../services/autenticacion.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-agregar-cuentas',
@@ -20,6 +22,8 @@ export class AgregarCuentasComponent implements OnInit {
   isProcessing: boolean = false;
 
   constructor(
+    private usuarioService: UsuarioService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private cuentaService: CuentaService,
     private snackBar: MatSnackBar,
@@ -94,7 +98,13 @@ export class AgregarCuentasComponent implements OnInit {
       this.snackBar.open('Por favor complete todos los campos correctamente', 'Cerrar', { duration: 3000 });
     }
   }
-  redirectTo(route: string) {
-    this.router.navigate([route]);
+
+  redirectTo(route: string): void {
+    if (this.cedula) {
+      this.comparticionParametrosService.setCedula(this.cedula);
+      this.router.navigate([route]);
+    } else {
+      console.error('Cedula no proporcionada');
+    }
   }
 }

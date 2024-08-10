@@ -1,7 +1,21 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
 <div class="header">
-  <h2>Horizon Bank</h2>
+  <div class="logo">
+    <!--<h1>Horizon Bank</h1>-->
+    <img src="assets/sello1.png" alt="icon">
+  </div>
 </div>
+<div class="sidebar-wrapper">
+  <div class="sidebar">
+    <button (click)="redirectTo('/')">Cerrar Sesión</button>
+    <button (click)="redirectTo('cambio-contraseña')">Cambio Contraseña</button>
+    <button (click)="redirectTo('crear-cuenta')">Agregar Cuenta</button>
+    <button (click)="redirectTo('transferencia')">Transferencia</button>
+    <button (click)="redirectToHistorialTransferencias()">Historial de Transferencias</button>
+    </div>
+  </div>
 <div class="content">
   <div class="welcome">
     <h2>¡Bienvenid&#64;, {{ nombreCliente }}!</h2>
@@ -15,9 +29,12 @@
           <p>Número de cuenta: {{ selectedAccount.numeroCuenta }}</p>
         </div>
         <div class="account-balance">
-          <p><strong>{{ selectedAccount.saldo | currency }}</strong></p>
+          <p><strong>{{ mostrarSaldo ? (selectedAccount.saldo | currency) : '****' }}</strong></p>
           <button *ngIf="cuentas.length > 1" (click)="toggleAccounts()">
             <i class="fas" [ngClass]="showAccounts ? 'fa-caret-up' : 'fa-caret-down'"></i>
+          </button>
+          <button (click)="toggleSaldo()">
+            <i class="fas" [ngClass]="mostrarSaldo ? 'fa-eye-slash' : 'fa-eye'"></i>
           </button>
         </div>
       </div>
@@ -29,41 +46,11 @@
               <p>{{ cuenta.numeroCuenta }}</p>
             </div>
             <div class="account-balance">
-              <p><strong>{{ cuenta.saldo | currency }}</strong></p>
+              <p><strong>{{ mostrarSaldo ? (cuenta.saldo | currency) : '****' }}</strong></p>
             </div>
           </li>
         </ul>
       </div>
-      
     </div>
-  </div>
-  <div class="button-container">
-    <button (click)="redirectTo('/')">Regresar</button>
-    <button (click)="redirectTo('cambio-contraseña')">Cambio contraseña</button>
-    <button (click)="redirectTo('crear-cuenta')">Agregar cuenta</button>
-    <button (click)="redirectTo('transferencia')">Transferencia</button>
-    <button (click)="redirectToHistorialTransferencias()">Historial de Transferencias</button>
-  </div>
-</div>
-<div class="footer">
-  <div class="footer-column">
-    <div>Horizon Bank</div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Ayuda y Contacto</div>
-    <div>+593999999999</div>
-    <div><a href="#">Facebook</a></div>
-    <div><a href="#">Instagram</a></div>
-    <div><a href="#">LinkedIn</a></div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Sobre Nosotros</div>
-    <div>Quiénes Somos</div>
-    <div>Trabaja con Nosotros</div>
-    <div>Transparencia</div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Más Servicios</div>
-    <div>Transacciones en Línea</div>
   </div>
 </div>
