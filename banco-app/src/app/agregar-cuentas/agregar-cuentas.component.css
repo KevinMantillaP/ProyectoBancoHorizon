@@ -397,30 +397,42 @@ select.form-control {
         padding: 10px;
     }
 }
+.sidebar-wrapper {
+  position: relative; /* Necesario para la posición absoluta del sidebar */
+  overflow: hidden; /* Oculta cualquier contenido que se salga del contenedor */
+  width: 250px;
+}
+
 .sidebar {
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgb(255,255,240);
-    background: linear-gradient(180deg, rgba(255,255,240,1) 40%, rgba(41,174,204,1) 100%);
-    padding-top: 20px;
-  }
+  height: calc(100vh - 80px); /* Altura completa menos el espacio del header */
+  width: 200px;
+  position: fixed; /* Fijo para que no se mueva con el scroll */
+  top: 80px; /* Espacio para el header */
+  left: 0px; /* Empieza fuera de la vista */
+  background: #1273eb;
+  padding-top: 20px;
+  transition: left 0.3s ease; /* Animación suave para mostrar/ocultar */
+  z-index: 1000; /* Asegura que el sidebar esté encima de otros contenidos */
+}
+
+.sidebar-wrapper:hover .sidebar {
+  left: 0; /* Mostrar la sidebar cuando el mouse esté sobre el contenedor */
+}
+
 
 .sidebar button {
-    padding: 10px 15px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #1a61a0;
-    background: none;
-    border: none;
-    display: block;
-    width: 80%;
-    text-align: left;
-    transition: 0.3s;
-    cursor: pointer;
-  }
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #0f2676;
+  background: none;
+  border: none;
+  display: block;
+  width: 80%;
+  text-align: left;
+  transition: 0.3s;
+  cursor: pointer;
+}
   
   .sidebar button:hover {
     background-color: #29aecc;

@@ -6,13 +6,14 @@
   </div>
 
 
-
-<div class="sidebar">
-    <button (click)="redirectTo('/')">Cerrar Sesion</button>
-    <button (click)="redirectTo('visualizacion-saldo')">Visualizacion de saldo</button>
-    <button (click)="redirectTo('cambio-contraseña')">Cambio de Contraseña</button>
-    <button (click)="redirectTo('transferencia')">Transferencia</button>
-  </div>
+  <div class="sidebar-wrapper">
+    <div class="sidebar">
+        <button (click)="redirectTo('/')">Cerrar Sesion</button>
+        <button (click)="redirectTo('visualizacion-saldo')">Visualizacion de saldo</button>
+        <button (click)="redirectTo('cambio-contraseña')">Cambio de Contraseña</button>
+        <button (click)="redirectTo('transferencia')">Transferencia</button>
+      </div>
+    </div>
 <div class="content"> <!-- Añadido el contenedor content -->
     <div class="container">
         <h2>Agregar Cuenta Adicional</h2>
