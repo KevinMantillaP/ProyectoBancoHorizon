@@ -237,4 +237,8 @@ export class TransferenciasComponent implements OnInit {
   redirectToVisualizarSaldo(): void {
     this.router.navigate(['/visualizacion-saldo']);
   }
+
+  redirectToHistorialTransferencias(): void {
+    this.router.navigate(['/historial-transferencias']);
+  }
 }
