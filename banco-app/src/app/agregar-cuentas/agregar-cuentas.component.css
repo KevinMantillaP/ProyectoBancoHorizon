@@ -212,13 +212,76 @@ h2 {
   padding: 5px;
 }
 
-@media (max-width: 768px) {
-  .container {
-      width: 100%;
-      padding: 10px;
+@media (max-width: 450px) {
+  .sidebar {
+      width: 120px; /* Reduce el ancho de la barra lateral */
+      padding: 5px;
   }
 
-  .btn-primary {
-      padding: 10px;
+  .sidebar button {
+    font-size: 10px; /* Reduce el tamaño de la fuente de los botones en la barra lateral */
+    padding: 8px 4px; /* Reduce el padding de los botones */
+}
+
+.sidebar button i {
+    margin-right: 5px; /* Ajusta el margen del icono */
+}
+
+.logo img {
+    width: 125px; /* Reduce el tamaño del logo */
+    margin-top: 5px;
+}
+
+.header {
+    width: calc(100% - 140px);
+    margin-left: 120px;
+    padding: 10px;
+    text-align: center;
+}
+.header h2 {
+  font-size: 18px; /* Reduce el tamaño del título */
+}
+
+.user-profile {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+}
+
+.content {
+    margin-left: 120px;
+    max-width: calc(100% - 140px);
+}
+
+  .container {
+      width: 90%;
+      padding: 20px;
+      margin: 40px auto;
+  }
+
+  .container h2 {
+      font-size: 20px; /* Reduce el tamaño de la fuente en el título */
+  }
+
+  .form-control {
+      width: 90%;
+      padding: 8px;
+      font-size: 14px;
+  }
+
+  .button-container {
+      flex-direction: column; /* Cambia la dirección a columna */
+      width: 100%;
+  }
+
+  .button-container .btn-primary, 
+  .button-container .btn-secondary {
+      width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+      margin-bottom: 10px;
+  }
+
+  .text-danger {
+      font-size: 12px; /* Ajusta el tamaño de la fuente */
   }
 }
+

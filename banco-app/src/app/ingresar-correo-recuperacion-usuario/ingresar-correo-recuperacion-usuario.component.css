@@ -254,37 +254,29 @@
     min-height: 100vh;
   }
   
+  /* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white; /* Cambiar el fondo a blanco */
+  padding: 20px;
+  border-bottom: 8px solid #2cb5d3; /* Línea azul en la parte inferior */
+  position: static;
+  top: 0;
+  z-index: 1000;
+  height: 55px;
+  padding: 30px;
+  }
+  
   .header .logo {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centrar verticalmente el contenido */
+  margin-left: 20px; /* Mueve el logo un poco hacia la derecha */
   }
-  .logo img{
-    height: 400px;
-    width: auto;
-    margin-right: 10px;
-    margin-bottom: 20px;
+  
+  .logo img {
+  height: 200px; /* Ajusta la altura del logo */
+  width: auto;
   }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1273EB/*#00AEEF*/;
-    padding:  40px;
-    position: static;
-    top: 0;
-    z-index: 1000;
-    height: 55px;
-  }
-
-
-
-
-
-
-
-
 
 h3 {
     color: #1A61A0;
@@ -299,7 +291,7 @@ label {
 .content {
     flex: 1 0 auto;
     padding: 20px;
-    background: #99f1fd;
+    background: #F7F4E7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -433,17 +425,114 @@ input {
   }
 
 /* Media Queries */
-@media (min-width: 768px) {
-    .content {
-        flex-direction: row;
-    }
+@media (max-width: 450px) {
+  /* Ajustes para el contenedor de la página */
+  .page-container {
+      padding: 0 10px; /* Ajusta el padding para adaptarse mejor a pantallas pequeñas */
+  }
 
-    .container {
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
+  /* Ajustes para el header */
+  .header {
+      padding: 10px 15px; /* Reduce el padding del header */
+      height: auto; /* Permite que el header se ajuste a su contenido */
+      flex-direction: column; /* Coloca el logo y otros elementos en una columna para ahorrar espacio */
+  }
 
-    .button-container {
-        flex-direction: row;
-    }
+  .header .logo {
+      margin-left: 0; /* Centra el logo en pantallas pequeñas */
+      text-align: center;
+  }
+
+  .logo img {
+      height: 200px; /* Reduce la altura del logo para pantallas pequeñas */
+      width: auto;
+  }
+
+  h3 {
+      font-size: 18px; /* Reduce el tamaño del título */
+  }
+
+  label {
+      font-size: 14px; /* Reduce el tamaño de la fuente en los labels */
+  }
+
+  .content {
+      padding: 10px; /* Reduce el padding del contenido */
+      flex-direction: column; /* Asegura que el contenido se muestre en una columna */
+      padding-bottom: 100px;
+  }
+
+  .container {
+      width: 100%; /* Ocupa todo el ancho disponible */
+      max-width: none; /* Elimina el ancho máximo para pantallas pequeñas */
+      padding: 15px; /* Ajusta el padding */
+      margin: 10px 0; /* Reduce el margen superior e inferior */
+      box-shadow: none; /* Elimina la sombra para simplificar el diseño en pantallas pequeñas */
+      border-radius: 5px; /* Reduce el radio de las esquinas */
+  }
+
+  .container p {
+      font-size: 14px; /* Reduce el tamaño de la fuente del texto */
+      padding: 5px; /* Reduce el padding */
+  }
+
+  input {
+      width: calc(100% - 15px); /* Ajusta el ancho del input para pantallas pequeñas */
+      padding: 8px; /* Reduce el padding del input */
+      font-size: 14px; /* Reduce el tamaño de la fuente en los inputs */
+  }
+
+  .button-container {
+      flex-direction: column; /* Asegura que los botones se muestren en una columna */
+      gap: 5px; /* Reduce el espacio entre los botones */
+  }
+
+  .button-container button {
+      width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+      font-size: 14px; /* Reduce el tamaño de la fuente en los botones */
+      padding: 8px; /* Reduce el padding de los botones */
+      margin: 5px 0; /* Ajusta el margen de los botones */
+  }
+
+  /* Ajustes para el footer */
+  .footer {
+      padding: 10px; /* Ajusta el padding del footer */
+      flex-direction: column; /* Coloca los elementos del footer en una columna */
+      align-items: center; /* Centra el contenido del footer */
+      text-align: center; /* Centra el texto en el footer */
+      position: relative;
+      margin-top: 20px;
+  }
+
+  .footer-column {
+      min-width: 100%; /* Elimina el ancho mínimo */
+      margin-bottom: 10px; /* Añade un margen inferior entre columnas */
+      align-items: center; /* Centra el contenido de las columnas */
+  }
+
+  .footer-column .img {
+      height: 50px; /* Reduce el tamaño de las imágenes en el footer */
+      margin-bottom: 5px; /* Reduce el margen inferior */
+      transform: translateY(0); /* Elimina cualquier desplazamiento vertical */
+  }
+
+  .footer .social-media a {
+      font-size: 14px; /* Reduce el tamaño de la fuente en los enlaces de redes sociales */
+      margin-left: 0px;
+  }
+
+  .footer .social-media a img {
+      width: 20px; /* Ajusta el tamaño de los íconos */
+      height: 20px;
+      margin-right: 5px; /* Reduce el margen derecho de los íconos */
+  }
+
+  .footer-column .mi-div {
+      font-size: 16px; /* Reduce el tamaño de la fuente en los encabezados de las columnas */
+      margin-left: 0; /* Elimina el margen izquierdo */
+  }
+
+  .footer a {
+      font-size: 14px; /* Reduce el tamaño de la fuente en los enlaces */
+  }
 }
