@@ -63,15 +63,16 @@
     <h3>Conversor</h3>
     <div class="currency-converter">
       <label for="amount">Cantidad:</label>
-      <input type="number" id="amount" placeholder="Ingresa la cantidad">
+      <input type="number" [(ngModel)]="amount" placeholder="Ingresa la cantidad">
       <label for="currency">Moneda:</label>
-      <select id="currency">
+      <select [(ngModel)]="currency">
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
         <option value="GBP">GBP</option>
       </select>
-      <button onclick="convertCurrency()">Convertir</button>
-      <p id="result"></p>
+      <button (click)="convertCurrency()">Convertir</button>
+      <p>{{ result }}</p>
     </div>
+    
   </div>
 </div>

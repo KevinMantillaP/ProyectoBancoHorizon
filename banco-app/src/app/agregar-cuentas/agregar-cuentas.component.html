@@ -1,22 +1,25 @@
 <div class="header">
-    <div class="logo">
-      <!--<h1>Horizon Bank</h1>-->
-      <img src="assets/sello1.png" alt="icon">
+    <div class="user-profile">
+      <i class="fas fa-user"></i>
     </div>
-  </div>
-
-
-  <div class="sidebar-wrapper">
-    <div class="sidebar">
-        <button (click)="redirectTo('/')">Cerrar Sesion</button>
-        <button (click)="redirectTo('visualizacion-saldo')">Visualizacion de saldo</button>
-        <button (click)="redirectTo('cambio-contraseña')">Cambio de Contraseña</button>
-        <button (click)="redirectTo('transferencia')">Transferencia</button>
-      </div>
+    <div class="titulo">
+      <h2>Agregar Cuenta</h2>
     </div>
-<div class="content"> <!-- Añadido el contenedor content -->
+</div>
+ 
+<div class="content">
+    <div class="sidebar"> 
+        <div class="logo">
+          <img src="assets/logo3.png" alt="icon">
+        </div>
+        <button (click)="redirectTo('cambio-contraseña')"><i class="fas fa-key"></i> Cambio Contraseña</button>
+        <button (click)="redirectTo('visualizacion-saldo')"><i class="fas fa-eye"></i> Visualización de saldo</button>
+        <button (click)="redirectTo('transferencia')"><i class="fas fa-exchange-alt"></i> Transferencia</button>
+        <button (click)="redirectTo('historial-transferencias')"><i class="fas fa-history"></i> Historial de Transferencias</button>
+        <button (click)="redirectTo('seleccion-servicio')"><i class="fas fa-money-bill-wave"></i> Pagar Servicios</button>
+        <button (click)="redirectTo('/')"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+    </div>
     <div class="container">
-        <h2>Agregar Cuenta Adicional</h2>
         <form [formGroup]="cuentaForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="tipo">Tipo de Cuenta</label>
@@ -30,7 +33,6 @@
                 </div>
             </div>
             
-
             <div class="form-group">
                 <label for="saldoInicial">Saldo Inicial</label>
                 <input id="saldoInicial" formControlName="saldoInicial" type="number" class="form-control" value="0" readonly>
@@ -40,9 +42,9 @@
                 </div>
             </div>
             <div class="button-container">
-                <button type="submit" class="btn btn-primary" [disabled]="cuentaForm.invalid || isProcessing">Agregar Cuenta</button>
+                <button (click)="redirectTo('visualizacion-saldo')" class="btn-secondary">Regresar</button>
+                <button type="submit" class="btn-primary" [disabled]="cuentaForm.invalid || isProcessing">Agregar Cuenta</button>
             </div>
         </form>
     </div>
-</div> <!-- Cierre del contenedor content -->
-
+</div>
