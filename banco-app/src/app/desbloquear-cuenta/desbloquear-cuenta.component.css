@@ -261,29 +261,29 @@ body, html {
     min-height: 100vh;
   }
   
-  .header .logo {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centrar verticalmente el contenido */
-  }
-  .logo img{
-    height: 400px;
-    width: auto;
-    margin-right: 10px;
-    margin-bottom: 20px;
-  }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1273EB/*#00AEEF*/;
-    padding:  40px;
-    position: static;
-    top: 0;
-    z-index: 1000;
-    height: 55px;
-  }
+  /* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white; /* Cambiar el fondo a blanco */
+  padding: 20px;
+  border-bottom: 8px solid #2cb5d3; /* Línea azul en la parte inferior */
+  position: static;
+  top: 0;
+  z-index: 1000;
+  height: 55px;
+  padding: 30px;
+}
+
+.header .logo {
+  margin-left: 20px; /* Mueve el logo un poco hacia la derecha */
+}
+
+.logo img {
+  height: 200px; /* Ajusta la altura del logo */
+  width: auto;
+}
 .content {
     flex: 1 0 auto;
     padding: 20px;
@@ -295,19 +295,7 @@ body, html {
     flex-direction: column;
     min-height: 100vh;
   }
-  .page-container::before{
-      content: '';
-      position: absolute;
-      background-color: #1273EB; /* Color de los círculos */
-      border-radius: 50%;
-  }
   
-  .page-container::before {
-      width: 100px; /* Tamaño del círculo más grande */
-      height: 100px;
-      top: 50px; /* Ajusta según la posición deseada */
-      left: 50px; /* Ajusta según la posición deseada */
-  }
   
   .content {
     flex: 1 ;
@@ -315,10 +303,10 @@ body, html {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: #fff;
+    background: #F7F4E7;
   }
   
-  .vcontainer {
+  .container {
     width: 50%;
     padding: 50px;
     background-color: white;
@@ -377,7 +365,7 @@ body, html {
     width: 50%;
     padding: 10px;
     margin-top: 10px;
-    background-color: #1273EB;
+    background-color: #11b4d8;
     border: none;
     color: white;
     font-size: 20px;
@@ -502,25 +490,104 @@ input {
   .footer a:hover {
     text-decoration: underline;
   }
-/* Media Queries */
-@media (min-width: 768px) {
-    .content {
-        flex-direction: row;
-    }
+/* Media Queries para dispositivos con un ancho máximo de 450px */
+@media (max-width: 450px) {
 
-    .container {
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
+  /* Ajustes generales */
+  body, html {
+      font-size: 14px; /* Reducir el tamaño de fuente global */
+  }
 
-    .button-container {
-        flex-direction: row;
-    }
+  .header {
+      padding: 10px 15px; /* Reduce el padding del header */
+      height: 100px; /* Permite que el header ajuste su altura automáticamente */
+  }
 
-    /* label{
-        margin-left: 40px;
-    } */
+  .header .logo img {
+      height: 150px; /* Reduce el tamaño del logo */
+      margin-left: 0; /* Elimina el margen izquierdo del logo */
+  }
+
+  .content {
+      flex-direction: column; /* Alinea el contenido en una columna */
+      padding: 15px; /* Reduce el padding del contenido */
+  }
+
+  .container {
+      width: 90%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+      padding: 15px; /* Reduce el padding interno */
+      margin-top: 10px; /* Reduce el margen superior */
+      margin-bottom: 10px; /* Reduce el margen inferior */
+  }
+
+  .container h2 {
+      font-size: 24px; /* Reduce el tamaño de la fuente del título */
+  }
+
+  .container p {
+      font-size: 16px; /* Reduce el tamaño de la fuente del párrafo */
+      margin-bottom: 15px; /* Reduce el margen inferior */
+  }
+
+  .code-inputs {
+      flex-direction: column; /* Coloca los inputs de código en columna */
+      gap: 5px; /* Reduce el espacio entre los inputs */
+      margin-bottom: 15px; /* Reduce el margen inferior */
+  }
+
+  .code-inputs input {
+      width: 40px; /* Ajusta el tamaño de los inputs de código */
+      height: 40px; /* Ajusta la altura de los inputs de código */
+      font-size: 20px; /* Reduce el tamaño de la fuente en los inputs */
+  }
+
+  .container button {
+      width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+      font-size: 16px; /* Reduce el tamaño de la fuente de los botones */
+      margin-bottom: 10px; /* Añade espacio entre los botones */
+  }
+
+  input {
+      width: calc(100% - 20px); /* Ajusta el ancho de los inputs */
+      padding: 8px; /* Reduce el padding interno de los inputs */
+  }
+
+  .button-container {
+      flex-direction: column; /* Coloca los botones en columna */
+      gap: 5px; /* Reduce el espacio entre los botones */
+  }
+
+  .footer {
+      flex-direction: column; /* Coloca las columnas del footer en una columna */
+      align-items: center; /* Centra las columnas en la pantalla */
+      padding: 15px 0; /* Ajusta el padding del footer */
+  }
+
+  .footer-column {
+      min-width: 100%; /* Asegura que las columnas del footer ocupen todo el ancho */
+      margin-bottom: 15px; /* Añade espacio entre las columnas */
+      align-items: center; /* Centra el contenido de las columnas */
+      font-size: 14px; /* Reduce el tamaño de la fuente en el footer */
+  }
+
+  .footer .social-media a {
+      font-size: 14px; /* Ajusta el tamaño de la fuente en los enlaces de redes sociales */
+  }
+
+  .footer .social-media a img {
+      width: 20px; /* Ajusta el tamaño de los íconos de redes sociales */
+      height: 20px; /* Ajusta el tamaño de los íconos de redes sociales */
+  }
+
+  .footer-column .mi-div {
+      font-size: 16px; /* Ajusta el tamaño de la fuente de los encabezados en el footer */
+  }
+
+  .footer a {
+      margin: 5px 0; /* Ajusta el margen de los enlaces en el footer */
+  }
+
+  .footer-column .img {
+      height: 50px; /* Reduce el tamaño de las imágenes en el footer */
+  }
 }
-
-
-
