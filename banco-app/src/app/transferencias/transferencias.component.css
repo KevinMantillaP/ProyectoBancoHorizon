@@ -403,3 +403,142 @@ body, html {
   background-color: #999;
 }
 
+/* Media Queries para pantallas con ancho máximo de 450px */
+@media (max-width: 450px) {
+  /* Ajustes generales */
+  body, html {
+      font-size: 14px; /* Reduce el tamaño de fuente global */
+  }
+
+  .header {
+      width: calc(100% - 150px); /* Ajusta el ancho del header para pantallas pequeñas */
+      margin-left: 120px; /* Alinea el header con el nuevo tamaño de la barra lateral */
+      padding: 10px; /* Reduce el padding del header */
+  }
+
+  .header h2 {
+      font-size: 18px; /* Reduce el tamaño del título */
+  }
+
+  .user-profile {
+      width: 30px; /* Reduce el tamaño del perfil de usuario */
+      height: 30px; /* Reduce la altura del perfil de usuario */
+      font-size: 14px; /* Reduce el tamaño del ícono */
+  }
+
+  .content {
+      margin-left: 120px; /* Deja espacio para la barra lateral más estrecha */
+      padding: 15px; /* Reduce el padding del contenido */
+      max-width: calc(100% - 120px); /* Ajusta el ancho del contenido */
+  }
+
+  .sidebar {
+      width: 120px; /* Reduce el ancho de la barra lateral */
+      padding: 10px; /* Reduce el padding de la barra lateral */
+  }
+
+  .logo img {
+      width: 100px; /* Reduce el tamaño del logo en la barra lateral */
+      margin-top: 5px; /* Ajusta el margen superior del logo */
+  }
+
+  .sidebar button {
+      font-size: 12px; /* Reduce el tamaño de la fuente de los botones */
+      padding: 8px; /* Reduce el padding de los botones */
+  }
+
+  .sidebar button i {
+      margin-right: 5px; /* Ajusta el margen de los íconos en los botones */
+  }
+
+  .container {
+      width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+      padding: 15px; /* Reduce el padding dentro del contenedor */
+      margin: 10px auto; /* Ajusta los márgenes superior e inferior */
+      max-width: 100%; /* Asegura que el contenedor no se desborde */
+  }
+
+  .container h2 {
+      font-size: 20px; /* Reduce el tamaño de la fuente en el título */
+  }
+
+  .container form label {
+      font-size: 14px; /* Ajusta el tamaño de la fuente en los labels */
+  }
+
+  .form-group {
+      margin-bottom: 15px; /* Reduce el margen inferior entre los grupos de formularios */
+  }
+
+  .container form select,
+  .container form input[type="text"],
+  .container form input[type="number"],
+  .container form textarea {
+      width: 90%; /* Ajusta el ancho de los inputs y textarea */
+      font-size: 14px; /* Reduce el tamaño de la fuente en los inputs */
+      padding: 8px; /* Ajusta el padding dentro de los inputs */
+  }
+
+  .container .input-group {
+      flex-direction: column; /* Coloca los elementos de la input group en columna */
+  }
+
+  .container .input-group input {
+      border-radius: 5px; /* Asegura que los bordes de los inputs sean redondeados */
+      margin-bottom: 10px; /* Añade espacio entre el input y el botón de búsqueda */
+  }
+
+  .container .input-group .btn-search {
+      width: 90%; /* Asegura que el botón de búsqueda ocupe todo el ancho disponible */
+      padding: 10px; /* Ajusta el padding del botón de búsqueda */
+  }
+
+  .button-container {
+      flex-direction: column; /* Coloca los botones en columna */
+      width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+      margin-top: 15px; /* Ajusta el margen superior de la sección de botones */
+  }
+
+  .button-container .btn-primary, 
+  .button-container .btn-secondary {
+      width: 90%; /* Asegura que los botones ocupen todo el ancho disponible */
+      margin-bottom: 10px; /* Añade espacio entre los botones */
+      font-size: 16px; /* Ajusta el tamaño de la fuente de los botones */
+  }
+
+  .ventana-confirmacion {
+      padding: 20px; /* Reduce el padding de la ventana de confirmación */
+      width: 80%; /* Asegura que la ventana de confirmación ocupe la mayor parte del ancho disponible */
+  }
+
+  .ventana-confirmacion h2 {
+      font-size: 20px; /* Reduce el tamaño de la fuente del título en la confirmación */
+      margin-bottom: 15px; /* Ajusta el margen inferior */
+  }
+
+  .ventana-confirmacion p {
+      font-size: 14px; /* Ajusta el tamaño de la fuente en los párrafos */
+      margin: 5px 0; /* Ajusta los márgenes entre los párrafos */
+  }
+
+  .ventana-confirmacion input[type="text"] {
+      width: 90%; /* Asegura que el input ocupe el 90% del ancho disponible */
+      font-size: 14px; /* Ajusta el tamaño de la fuente del input */
+  }
+
+  .ventana-confirmacion .button-container {
+      flex-direction: column; /* Coloca los botones en columna */
+      width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+      margin-top: 15px; /* Ajusta el margen superior de la sección de botones */
+  }
+
+  .ventana-confirmacion .button-container button {
+      width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+      font-size: 16px; /* Ajusta el tamaño de la fuente de los botones */
+      margin-bottom: 10px; /* Añade espacio entre los botones */
+  }
+
+  .ventana-confirmacion .button-container .btn-secondary {
+      background-color: #ccc; /* Mantiene el color de fondo secundario */
+  }
+}

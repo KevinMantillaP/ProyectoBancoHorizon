@@ -288,6 +288,7 @@ body, html {
 @media (max-width: 450px) {
   .sidebar {
     width: 120px; /* Reduce el ancho de la barra lateral */
+    padding: 10px;
   }
 
   .header {
@@ -303,7 +304,7 @@ body, html {
   }
 
   .sidebar button {
-    font-size: 10px; /* Reduce el tamaño de la fuente de los botones en la barra lateral */
+    font-size: 12px; /* Reduce el tamaño de la fuente de los botones en la barra lateral */
     padding: 8px 4px; /* Reduce el padding de los botones */
   }
 
