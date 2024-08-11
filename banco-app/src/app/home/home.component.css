@@ -412,3 +412,61 @@ margin-bottom: 10px;
     text-align: center;
   }
 }
+@media (max-width: 450px) {
+  .header .logo img {
+    width: 134px;
+    height: 100%; /* Ajusta para mantener la proporción */
+    justify-content: left;
+  }
+
+  .buttons-container {
+    display: flex; /* Asegura que los botones estén alineados en una sola línea */
+    flex-wrap: nowrap; /* Evita que los botones se envuelvan en varias líneas */
+    justify-content: center; /* Centra los botones dentro del contenedor */
+  }
+
+  .buttons-container button {
+    font-size: 15px; /* Ajusta el tamaño del texto en los botones */
+    padding: 6px 10px; /* Ajusta el espacio interno (padding) de los botones */
+    margin: 4px; /* Añade un margen entre los botones */
+  }
+
+  .carousel img {
+    height: auto; /* Ajusta la altura para mantener la proporción */
+    width: 100%;
+  }
+
+  .service-card,
+  .branch-details {
+    padding: 10px;
+  }
+
+  .footer {
+    font-size: 14px;
+  }
+
+  .chatbot-toggle {
+    bottom: 20px;
+    right: 20px;
+    padding: 8px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .reason,
+  .service-card,
+  .branch {
+    flex: 1 1 100%;
+  }
+
+  .reason,
+  .branch-details {
+    text-align: center;
+  }
+
+  .buttons-container button {
+    margin-bottom: 10px;
+  }
+}
+

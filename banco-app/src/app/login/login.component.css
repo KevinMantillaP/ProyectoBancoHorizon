@@ -146,5 +146,130 @@ input {
 .alert-danger {
   background-color: #f44336; /* Red */
 }
+@media (max-width: 768px) {
+  .header .logo img {
+    width: 200px; /* Ajusta el tamaño del logo para pantallas más pequeñas */
+    height: auto; /* Mantiene la proporción del logo */
+    margin-left: 200px; /* Centra el logo horizontalmente */
+    margin-right: 800px; /* Centra el logo horizontalmente */
+    display: block; /* Asegura que el logo esté en su propia línea */
+  }
 
+  .button-container {
+    flex-direction: column; /* Apila los botones verticalmente */
+    align-items: center; /* Centra los botones horizontalmente */
+  }
 
+  .button-container button {
+    width: 100%; /* Ajusta el ancho de los botones para que ocupen el 100% del contenedor */
+    max-width: 200px; /* Ajusta el ancho máximo de los botones */
+    font-size: 14px; /* Ajusta el tamaño de la fuente */
+    padding: 8px; /* Ajusta el padding */
+    margin: 5px 0; /* Añade margen vertical entre los botones */
+  }
+
+  .forgot-credentials {
+    flex-direction: column; /* Apila los botones verticalmente */
+    align-items: center; /* Centra los botones horizontalmente */
+  }
+
+  .forgot-credentials button {
+    width: 100%; /* Ajusta el ancho de los botones para que ocupen el 100% del contenedor */
+    max-width: 200px; /* Ajusta el ancho máximo de los botones */
+    font-size: 14px; /* Ajusta el tamaño de la fuente */
+    padding: 8px; /* Ajusta el padding */
+    margin: 5px 0; /* Añade margen vertical entre los botones */
+  }
+}
+@media (max-width: 450px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    padding: 30px; /* Ajusta el padding para dar espacio */
+  }
+
+  .header .logo img {
+    width: 120px; /* Reduce el tamaño del logo */
+    height: auto; /* Mantiene la proporción del logo */
+  }
+
+  .content {
+    padding: 10px; /* Reduce el padding en el contenedor de contenido */
+  }
+
+  .form-group {
+    margin-bottom: 10px; /* Reduce el margen inferior entre los grupos de formulario */
+    width: 200px; /* Asegura que el grupo de formulario ocupe el ancho completo del contenedor */
+  }
+
+  .form-group label {
+    font-size: 14px; /* Reduce el tamaño del texto de la etiqueta */
+    margin-bottom: 5px; /* Reduce el margen inferior de la etiqueta */
+  }
+
+  .form-group input {
+    width: 100%; /* Asegura que el campo de entrada ocupe el ancho completo del grupo de formulario */
+    padding: 8px; /* Ajusta el padding del campo de entrada para hacerlo más pequeño */
+    font-size: 14px; /* Reduce el tamaño de la fuente en el campo de entrada */
+    border-radius: 4px; /* Ajusta el radio de borde para hacerlo más pequeño */
+  }
+
+  .form-captcha {
+    display: flex;
+    justify-content: center; /* Centra el CAPTCHA horizontalmente */
+    margin-bottom: 20px; /* Ajusta el margen inferior para dar espacio */
+    padding: 0 10px; /* Añade un poco de padding para evitar que el CAPTCHA toque los bordes */
+  }
+
+  .form-captcha > .g-recaptcha {
+    transform: scale(0.7); /* Reduce el tamaño del CAPTCHA al 70% */
+    transform-origin: 0 0; /* Ajusta el origen de la transformación para mantener la alineación */
+    width: 100%; /* Asegura que el CAPTCHA ocupe el ancho completo del contenedor */
+    height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+    margin-top: 10px; /* Ajusta el margen superior si es necesario */
+  }
+
+  .forgot-credentials {
+    display: flex; /* Usa flexbox para alinear los botones */
+    flex-direction: column; /* Coloca los botones en una columna (uno encima del otro) */
+    align-items: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espacio entre los botones */
+    width: 100%; /* Asegura que el contenedor de botones ocupe el ancho completo del contenedor padre */
+  }
+
+  .forgot-credentials button {
+    width: 100%; /* Ajusta el ancho de los botones para que ocupen el 100% del contenedor */
+    max-width: 180px; /* Ajusta el ancho máximo de los botones */
+    font-size: 14px; /* Ajusta el tamaño de la fuente en los botones */
+    padding: 8px; /* Ajusta el padding en los botones */
+    margin: 5px 0; /* Añade margen vertical entre los botones */
+  }
+
+  .alert {
+    font-size: 14px; /* Ajusta el tamaño de la fuente en las alertas */
+    padding: 8px; /* Ajusta el padding en las alertas */
+  }
+}
+
+@media (max-width: 576px) {
+  .reason,
+  .service-card,
+  .branch {
+    flex: 1 1 100%; /* Asegura que los elementos ocupen el 100% del ancho del contenedor */
+  }
+
+  .reason,
+  .branch-details {
+    text-align: center; /* Centra el texto dentro de los contenedores */
+  }
+
+  .button-container button,
+  .forgot-credentials button {
+    width: 100%; /* Ajusta el ancho de los botones para que ocupen el 100% del contenedor */
+    max-width: 180px; /* Ajusta el ancho máximo de los botones */
+    font-size: 12px; /* Ajusta el tamaño de la fuente */
+    padding: 6px; /* Ajusta el padding */
+    margin-bottom: 10px; /* Añade margen inferior entre los botones */
+  }
+}
