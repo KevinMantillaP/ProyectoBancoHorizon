@@ -16,21 +16,39 @@
   <div class="carousel">
     <div class="carousel-container">
       <div class="carousel-slide">
-        <img src="assets/img/Banner1.1.jpg" alt="Slide 1">
+        <img src="assets/img/loan.png" alt="Slide 1">
+        <div class="carousel-text">
+          <h1>¡Un precio bajo y fijo para siempre!</h1>
+          <p>Descubre nuestras opciones de asegurar tus bienes y protege a tu familia con tarifas competitivas.</p>
+        </div>
+      
       </div>
       <div class="carousel-slide">
-        <img src="assets/img/Banner2.2.jpg" alt="Slide 2">
+        <img src="assets/img/ahorro.png" alt="Slide 2">
+        <div class="carousel-text">
+          <h1>¡Estudia sin preocupaciones!</h1>
+          <p>Financia tu educación con nuestros préstamos estudiantiles a tasas accesibles.</p>
+        </div>
       </div>
       <div class="carousel-slide">
-        <img src="assets/img/Banner3.3.jpg" alt="Slide 3">
+        <img src="assets/img/inversion.png" alt="Slide 3">
+        <div class="carousel-text">
+          <h1>¡Impulsa tu negocio hoy mismo!</h1>
+          <p>Impulsa tu negocio con nuestros préstamos para pequeñas y medianas empresas. Financiación rápida y sencilla para que tu negocio alcance nuevas alturas.</p>
+        </div>
       </div>
     </div>
-    <button class="carousel-button prev" (click)="prevSlide()">&#10094;</button>
-    <button class="carousel-button next" (click)="nextSlide()">&#10095;</button>
+    <div class="carousel-indicators">
+    <!--<button class="carousel-button prev" (click)="prevSlide()">&#10094;</button>
+    <button class="carousel-button next" (click)="nextSlide()">&#10095;</button>-->
+    <span class="carousel-indicator" (click)="goToSlide(0)" [class.active]="currentSlide === 0"></span>
+    <span class="carousel-indicator" (click)="goToSlide(1)" [class.active]="currentSlide === 1"></span>
+    <span class="carousel-indicator" (click)="goToSlide(2)" [class.active]="currentSlide === 2"></span>
+  </div>
   </div>
   
   <div class="why-choose-us">
-    <h2>¿Porqué Elegirnos?</h2>
+    <h2>¿Por Qué Elegirnos?</h2>
     <div class="reasons">
       <div class="reason">
         <img src="assets/img/img1.jpg" width="300" height="200" alt="Reason 1">
@@ -47,28 +65,30 @@
     </div>
   </div>
   <!-- Servicios Section -->
+   <div class="servicio">
+  <h2>Nuestros Servicios</h2></div>
   <div class="services">
-    <h2>Nuestros Servicios</h2>
+    
     <div class="service-cards">
       <div class="service-card">
         <img src="assets/img/vivienda.png" alt="Préstamo vivienda">
-        <h3>Préstamo vivienda</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam convallis semper lacus, placerat accumsan arcu tempus id. Donec interdum vitae.</p>
+        <h3>Préstamos Hipotecarios</h3>
+        <p>Obtén el hogar de tus sueños con nuestros préstamos hipotecarios a tasas competitivas. Financia tu casa con planes de pago flexibles y asesoramiento personalizado.</p>
       </div>
       <div class="service-card">
         <img src="assets/img/dinero2.png" alt="Ahorro flexible">
         <h3>Ahorro flexible</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam convallis semper lacus, placerat accumsan arcu tempus id. Donec interdum vitae.</p>
+        <p>Ahorra a tu propio ritmo con nuestras cuentas de ahorro flexible. Disfruta de tasas de interés atractivas y acceso fácil a tu dinero cuando lo necesites.</p>
       </div>
       <div class="service-card">
         <img src="assets/img/prestamo2.png" alt="Préstamo">
-        <h3>Préstamo</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam convallis semper lacus, placerat accumsan arcu tempus id. Donec interdum vitae.</p>
+        <h3>Préstamos sin Garantes</h3>
+        <p>Accede a préstamos rápidos y sencillos sin necesidad de garantes. Soluciones financieras adaptadas a tus necesidades con aprobación inmediata</p>
       </div>
       <div class="service-card">
         <img src="assets/img/inversion2.png" alt="Inversiones">
         <h3>Inversiones</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam convallis semper lacus, placerat accumsan arcu tempus id. Donec interdum vitae.</p>
+        <p>Invierte en tu futuro con nuestras opciones de inversión. Diversifica tu portafolio y maximiza tus rendimientos con asesoramiento experto.</p>
       </div>
     </div>
   </div>
@@ -79,23 +99,23 @@
     <div class="branch">
       <img src="assets/img/sucursal1.jpg" alt="Sucursal ABCDEFG">
       <div class="branch-details">
-        <h3>Sucursal ABCDEFG</h3>
+        <h3>Sucursal 12 de Octubre</h3>
         <p><strong>Dirección:</strong> Av. Ladrón de Guevara E11-253, Quito</p>
         <p><strong>Horarios:</strong></p>
         <ul>
-          <li>Lunes: 7am - 6pm</li>
-          <li>Martes: 7am - 6pm</li>
-          <li>Miércoles: 7am - 6pm</li>
-          <li>Jueves: 7am - 6pm</li>
-          <li>Viernes: 7am - 6pm</li>
+          <li>Lunes: 8am - 5pm</li>
+          <li>Martes: 8am - 5pm</li>
+          <li>Miércoles: 8am - 5pm</li>
+          <li>Jueves: 8am - 5pm</li>
+          <li>Viernes: 8am - 5pm</li>
         </ul>
       </div>
     </div>
     <div class="branch">
       <img src="assets/img/sucursal2.jpg" alt="Sucursal ABCDEFG">
       <div class="branch-details">
-        <h3>Sucursal ABCDEFG</h3>
-        <p><strong>Dirección:</strong> Av. Ladrón de Guevara E11-253, Quito</p>
+        <h3>Sucursal Amazonas</h3>
+        <p><strong>Dirección:</strong> Av. Amazonas y Naciones Unidas, Quito</p>
         <p><strong>Horarios:</strong></p>
         <ul>
           <li>Lunes: 7am - 6pm</li>
@@ -103,21 +123,22 @@
           <li>Miércoles: 7am - 6pm</li>
           <li>Jueves: 7am - 6pm</li>
           <li>Viernes: 7am - 6pm</li>
+          <li>Sábado: 9am - 1pm</li>
         </ul>
       </div>
     </div>
     <div class="branch">
       <img src="assets/img/sucursal3.jpg" alt="Sucursal ABCDEFG">
       <div class="branch-details">
-        <h3>Sucursal ABCDEFG</h3>
-        <p><strong>Dirección:</strong> Av. Ladrón de Guevara E11-253, Quito</p>
+        <h3>Sucursal Benalcázar</h3>
+        <p><strong>Dirección:</strong> Av. 6 de Diciembre y Portugal, Quito</p>
         <p><strong>Horarios:</strong></p>
         <ul>
-          <li>Lunes: 7am - 6pm</li>
-          <li>Martes: 7am - 6pm</li>
-          <li>Miércoles: 7am - 6pm</li>
-          <li>Jueves: 7am - 6pm</li>
-          <li>Viernes: 7am - 6pm</li>
+          <li>Lunes: 8am - 5pm</li>
+          <li>Martes: 8am - 5pm</li>
+          <li>Miércoles: 8am - 5pm</li>
+          <li>Jueves: 8am - 5pm</li>
+          <li>Viernes: 8am - 5pm</li>
         </ul>
       </div>
     </div>
@@ -128,6 +149,8 @@
   </button>
   <app-chatbot *ngIf="showChatbot" (close)="closeChatbot()"></app-chatbot>
   
+
+
   <div class="footer">
     <div class="footer-column">
       <img src="assets/sello1.png" width="250"  alt="icon">

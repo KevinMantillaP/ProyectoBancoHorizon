@@ -223,7 +223,6 @@ margin-bottom: 10px;
   text-decoration: underline;
 }
 
-
 /* Media queries para adaptabilidad */
 @media (max-width: 768px) {
   .header h2 {

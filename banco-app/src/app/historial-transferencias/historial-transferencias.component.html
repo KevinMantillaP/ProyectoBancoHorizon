@@ -1,12 +1,22 @@
 <div class="header">
-  <h2>Horizon Bank</h2>
+  <div class="logo">
+    <!--<h1>Horizon Bank</h1>-->
+    <img src="assets/sello1.png" alt="icon">
+  </div>
+</div>
+
+<div class="sidebar-wrapper">
+  <div #sidebar class="sidebar">
+    <button (click)="redirectTo('/')">Cerrar Sesión</button>
+    <button (click)="redirectTo('visualizacion-saldo')">Visualización de Saldo</button>
+    <button (click)="redirectTo('cambio-contraseña')">Cambiar Contraseña</button>
+    <button (click)="redirectTo('crear-cuenta')">Crear Cuenta</button>
+    <button (click)="redirectTo('transferencia')">Transferencia</button>
+  </div>
 </div>
 <div class="content">
   <div class="container">
     <h2>Historial de Transferencias</h2>
-    <div class="button-container">
-      <button class="regresar-button" (click)="regresar()">Regresar</button>
-    </div>
     <div class="filters-container">
       <label>Filtrar por Tipo:</label>
       <select [(ngModel)]="filtroTipo" (change)="filtrarPorTipo(filtroTipo)">
@@ -17,8 +27,11 @@
       <label>Seleccionar Rango de Fechas:</label>
       <input type="date" [(ngModel)]="fechaInicio" (ngModelChange)="filtrarPorFechas()">
       <input type="date" [(ngModel)]="fechaFin" (ngModelChange)="filtrarPorFechas()">
-      <button *ngIf="fechaInicio || fechaFin" (click)="filtrarPorFechas()">Aplicar Filtro</button>
-      <button *ngIf="fechaInicio || fechaFin" (click)="fechaInicio = fechaFin = ''; filtrarPorFechas()">Quitar Filtro</button>
+      
+      <div class="button-group">
+      <button *ngIf="fechaInicio || fechaFin" (click)="filtrarPorFechas()" class="boton">Aplicar Filtro</button>
+      <button *ngIf="fechaInicio || fechaFin" (click)="fechaInicio = fechaFin = ''; filtrarPorFechas()" class="boton">Quitar Filtro</button>
+    </div>
     </div>
     <div *ngIf="transferenciasFiltradas.length === 0">
       <p>No hay transferencias para mostrar.</p>
@@ -33,33 +46,5 @@
         </div>
       </li>
     </ul>
-  </div>
-</div>
-<div class="footer">
-  <div class="footer-column">
-    <div>Horizon Bank</div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Ayuda y Contacto</div>
-    <div>+593999999999</div>
-    <div>
-      <a href="#">Facebook</a>
-    </div>
-    <div>
-      <a href="#">Instagram</a>
-    </div>
-    <div>
-      <a href="#">LinkedIn</a>
-    </div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Sobre Nosotros</div>
-    <div>Quienes Somos</div>
-    <div>Trabaja con Nosotros</div>
-    <div>Transparencia</div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Mas Servicios</div>
-    <div>Transacciones en Linea</div>
   </div>
 </div>

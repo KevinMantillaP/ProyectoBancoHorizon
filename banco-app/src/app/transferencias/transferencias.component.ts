@@ -10,6 +10,7 @@ import moment from 'moment';
 import 'moment-timezone';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../services/autenticacion.service';
 
 @Component({
   selector: 'app-transferencias',
@@ -36,6 +37,7 @@ export class TransferenciasComponent implements OnInit {
   codigoIngresado: string = ''; // Campo para el código ingresado por el usuario
 
   constructor(
+    private authService: AuthService,
     private transferenciaService: TransferenciaService,
     private usuarioService: UsuarioService,
     private emailService: EmailService,
@@ -223,7 +225,13 @@ export class TransferenciasComponent implements OnInit {
     return 'TRF-' + Math.random().toString(36).substr(2, 9).toUpperCase();
   }
 
-  redirectToVisualizarSaldo(): void {
-    this.router.navigate(['/visualizacion-saldo']);
+
+  redirectTo(route: string): void {
+    if (this.cedula) {
+      this.comparticionParametrosService.setCedula(this.cedula);
+      this.router.navigate([route]);
+    } else {
+      console.error('Cedula no proporcionada');
+    }
   }
 }

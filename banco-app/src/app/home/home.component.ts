@@ -39,6 +39,11 @@ export class HomeComponent implements OnInit {
     this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
     this.updateSlide();
   }
+  //OJO
+  goToSlide(slideIndex: number) {
+    this.currentSlide = slideIndex;
+    this.updateSlide();
+  }
 
   updateSlide() {
     if (isPlatformBrowser(this.platformId)) {
