@@ -75,6 +75,7 @@ export const actualizarSaldoCuenta = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
+
 export const getClienteByNumeroCuenta = async (req: Request, res: Response) => {
   const { numeroCuenta } = req.params;
   try {
@@ -97,5 +98,40 @@ export const getClienteByNumeroCuenta = async (req: Request, res: Response) => {
     res.json(response);
   } catch (err: any) {
     res.status(500).json({ message: err.message });
+  }
+};
+
+export const actualizarSaldo = async (req: Request, res: Response) => {
+  const { cedula, monto } = req.body;
+
+  try {
+    const cuenta = await Cuenta.findOne({ cedula });
+    if (!cuenta) {
+      return res.status(404).json({ message: 'Cuenta no encontrada' });
+    }
+
+    cuenta.saldo += monto;
+    await cuenta.save();
+
+    res.json({ message: 'Saldo actualizado correctamente', saldo: cuenta.saldo });
+  } catch (error) {
+    console.error('Error al actualizar saldo:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
+export const obtenerSaldo = async (req: Request, res: Response) => {
+  const { cedula } = req.params;
+
+  try {
+    const cuenta = await Cuenta.findOne({ cedula });
+    if (!cuenta) {
+      return res.status(404).json({ message: 'Cuenta no encontrada' });
+    }
+
+    res.json({ saldo: cuenta.saldo });
+  } catch (error) {
+    console.error('Error al obtener saldo:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
   }
 };

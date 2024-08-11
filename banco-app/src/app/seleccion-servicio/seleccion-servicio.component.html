@@ -1,0 +1,16 @@
+<h1>Seleccionar Servicio</h1>
+
+<div>
+  <button (click)="seleccionarServicio('Agua')">Agua</button>
+  <button (click)="seleccionarServicio('Luz')">Luz</button>
+  <button (click)="seleccionarServicio('Internet')">Internet</button>
+</div>
+
+<button (click)="redirectTo('visualizacion-saldo')">Regresar</button>
+
+<div *ngIf="servicioSeleccionado">
+  <p>Servicio: {{ servicioSeleccionado }}</p>
+  <p>Valor: {{ valorFactura }}</p>
+  <p>Estado: {{ estado }}</p>
+  <button *ngIf="estado === 'Por pagar'" (click)="pagarConPayPal()">Pagar con PayPal</button>
+</div>

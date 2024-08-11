@@ -35,6 +35,9 @@ export class HistorialTransferenciasComponent implements OnInit {
   ngOnInit(): void {
     this.numeroCuenta = this.comparticionParametrosService.getNumeroCuenta();
     this.cedula = this.comparticionParametrosService.getCedula();
+
+    console.log('Número de cuenta recuperado:', this.numeroCuenta);
+
     if (this.numeroCuenta) {
       this.obtenerTransferencias();
     } else {
@@ -49,16 +52,39 @@ export class HistorialTransferenciasComponent implements OnInit {
 
   obtenerTransferencias(): void {
     if (this.numeroCuenta) {
-      this.usuarioService.getTransferenciasByNumeroCuenta(this.numeroCuenta).subscribe(data => {
-        this.transferencias = data.map(transferencia => ({
-          ...transferencia,
-          tipo: transferencia.cuentaDestino === this.numeroCuenta ? 'ingreso' : 'egreso'
-        })).sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
+        this.usuarioService.getTransferenciasByNumeroCuenta(this.numeroCuenta).subscribe(transferenciasData => {
+            const transferencias = transferenciasData.map(transferencia => ({
+                ...transferencia,
+                tipo: transferencia.cuentaDestino === this.numeroCuenta ? 'ingreso' : 'egreso',
+                numeroCuenta: transferencia.numeroCuenta || this.numeroCuenta  // Asegura que siempre haya un numeroCuenta
+            })).sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
 
-        this.transferenciasFiltradas = [...this.transferencias];
-      });
+            // Ahora obtener las transacciones de servicios desde la colección Transaccion
+            this.usuarioService.getTransaccionesByNumeroCuenta(this.numeroCuenta!).subscribe(transaccionesData => {
+              const transacciones = transaccionesData.map((transaccion: any) => {
+                console.log('Transacción recibida:', transaccion); // Verifica que la transacción tenga el numeroCuenta
+                return {
+                    ...transaccion,
+                    tipo: 'egreso',
+                    numeroCuenta: transaccion.numeroCuenta || this.numeroCuenta,
+                    descripcion: `Pago de ${transaccion.detalles?.servicio || 'servicio'}`
+                };
+            });
+
+                // Combina ambas listas de transferencias y transacciones
+                this.transferencias = [...transferencias, ...transacciones].sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
+
+                this.transferenciasFiltradas = [...this.transferencias];
+            });
+        });
+    } else {
+        console.error('Número de cuenta no proporcionado');
     }
-  }
+}
+
+  
+  
+  
 
   filtrarPorTipo(tipo: string): void {
     if (tipo === 'todos') {

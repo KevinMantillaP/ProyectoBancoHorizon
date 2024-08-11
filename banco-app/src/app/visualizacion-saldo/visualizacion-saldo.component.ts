@@ -99,4 +99,13 @@ export class VisualizacionSaldoComponent implements OnInit {
       console.error('No se pudo redirigir al historial de transferencias. Verifica que la cuenta seleccionada y la cédula estén disponibles.');
     }
   }
+
+  redirectToPayPal(): void {
+    if (this.cedula) {
+      this.comparticionParametrosService.setCedula(this.cedula);
+      this.router.navigate(['/paypal']);
+    } else {
+      console.error('Cedula no proporcionada');
+    }
+  }
 }

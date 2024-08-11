@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getCuentas, crearCuenta, verificarNumeroCuenta, actualizarSaldoCuenta, getClienteByNumeroCuenta  } from '../controllers/cuentaController';
+import { getCuentas, crearCuenta, verificarNumeroCuenta, actualizarSaldoCuenta, getClienteByNumeroCuenta, actualizarSaldo, obtenerSaldo  } from '../controllers/cuentaController';
 
 const router = Router();
 
@@ -8,5 +8,7 @@ router.post('/crear-cuenta', crearCuenta);
 router.get('/verificar-numero-cuenta/:numeroCuenta', verificarNumeroCuenta);
 router.put('/actualizar-saldo-cuenta', actualizarSaldoCuenta);
 router.get('/cuentas/cliente/:numeroCuenta', getClienteByNumeroCuenta);
+router.post('/actualizarSaldo', actualizarSaldo);
+router.get('/saldo/:cedula', obtenerSaldo);
 
 export default router;

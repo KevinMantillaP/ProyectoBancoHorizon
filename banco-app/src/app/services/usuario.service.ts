@@ -145,6 +145,42 @@ export class UsuarioService {
     );
   }
 
+  registrarTransaccion(transaccion: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/transacciones`, transaccion);
+  }
+
+  getTransaccionesByNumeroCuenta(numeroCuenta: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/transacciones/${numeroCuenta}`);
+  }  
+  
+  verificarPagoServicio(numeroCuenta: string, servicio: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/verificar-pago-servicio/${numeroCuenta}/${servicio}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+  
+  getFacturasPorCedula(cedula: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/facturas/${cedula}`);
+  }
+
+  crearFactura(factura: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/crear-factura`, factura);
+  }
+
+  pagarFactura(idFactura: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/pagar-factura/${idFactura}`, {});
+  }
+
+  getFacturaPorServicioYUsuario(cedula: string, servicio: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/facturas/${cedula}/${servicio}`);
+  }
+  
+  actualizarEstadoFactura(facturaActualizada: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/facturas/actualizar-estado`, facturaActualizada).pipe(
+        catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido!';
     if (error.error instanceof ErrorEvent) {

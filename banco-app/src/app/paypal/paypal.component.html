@@ -1,0 +1,25 @@
+<div>
+    <h1>Pago con PayPal</h1>
+    
+    <label for="cuenta">Seleccione una cuenta:</label>
+    <select id="cuenta" [(ngModel)]="selectedAccount" (change)="onAccountChange($event)">
+      <option *ngFor="let cuenta of cuentas" [value]="cuenta.numeroCuenta">
+        {{ cuenta.numeroCuenta }} - {{ cuenta.saldo | currency }}
+      </option>
+    </select>
+    
+    <p>Valor de la factura: {{ valorFactura | currency }}</p>
+    
+    
+
+    <div *ngIf="estado === 'Pagado'">
+      <p style="color: green;">Este servicio ya ha sido pagado el {{ fechaPago | date:'longDate' }} por un monto de {{ valorFactura | currency }}.</p>
+    </div>
+    
+    <div *ngIf="estado === 'Por pagar'">
+      <p>Estado: {{ estado }}</p>
+      <div id="paypal-button-container"></div>
+    </div>
+    <button (click)="redirectTo('seleccion-servicio')">Regresar</button>
+  </div>
+  

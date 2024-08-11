@@ -8,6 +8,7 @@ import loginAdministradorRoutes from './loginAdministradorRoutes';
 import auditoriaRoutes from './auditoriaRoutes';
 import emailRoutes from './emailRoutes';
 import dialogflowRoutes from './dialogflowRoutes';
+import paypalRoutes from './paypalRoutes'
 
 const router = Router();
 
@@ -20,5 +21,6 @@ router.use(loginAdministradorRoutes);
 router.use(auditoriaRoutes);
 router.use(emailRoutes);
 router.use(dialogflowRoutes);
+router.use(paypalRoutes)
 
 export default router;

@@ -16,6 +16,8 @@ import { DesbloquearCuentaComponent } from './desbloquear-cuenta/desbloquear-cue
 import { EnvioUsuarioRecuperacionUsuarioComponent } from './envio-usuario-recuperacion-usuario/envio-usuario-recuperacion-usuario.component';
 import { IngresarCorreoRecuperacionUsuarioComponent } from './ingresar-correo-recuperacion-usuario/ingresar-correo-recuperacion-usuario.component';
 import { ComprobanteTransaccionComponent } from './comprobante-transaccion/comprobante-transaccion.component';
+import { PaypalComponent } from './paypal/paypal.component';
+import { SeleccionServicioComponent } from './seleccion-servicio/seleccion-servicio.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -36,5 +38,7 @@ export const routes: Routes = [
     { path: 'Correo-recuperacion-usuario', component: EnvioUsuarioRecuperacionUsuarioComponent},
     { path: 'recuperacion-usuario', component: IngresarCorreoRecuperacionUsuarioComponent},
     { path: 'comprobante-transaccion', component: ComprobanteTransaccionComponent },
+    { path: 'paypal', component: PaypalComponent},
+    { path: 'seleccion-servicio', component: SeleccionServicioComponent}
 ];
 
