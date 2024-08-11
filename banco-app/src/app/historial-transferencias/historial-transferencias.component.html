@@ -28,7 +28,14 @@
         <div>
           <p>Fecha: {{ transferencia.fecha | date }}</p>
           <p>Monto: {{ transferencia.monto | currency }}</p>
-          <p>Cuenta: {{ transferencia.tipo === 'ingreso' ? transferencia.numeroCuenta : transferencia.cuentaDestino }}</p>
+          
+          <!-- Mostrar número de cuenta solo para pagos de servicios -->
+          <p *ngIf="transferencia.descripcion.includes('Pago de servicio')">Cuenta: {{ transferencia.numeroCuenta }}</p>
+
+          <!-- Mostrar tanto la cuenta como el destino para transferencias regulares -->
+          <p *ngIf="!transferencia.descripcion.includes('Pago de servicio')">Cuenta origen: {{ transferencia.numeroCuenta }}</p>
+          <p *ngIf="!transferencia.descripcion.includes('Pago de servicio')">Cuenta destino: {{ transferencia.cuentaDestino }}</p>
+
           <p>Descripción: {{ transferencia.descripcion }}</p>
         </div>
       </li>

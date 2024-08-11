@@ -12,6 +12,8 @@ export class ComparticionParametrosService {
   private from: string | null = null;
   private formData: any = null;
   private transferenciaData: any = {};
+  private valorFactura: number = 0;
+  private servicioSeleccionado: string | null = null;
 
   setTransferenciaData(data: any): void {
     this.transferenciaData = data;
@@ -79,5 +81,21 @@ export class ComparticionParametrosService {
 
   clearFormData(): void {
     this.formData = null;
+  }
+
+  setValorFactura(valor: number): void {
+    this.valorFactura = valor;
+  }
+
+  getValorFactura(): number {
+    return this.valorFactura;
+  }
+
+  setServicioSeleccionado(servicio: string): void {
+    this.servicioSeleccionado = servicio;
+  }
+  
+  getServicioSeleccionado(): string | null {
+    return this.servicioSeleccionado;
   }
 }

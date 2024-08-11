@@ -11,6 +11,8 @@ import auditoriaRoutes from './routes/auditoriaRoutes';
 import cuentaRoutes from './routes/cuentaRoutes';
 import emailRoutes from './routes/emailRoutes';
 import dialogflowRoutes from './routes/dialogflowRoutes';
+import paypalRoutes from './routes/paypalRoutes';
+import facturaRoutes from './routes/facturaRoutes';
 
 dotenv.config();
 const app = express();
@@ -43,5 +45,7 @@ app.use('/api', auditoriaRoutes);
 app.use('/api', cuentaRoutes);
 app.use('/api/email', emailRoutes);
 app.use('/api', dialogflowRoutes);
+app.use('/api/paypal', paypalRoutes);
+app.use('/api', facturaRoutes);
 
 export default app;

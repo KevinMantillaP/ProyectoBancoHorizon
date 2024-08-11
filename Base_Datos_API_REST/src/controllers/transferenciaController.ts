@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import Transferencia, { ITransferencia } from '../models/Transferencia';
 import Cuenta from '../models/Cuenta';
+import Transaccion from '../models/Transaccion';
+import moment from 'moment';
 
 // Obtener todas las transferencias
 export const getTransferencias = async (req: Request, res: Response) => {
@@ -25,7 +27,7 @@ export const crearTransferencia = async (req: Request, res: Response) => {
     numeroCuenta: req.body.numeroCuenta,
     saldoRestante: req.body.saldoRestante,
     descripcion: req.body.descripcion
-  });
+  }); 
 
   try {
     const transferenciaGuardada = await nuevaTransferencia.save();
@@ -82,6 +84,38 @@ export const getTransferenciasByCuenta = async (req: Request, res: Response) => 
     transferencias.sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
 
     res.json(transferencias);
+  } catch (err: any) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const registrarTransaccion = async (req: Request, res: Response) => {
+  const { cedula, numeroCuenta, tipo, monto, fecha, detalles } = req.body;
+
+  try {
+      const nuevaTransaccion = new Transaccion({
+          cedula,
+          numeroCuenta,
+          tipo,
+          monto,
+          fecha,
+          detalles
+      });
+
+      const transaccionGuardada = await nuevaTransaccion.save();
+      console.log('Transacción guardada en la base de datos:', transaccionGuardada);
+      res.status(201).json(transaccionGuardada);
+  } catch (error) {
+      console.error('Error al registrar la transacción:', error);
+      res.status(500).json({ message: 'Error al registrar la transacción', error });
+  }
+};
+
+export const getTransaccionesByCuenta = async (req: Request, res: Response) => {
+  const { numeroCuenta } = req.params;
+  try {
+    const transacciones = await Transaccion.find({ numeroCuenta });
+    res.json(transacciones);
   } catch (err: any) {
     res.status(500).json({ message: err.message });
   }

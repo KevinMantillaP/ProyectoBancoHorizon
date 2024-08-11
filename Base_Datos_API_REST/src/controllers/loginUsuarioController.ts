@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import axios from 'axios';
 import LoginUsuario, { ILoginUsuario } from '../models/LoginUsuario';
 import Cliente from '../models/Cliente';
+import { generarFacturasSiNoExisten } from './facturaController';
 
 const MAX_INTENTOS_FALLIDOS = 3;
 // Obtener todos los login de usuarios
@@ -113,6 +114,14 @@ export const loginUsuario = async (req: Request, res: Response) => {
     // Reiniciar intentos fallidos en caso de éxito
     usuario.intentosFallidos = 0;
     await usuario.save();
+
+    // Generar facturas si no existen
+    try {
+      await generarFacturasSiNoExisten(usuario.cedula);
+    } catch (facturaError) {
+      console.error('Error al generar facturas:', (facturaError as Error).message);
+      return res.status(500).json({ message: 'Error al generar facturas' });
+    }
 
     return res.status(200).json({ message: 'Inicio de sesión exitoso', cedula: usuario.cedula });
   } catch (error) {
