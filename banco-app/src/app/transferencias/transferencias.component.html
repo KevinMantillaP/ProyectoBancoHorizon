@@ -1,15 +1,27 @@
-<header class="header">
-  <div class="logo">
-    <!--<h1>Horizon Bank</h1>-->
-    <img src="assets/sello1.png" alt="icon">
+<div class="header">
+  <div class="user-profile">
+    <i class="fas fa-user"></i>
   </div>
-</header>
+  <div class="titulo">
+    <h2>Transferencias</h2>
+  </div>
+</div>
 <div class="content" [class.blurred]="mostrarConfirmacion">
+  <div class="sidebar"> 
+    <div class="logo">
+      <img src="assets/logo3.png" alt="icon">
+    </div>
+    <button (click)="redirectTo('cambio-contraseña')"><i class="fas fa-key"></i> Cambio Contraseña</button>
+    <button (click)="redirectTo('crear-cuenta')"><i class="fas fa-plus"></i> Agregar Cuenta</button>
+    <button (click)="redirectTo('visualizacion-saldo')"><i class="fas fa-eye"></i> Visualización de Saldo</button>
+    <button (click)="redirectToHistorialTransferencias()"><i class="fas fa-history"></i> Historial de Transferencias</button>
+    <button (click)="redirectTo('seleccion-servicio')"><i class="fas fa-money-bill-wave"></i> Pagar Servicios</button>
+    <button (click)="redirectTo('/')"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+  </div>
   <div class="container">
-    <h1>Transferencias</h1>
     <form (submit)="confirmarTransferencia()">
       <!-- Cuenta Origen Field -->
-      <div>
+      <div class="form-group">
         <label for="cuentaOrigen">Cuenta Origen</label>
         <select id="cuentaOrigen" [(ngModel)]="cuentaOrigen" name="cuentaOrigen" (change)="onCuentaOrigenChange()" required>
           <option *ngFor="let cuenta of cuentas" [ngValue]="cuenta.numeroCuenta">{{ cuenta.numeroCuenta }}</option>
@@ -17,41 +29,44 @@
         <small *ngIf="!cuentaOrigen">Selecciona una cuenta origen</small>
       </div>
       <!-- Saldo de la cuenta Origen -->
-      <div *ngIf="cuentaOrigen">
+      <div class="form-group" *ngIf="cuentaOrigen">
         <label>Saldo de la cuenta origen: {{ saldoCuentaOrigen | currency }}</label>
       </div>
       <!-- Cuenta Destino Field -->
-      <div>
+      <div class="form-group">
         <label for="cuentaDestino">Cuenta Destino</label>
-        <input id="cuentaDestino" type="text" [(ngModel)]="cuentaDestino" name="cuentaDestino" (blur)="buscarTitularCuentaDestino()" placeholder="Número de cuenta destino" required>
-        <button type="button" (click)="buscarTitularCuentaDestino()" aria-label="Buscar cuenta">
-          <mat-icon>search</mat-icon> <!-- Utiliza un ícono de búsqueda -->
-        </button>
+        <div class="input-group">
+          <input id="cuentaDestino" type="text" [(ngModel)]="cuentaDestino" name="cuentaDestino" (blur)="buscarTitularCuentaDestino()" placeholder="Número de cuenta destino" required>
+          <button type="button" (click)="buscarTitularCuentaDestino()" aria-label="Buscar cuenta" class="btn-search">
+            <i class="fas fa-search"></i> <!-- Utiliza un ícono de búsqueda -->
+          </button>
+        </div>
         <div *ngIf="nombreTitular && apellidoTitular">
-          <p><strong>La cuenta pertenece a: {{ nombreTitular }} {{ apellidoTitular }}</strong></p>
+          <p class="account-owner"><strong>La cuenta pertenece a: {{ nombreTitular }} {{ apellidoTitular }}</strong></p>
         </div>
         <small *ngIf="!cuentaDestino">Ingresa un número de cuenta destino</small>
       </div>
       <!-- Monto Field -->
-      <div>
+      <div class="form-group">
         <label for="monto">Monto</label>
         <input id="monto" type="number" [(ngModel)]="monto" name="monto" placeholder="Monto" min="1" required>
         <small *ngIf="!monto || monto <= 0">Ingresa un monto válido a transferir</small>
       </div>
       <!-- Descripción Field -->
-      <div>
+      <div class="form-group">
         <label for="descripcion">Descripción</label>
         <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3" placeholder="Pago Luz, etc."></textarea>
         <small *ngIf="descripcion.trim() === ''">Obligatorio</small>
       </div>
       <!-- Submit Button -->
       <div class="button-container">
-        <button (click)="redirectToVisualizarSaldo()">Regresar</button>
-        <button type="submit" [disabled]="isProcessing">Confirmar Transferencia</button>
+        <button (click)="redirectToVisualizarSaldo()" class="btn-secondary">Regresar</button>
+        <button type="submit" [disabled]="isProcessing" class="btn-primary">Confirmar Transferencia</button>
       </div>
     </form>
   </div>
 </div>
+
 <!-- Confirmación -->
 <div class="overlay" *ngIf="mostrarConfirmacion">
   <div class="ventana-confirmacion">
@@ -64,47 +79,7 @@
       <label for="codigoVerificacion">Código de Verificación: </label>
       <input id="codigoVerificacion" type="text" [(ngModel)]="codigoIngresado" name="codigoVerificacion" placeholder="Ingresa el código de verificación" required>
     </div>
-    <button (click)="realizarTransferencia()" [disabled]="isProcessing">Confirmar</button>
     <button (click)="cancelarConfirmacion()">Cancelar</button>
-  </div>
-</div>
-
-<div class="footer">
-  <div class="footer-column">
-    <img src="assets/sello1.png" width="250"  alt="icon">
-  </div>
-  <div class="footer-column">
-
-    <div class="mi-div">Contacto y Ayuda</div>
-    <div class="social-media">
-    <a href="#" target="_blank">
-      <img src="assets/social/telefono.png" alt="LinkedIn">
-      (02) 2999000</a>
-      <a href="#" target="_blank">
-        <img src="assets/social/celular.png" alt="LinkedIn">
-        (+593) 987654321</a>
-  </div>
-   <div class="social-media" >                 
-   <a href="" target="_blank">
-    <img src="assets/social/facebook.png" alt="Facebook"> Facebook</a>
-    <a href="" target="_blank">
-      <img src="assets/social/instagram.png" alt="Instagram">
-      Instagram
-    </a>
-    <a href="#" target="_blank">
-      <img src="assets/social/linkedin.png" alt="LinkedIn">
-      LinkedIn
-    </a>
-    </div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Sobre Nosotros</div>
-    <div>¿Quienes Somos?</div>
-    <div>Trabaja con Nosotros</div>
-    <div>Trasparencia</div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Más Servicios</div>
-    <div>Políticas de Privacidad</div>
+    <button (click)="realizarTransferencia()" [disabled]="isProcessing">Confirmar</button>
   </div>
 </div>
