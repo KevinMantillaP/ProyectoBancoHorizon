@@ -234,4 +234,8 @@ export class TransferenciasComponent implements OnInit {
       console.error('Cedula no proporcionada');
     }
   }
+
+  redirectToVisualizarSaldo(): void {
+    this.router.navigate(['/visualizacion-saldo']);
+  }
 }

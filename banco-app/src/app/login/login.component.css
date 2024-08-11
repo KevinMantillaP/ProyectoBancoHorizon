@@ -1,69 +1,138 @@
-/* Estilos generales */
 body {
   font-family: Arial, sans-serif;
-  background-color: #8ADBE5; /* Fondo azul claro */
+  background-color: #f0f0f0;
   margin: 0;
   padding: 0;
-}
-
-/* Estilo del contenedor de la cabecera */
-.header .logo {
-  flex-grow: 1;
   display: flex;
-  justify-content: center;
-  align-items: center; /* Centrar verticalmente el contenido */
-}
-.logo img{
-  height: 400px;
-  width: auto;
-  margin-right: 10px;
-  margin-bottom: 20px;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Centra el contenido horizontalmente */
   align-items: center;
-  background-color: #29AECC;
-  padding:  40px;
-  position: static;
+  /* height: 100vh; */
+}
+
+.background-image-wrapper {
+  position: absolute;
   top: 0;
-  z-index: 1000;
-  height: 55px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* Asegura que la imagen esté detrás del content-wrapper */
 }
 
-.header h2 {
-  margin: 0;
-  padding: 10px;
+.background-image {
+  width: 55%; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsión */
 }
 
-/* Estilo del contenedor de inicio de sesión */
+.content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #7ADBEF; /* Color azul más oscuro */
+  clip-path: polygon(45% 0%, 100% 0%, 100% 100%, 55% 100%);
+  z-index: -1; /* Asegura que el contenido esté por encima */
+}
+
 .content {
-  flex: 1 0 auto;
-  padding: 20px;
-  background: #99f1fd;
-  display: flex; 
+  position: relative;
+  z-index: 1; /* Asegura que esté encima del content-wrapper */
+  padding: 14px;
+  max-width: 500px;
+  background-color: #7ADBEF; /* Color celeste */
+  margin-left: auto; /* Empuja hacia la derecha */
+  margin-right: 45px; /* Centra horizontalmente */
+  transform: translateX(0); /* Elimina el desplazamiento adicional */
+}
+
+.header .logo img {
+  width: 300px; /* Ajusta el tamaño del logo según sea necesario */
+  margin-top: 10px;
+  margin-left: 840px;
 }
 
 .container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  margin-bottom: 20px; /* Añadir espacio para el footer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.container h2 {
+h2 {
+  color: #ffffff;
   text-align: center;
-  color: #1A61A0;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+label {
+  color: #ffffff;
+  margin-bottom: 5px;
+  margin-right: 200px;
+  margin-left: 88px;
+}
+
+input {
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #EBEBEB;
+  text-align: center;
+  margin-left: 88px;
 }
 
 .form-captcha {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.button-container button {
+  width: 150px;
+  padding: 10px;
+  background-color: #2a78bc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #288fea;
+}
+
+.forgot-credentials button {
+  width: 140px;
+  padding: 10px 20px;
+  background-color: #7ADBEF;
+  font-family: 'Magdelin Alt Text';
+  font-size: 16px;
+  border: 3px solid #ffffff;
+  color: white;
+  border-radius: 7px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.forgot-credentials button:hover {
+  background-color: #ffffff;
+  color: #7ADBEF;
 }
 
 .alert {
@@ -78,198 +147,4 @@ body {
   background-color: #f44336; /* Red */
 }
 
-form div {
-  margin-bottom: 15px;
-  text-align: left;
-}
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #1A61A0;
-  /* width: 110px; */
-  margin-left: 110px;
-}
-
-input {
-  /* width: 300px; */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #EBEBEB;
-  text-align: center;
-  margin: 0 auto;
-  display: block;
-}
-
-.container .login{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.button-container {
-  display: flex;
-  justify-content: center; /* Centra horizontalmente los botones */
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.button-container button {
-  width: 150px;
-  padding: 10px;
-  background-color: #1A61A0;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  margin:5px;
-  position: sticky;
-}
-
-.button-container button:hover {
-  background-color: #29AECC;
-}
-
-.container .forgot-credentials {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-}
-
-.container .forgot-credentials button {
-  color: #29AECC; /* Texto azul oscuro */
-  text-decoration: none;
-  border: 3px solid #29AECC;
-  font-weight: bold;
-  background-color: white;
-  padding: 10px;  
-  border-radius: 10px;
-  width: 150px;
-}
-
-.container .forgot-credentials button:hover {
-  background-color: #29AECC;
-  color: white;
-}
-
- /* Footer styling */
- .footer {
-  background-color: #29AECC;
-  color: #fff;
-  padding: 10px 0;
-  text-align: center;
-  width: 100%;
-  flex-shrink: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: flex-start;
-  overflow: hidden;
-  margin-bottom: 0;
-  font-family: 'Magdelin Alt Regular';
-  font-size:  20px;
-  
-}
-.footer-column {
-  padding:  0;
-  min-width: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  margin: 0px;
-  font-family: 'Magdelin Alt Regular';
-  font-size:  20px;
- /* Alinea el contenido de cada columna a la izquierda */
-}
-.footer-column .img{
-height: 70px;
-margin-bottom: 0;
-transform: translateY(-10px); 
-
-}
-.social-media {
-margin-top: 10px;
-}
-.footer .social-media a {
-display: flex;
-align-items: center;
-margin: 5px 0;
-color: white;
-text-decoration: none;
-font-family: 'Magdelin Alt Regular';
-  font-size:  20px;
-}
-.footer .social-media a img {
-width: 24px; /* Ajusta el tamaño de los íconos */
-height: 24px;
-margin-right: 10px;
-object-fit: contain;
-
-}
-.footer-column .mi-div {
-margin-left: 20px; /* Ajusta el valor según sea necesario */
-margin-bottom: 10px;
-  font-weight: bold;
-}
-.footer a {
-  color: #F7F4E7;
-  text-decoration: none;
-  margin: 0 10px;
-}
-.footer a:hover {
-  text-decoration: underline;
-}
-
-/* Media queries para adaptabilidad */
-@media (max-width: 768px) {
-  .header h2 {
-    font-size: 1.5em;
-  }
-
-  .container {
-    width: 95%;
-    padding: 15px;
-  }
-
-  label{
-    margin-left: 105px;
-  }
-
-  /* .button-container button, .container .forgot-credentials button {
-    flex: 1 0 100%;
-  } */
-}
-
-@media (max-width: 480px) {
-  .header {
-    height: 60px;
-    padding: 5px 0;
-  }
-
-  .header h2 {
-    font-size: 1.2em;
-    padding: 5px;
-  }
-
-  .footer {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer-column {
-    width: 100%;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer a {
-    margin: 5px 0;
-  }
-
-  label{
-    margin-left: 15px;
-  }
-}

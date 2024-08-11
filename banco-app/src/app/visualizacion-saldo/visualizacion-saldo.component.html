@@ -1,27 +1,31 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <div class="header">
-  <div class="logo">
-    <!--<h1>Horizon Bank</h1>-->
-    <img src="assets/sello1.png" alt="icon">
+  <div class="user-profile">
+    <i class="fas fa-user"></i>
+  </div>
+  <div class="welcome">
+    <h2>¡Bienvenido&#64;, {{ nombreCliente }}!</h2>
   </div>
 </div>
 
 <div class="main-container">
-  <div class="sidebar">
-    <h3></h3>
-    <button (click)="redirectTo('/')">Cerrar Sesión</button>
-    <button (click)="redirectTo('cambio-contraseña')">Cambio Contraseña</button>
-    <button (click)="redirectTo('crear-cuenta')">Agregar Cuenta</button>
-    <button (click)="redirectTo('transferencia')">Transferencia</button>
-    <button (click)="redirectToHistorialTransferencias()">Historial de Transferencias</button>
-    <button (click)="redirectTo('seleccion-servicio')">Pagar Servicios</button>
-  </div>
-  <div class="content">
-    <div class="welcome">
-      <h2>¡Bienvenido&#64;, {{ nombreCliente }}!</h2>
+  <div class="sidebar"> 
+    <div class="logo">
+      <img src="assets/logo3.png" alt="icon">
     </div>
-    <hr class="separator">
+    <button (click)="redirectTo('cambio-contraseña')"><i class="fas fa-key"></i> Cambio Contraseña</button>
+    <button (click)="redirectTo('crear-cuenta')"><i class="fas fa-plus"></i> Agregar Cuenta</button>
+    <button (click)="redirectTo('transferencia')"><i class="fas fa-exchange-alt"></i> Transferencia</button>
+    <button (click)="redirectToHistorialTransferencias()"><i class="fas fa-history"></i> Historial de Transferencias</button>
+    <button (click)="redirectTo('seleccion-servicio')"><i class="fas fa-money-bill-wave"></i> Pagar Servicios</button>
+    <button (click)="redirectTo('/')"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+  </div>
+  
+  <div class="content">
+    <h3>Cuentas</h3>
+    
     <div class="container">
       <div class="account-info">
         <div class="account-details-wrapper" *ngIf="selectedAccount">
@@ -54,44 +58,20 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="footer">
-  <div class="footer-column">
-    <img src="assets/sello1.png" width="250"  alt="icon">
-  </div>
-  <div class="footer-column">
 
-    <div class="mi-div">Contacto y Ayuda</div>
-    <div class="social-media">
-    <a href="#" target="_blank">
-      <img src="assets/social/telefono.png" alt="LinkedIn">
-      (02) 2999000</a>
-      <a href="#" target="_blank">
-        <img src="assets/social/celular.png" alt="LinkedIn">
-        (+593) 987654321</a>
-  </div>
-   <div class="social-media" >                 
-   <a href="" target="_blank">
-    <img src="assets/social/facebook.png" alt="Facebook"> Facebook</a>
-    <a href="" target="_blank">
-      <img src="assets/social/instagram.png" alt="Instagram">
-      Instagram
-    </a>
-    <a href="#" target="_blank">
-      <img src="assets/social/linkedin.png" alt="LinkedIn">
-      LinkedIn
-    </a>
+    <hr class="separator">
+    <h3>Conversor</h3>
+    <div class="currency-converter">
+      <label for="amount">Cantidad:</label>
+      <input type="number" id="amount" placeholder="Ingresa la cantidad">
+      <label for="currency">Moneda:</label>
+      <select id="currency">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+      </select>
+      <button onclick="convertCurrency()">Convertir</button>
+      <p id="result"></p>
     </div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Sobre Nosotros</div>
-    <div>¿Quienes Somos?</div>
-    <div>Trabaja con Nosotros</div>
-    <div>Trasparencia</div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Más Servicios</div>
-    <div>Políticas de Privacidad</div>
   </div>
 </div>

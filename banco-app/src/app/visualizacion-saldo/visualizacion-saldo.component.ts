@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/autenticacion.service';
 import { ComparticionParametrosService } from '../services/comparticion-parametros.service';
@@ -9,17 +9,21 @@ import { ComparticionParametrosService } from '../services/comparticion-parametr
 @Component({
   selector: 'app-visualizacion-saldo',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './visualizacion-saldo.component.html',
   styleUrls: ['./visualizacion-saldo.component.css']
 })
 export class VisualizacionSaldoComponent implements OnInit {
   nombreCliente: string = '';
+  nombreClienteIniciales: string = '';
   cuentas: any[] = [];
   cedula: string | null = null;
   selectedAccount: any = null;
   showAccounts: boolean = false;
   mostrarSaldo: boolean = false; // Inicialmente, el saldo no se muestra
+  amount: number = 0;
+  currency: string = 'USD';
+  result: string = '';
 
   constructor(
     private usuarioService: UsuarioService,
@@ -49,6 +53,25 @@ export class VisualizacionSaldoComponent implements OnInit {
     } else {
       console.error('No se pudo obtener la cédula del usuario autenticado');
     }
+  }
+
+  getIniciales(nombre: string): string {
+    return nombre.split(' ').map(n => n[0]).join('').toUpperCase();
+  }
+
+  convertCurrency(): void {
+    let rate = 0;
+
+    if (this.currency === "EUR") {
+      rate = 0.85; // Tipo de cambio ejemplo
+    } else if (this.currency === "GBP") {
+      rate = 0.75; // Tipo de cambio ejemplo
+    } else {
+      rate = 1; // USD
+    }
+
+    const resultValue = this.amount * rate;
+    this.result = `Resultado: ${resultValue.toFixed(2)} ${this.currency}`;
   }
 
   toggleAccounts(): void {

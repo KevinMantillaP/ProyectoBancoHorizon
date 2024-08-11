@@ -15,55 +15,50 @@ body {
 
 /* Header */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #29AECC;
-    padding:  20px;
-    position: static;
-    top: 0;
-    z-index: 1000;
-    height: 55px;
-}
-.left-items {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: 20%; /* Ajustar según necesidad */
-  /* Añadir estilo adicional si es necesario */
+  background-color: white; /* Cambiar el fondo a blanco */
+  padding: 20px;
+  border-bottom: 8px solid #2cb5d3; /* Línea azul en la parte inferior */
+  position: static;
+  top: 0;
+  z-index: 1000;
+  height: 55px;
+  padding: 30px;
 }
+
 .header .logo {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Centrar verticalmente el contenido */
+  margin-left: 20px; /* Mueve el logo un poco hacia la derecha */
 }
-.logo img{
-  height: 300px;
+
+.logo img {
+  height: 200px; /* Ajusta la altura del logo */
   width: auto;
-  margin-right: 10px;
-  margin-bottom: 20px;
 }
+
 .buttons-container {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
+  margin-right: 20px; /* Mueve los botones un poco hacia la izquierda */
 }
+
 .buttons-container button {
-    background-color: #29AECC;
-    color: white;
-    font-family: 'Magdelin Alt Text';
-    border: 3px solid white;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
+  background-color: white; /* Fondo blanco inicial */
+  color: #2cb5d3; /* Texto azul */
+  font-family: 'Magdelin Alt Text';
+  border: 3px solid #2cb5d3; /* Borde azul */
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para color de fondo y texto */
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .buttons-container button:hover {
-    background-color: white;
-    color: #00AEEF;
-    font-weight: bold;
+  background-color: #2cb5d3; /* Fondo azul al pasar el mouse */
+  color: white; /* Texto blanco */
 }
 
 /* Ensure buttons have no outline when focused */
@@ -192,6 +187,12 @@ body {
 }
 
 /* Servicios Section */
+.servicio h2 {
+    color: #29AECC;
+    margin-bottom: 40px;
+    font-weight: bold;
+    text-align: center;
+}
 .services {
     text-align: center;
     padding: 50px 20px;
@@ -325,7 +326,7 @@ body {
   
   /* Footer styling */
  .footer {
-  background-color: #29AECC;
+  background-color: #2cb5d3;
   color: #fff;
   padding: 10px 0;
   text-align: center;

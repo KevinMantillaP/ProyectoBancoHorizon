@@ -106,7 +106,7 @@ export class LoginComponent {
 
   private handleLoginError(error: any) {
     if (error.status === 401) {
-      this.errorMessage = 'Contraseña incorrecta. Verifica tus datos e intenta nuevamente.';
+      this.errorMessage = 'Contraseña incorrecta. Intenta nuevamente.';
     } else if (error.status === 404) {
       this.errorMessage = 'Usuario no encontrado';
     } else if (error.status === 403) {

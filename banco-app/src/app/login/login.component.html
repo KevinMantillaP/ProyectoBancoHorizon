@@ -1,75 +1,41 @@
-<div class="header">
-  <div class="logo">
-    <!--<h1>Horizon Bank</h1>-->
-    <img src="assets/sello1.png" alt="icon">
-  </div>
+<div class="background-image-wrapper">
+  <img src="assets/banco.png" alt="Descripción de la imagen" class="background-image">
 </div>
-<div class="content">
-  <div class="container">
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
-    </div>
-    <h2>Ingreso</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="nombreUsuario">Usuario</label>
-        <input id="nombreUsuario" formControlName="nombreUsuario" type="text">
-      </div>
-      <div class="form-group">
-        <label for="contraseña">Contraseña</label>
-        <input id="contraseña" formControlName="contraseña" type="password">
-      </div>
-      <div class="form-captcha">
-        <re-captcha #captchaRef (resolved)="resolved($event)" siteKey="{{ reCaptchaSiteKey }}"></re-captcha>
-      </div>
-      <div class="button-container">
-        <button type="button" (click)="redirectTo('')">Regresar</button>
-        <button type="submit" [disabled]="isProcessing ">Ingresar</button> 
-      </div>
-      <div class="forgot-credentials">
-        <button type="button" (click)="redirectTo('recuperar-contraseña')">¿Olvidaste tu contraseña?</button>
-        <button type="button" (click)="redirectTo('Correo-recuperacion-usuario')">¿Olvidaste tu usuario?</button>
-        <button type="button" (click)="redirectTo('desbloquear-cuenta')">¿Cuenta bloqueada?</button>
-      </div>
-    </form>
-  </div>
-</div>
-<div class="footer">
-  <div class="footer-column">
-    <img src="assets/sello1.png" width="250"  alt="icon">
-  </div>
-  <div class="footer-column">
-
-    <div class="mi-div">Contacto y Ayuda</div>
-    <div class="social-media">
-    <a href="#" target="_blank">
-      <img src="assets/social/telefono.png" alt="LinkedIn">
-      (02) 2999000</a>
-      <a href="#" target="_blank">
-        <img src="assets/social/celular.png" alt="LinkedIn">
-        (+593) 987654321</a>
-  </div>
-   <div class="social-media" >                 
-   <a href="" target="_blank">
-    <img src="assets/social/facebook.png" alt="Facebook"> Facebook</a>
-    <a href="" target="_blank">
-      <img src="assets/social/instagram.png" alt="Instagram">
-      Instagram
-    </a>
-    <a href="#" target="_blank">
-      <img src="assets/social/linkedin.png" alt="LinkedIn">
-      LinkedIn
-    </a>
+<div class="content-wrapper"></div>
+<div class="login-container">
+  <div class="header">
+    <div class="logo">
+      <img src="assets/logo3.1.png" alt="Horizon Bank Logo">
     </div>
   </div>
-  <div class="footer-column">
-    <div class="mi-div">Sobre Nosotros</div>
-    <div>¿Quienes Somos?</div>
-    <div>Trabaja con Nosotros</div>
-    <div>Trasparencia</div>
-  </div>
-  <div class="footer-column">
-    <div class="mi-div">Más Servicios</div>
-    <div>Políticas de Privacidad</div>
+  <div class="content">
+    <div class="container">
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+      <h2>Bienvenido</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nombreUsuario">Usuario</label>
+          <input id="nombreUsuario" formControlName="nombreUsuario" type="text">
+        </div>
+        <div class="form-group">
+          <label for="contraseña">Contraseña</label>
+          <input id="contraseña" formControlName="contraseña" type="password">
+        </div>
+        <div class="form-captcha">
+          <re-captcha #captchaRef (resolved)="resolved($event)" siteKey="{{ reCaptchaSiteKey }}"></re-captcha>
+        </div>
+        <div class="button-container">
+          <button type="button" (click)="redirectTo('')">Regresar</button>
+          <button type="submit" [disabled]="isProcessing">Ingresar</button>
+        </div>
+        <div class="forgot-credentials">
+          <button type="button" (click)="redirectTo('recuperar-contraseña')">¿Olvidaste tu contraseña?</button>
+          <button type="button" (click)="redirectTo('Correo-recuperacion-usuario')">¿Olvidaste tu usuario?</button>
+          <button type="button" (click)="redirectTo('desbloquear-cuenta')">¿Cuenta bloqueada?</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
