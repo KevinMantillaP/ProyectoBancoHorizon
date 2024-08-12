@@ -295,6 +295,7 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: calc(100vh - 75px);
 }
 
 .container {
@@ -307,6 +308,7 @@ label {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
     margin-bottom: 20px;
+    min-height: calc(100vh - 75px);
 }
 
 .container p {
@@ -340,7 +342,7 @@ input {
 .button-container button {
     width: 30%;
     padding: 10px;
-    background-color: #1A61A0;
+    background-color: #37b6e9;
     color: #fff;
     border: none;
     border-radius: 5px;

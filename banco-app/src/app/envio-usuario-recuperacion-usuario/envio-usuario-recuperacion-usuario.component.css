@@ -297,7 +297,8 @@ width: auto;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: #F7F4E7;;
+  background: #F7F4E7;
+  min-height: calc(100vh - 75px);
 }
 
 .vcontainer {

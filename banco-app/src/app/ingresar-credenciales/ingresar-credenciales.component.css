@@ -6,42 +6,43 @@ body, html {
     padding: 0;
     height: 100%;
 }
-
-.header .logo {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centrar verticalmente el contenido */
-  }
-  .logo img{
-    height: 400px;
-    width: auto;
-    margin-right: 10px;
-    margin-bottom: 20px;
-  }
-  .header {
+/* Header */
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #29AECC;
-    padding:  40px;
+    background-color: white; /* Cambiar el fondo a blanco */
+    padding: 20px;
+    border-bottom: 8px solid #2cb5d3; /* Línea azul en la parte inferior */
     position: static;
     top: 0;
     z-index: 1000;
     height: 55px;
-}
+    padding: 30px;
+  }
+  
+  .header .logo {
+    margin-left: 20px; /* Mueve el logo un poco hacia la derecha */
+  }
+  
+  .logo img {
+    height: 200px; /* Ajusta la altura del logo */
+    width: auto;
+  }
   
 
 .content {
     flex: 1 0 auto;
     padding: 20px;
-    background: #99f1fd;
+    background: #F7F4E7;
     display: flex; 
+    min-height: calc(100vh - 75px);
 }
 
 .container {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
+    height: 90%;
     margin: 0 auto;
     background-color: white;
     padding: 20px;
@@ -84,7 +85,7 @@ input {
 .button-container button {
     width: 100%;
     padding: 10px;
-    background-color: #1A61A0;
+    background-color: #37b6e9;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -207,4 +208,89 @@ body {
     }
 }
 
+@media (max-width: 450px) {
+    /* Header */
+    .header {
+      flex-direction: column; /* Coloca los elementos del header en una columna */
+      padding: 15px; /* Reduce el padding */
+      text-align: center; /* Centra el contenido */
+    }
+  
+    .header .logo {
+      margin-left: 0; /* Centra el logo */
+      margin: -20px auto 10px auto;
+    }
+  
+    .logo img {
+      height: 120px; /* Reduce el tamaño del logo */
+    }
+  
+    /* Content */
+    .content {
+      padding: 10px; /* Reduce el padding del contenido */
+      flex-direction: column; /* Coloca los elementos del content en una columna */
+    }
+  
+    .container {
+      width: 90%; /* Asegura que el contenedor ocupe todo el ancho */
+      max-width: 100%; /* Evita que el contenedor sea más ancho que la pantalla */
+      padding: 15px; /* Reduce el padding dentro del contenedor */
+      margin-top: 15px; /* Reduce el margen superior */
+      margin-bottom: 15px; /* Reduce el margen inferior */
+      box-shadow: none; /* Elimina la sombra para un diseño más limpio */
+    }
+  
+    h1 {
+      font-size: 24px; /* Reduce el tamaño del texto del título */
+    }
+  
+    label {
+      font-size: 14px; /* Reduce el tamaño del texto de las etiquetas */
+    }
+  
+    input {
+      width: calc(100% - 10px); /* Ajusta el ancho del input */
+      padding: 8px; /* Reduce el padding del input */
+      font-size: 14px; /* Reduce el tamaño del texto del input */
+    }
+  
+    .button-container {
+      flex-direction: column; /* Coloca los botones en una columna */
+      gap: 5px; /* Reduce el espacio entre los botones */
+    }
+  
+    .button-container button {
+      font-size: 14px; /* Reduce el tamaño del texto del botón */
+      padding: 8px; /* Reduce el padding del botón */
+    }
+  
+    /* Footer */
+    .footer {
+      flex-direction: column; /* Coloca los elementos del footer en una columna */
+      padding: 10px; /* Ajusta el padding */
+      text-align: center; /* Centra el texto en el footer */
+    }
+  
+    .footer-column {
+      width: 100%; /* Asegura que las columnas del footer ocupen todo el ancho */
+      align-items: center; /* Centra los elementos dentro de cada columna */
+      margin-bottom: 10px; /* Ajusta el margen inferior entre las columnas */
+    }
+  
+    .footer .social-media a {
+      font-size: 16px; /* Reduce el tamaño de la fuente en los enlaces sociales */
+      margin: 5px 0; /* Ajusta el margen entre los enlaces */
+    }
+  
+    .footer .social-media a img {
+      width: 20px; /* Reduce el tamaño de los íconos sociales */
+      height: 20px;
+    }
+  
+    .footer-column .mi-div {
+      margin-left: 0; /* Elimina el margen izquierdo */
+      text-align: center; /* Centra el texto */
+    }
+  }
+  
 

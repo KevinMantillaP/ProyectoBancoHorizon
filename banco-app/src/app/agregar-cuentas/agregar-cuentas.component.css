@@ -178,7 +178,7 @@ h2 {
 .button-container .btn-primary {
   width: 48%;
   padding: 12px;
-  background-color: #1A61A0;
+  background-color: #37b6e9;
   color: #fff;
   border: none;
   border-radius: 25px;
@@ -219,7 +219,7 @@ h2 {
   }
 
   .sidebar button {
-    font-size: 10px; /* Reduce el tamaño de la fuente de los botones en la barra lateral */
+    font-size: 12px; /* Reduce el tamaño de la fuente de los botones en la barra lateral */
     padding: 8px 4px; /* Reduce el padding de los botones */
 }
 
