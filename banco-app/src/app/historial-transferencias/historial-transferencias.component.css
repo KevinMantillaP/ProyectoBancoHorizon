@@ -247,135 +247,106 @@ li p {
   min-height: 100vh;
 }
 
-@media (max-width: 768px) {
-  .header {
-    padding: 20px;
-  }
-
-  .header h2 {
-    font-size: 24px;
-  }
-
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    padding: 10px;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  .content {
-    margin-left: 0;
-    padding: 10px;
-    max-width: 100%;
-  }
-}
-
 @media (max-width: 450px) {
+  /* Sidebar */
   .sidebar {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .sidebar button {
-    font-size: 14px;
-    padding: 10px;
+    width: 120px; /* Reduce el ancho de la barra lateral */
+    height: 100vh; /* Asegura que la barra lateral ocupe toda la altura de la pantalla */
+    padding: 5px; /* Reduce el padding para adaptarse mejor */
+    position: fixed; /* Fija la barra lateral en su lugar */
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Añade scroll si el contenido de la barra lateral es demasiado largo */
   }
 
   .logo img {
-    width: 120px;
+    width: 120px; /* Reduce el ancho del logo */
+     /* Ajusta el margen superior si es necesario */
   }
 
-  .content {
-    padding: 8px;
+  /* Sidebar buttons */
+  .sidebar button {
+    font-size: 12px; /* Reduce el tamaño de la fuente de los botones en la barra lateral */
+    padding: 8px 5px; /* Reduce el padding de los botones */
+    text-align: left;
   }
 
-  .header h2 {
-    font-size: 20px;
+  .sidebar button i {
+    margin-right: 5px; /* Ajusta el margen del icono */
   }
 
-  .user-profile {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
+  /* Header */
   .header {
-    width: 100%;
-    margin-left: 0;
-    padding: 20px;
-    flex-direction: column;
+    width: calc(100% - 100px); /* Ajusta el ancho del header en función del nuevo tamaño de la barra lateral */
+    margin-left: 80px; /* Alinea el header con la barra lateral */
+    padding: 10px; /* Reduce el padding */
+    text-align: center;
   }
 
   .header h2 {
-    font-size: 24px;
+    font-size: 18px; /* Reduce el tamaño del título */
   }
 
   .user-profile {
-    position: relative;
-    top: 10px;
-    right: auto;
-    margin-bottom: 15px;
+    width: 30px; /* Reduce el tamaño del perfil de usuario */
+    height: 30px; /* Reduce el tamaño del perfil de usuario */
+    font-size: 14px; /* Reduce el tamaño del icono */
   }
 
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    padding: 10px;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  .sidebar button {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .logo img {
-    width: 150px;
-  }
-
+  /* Content */
   .content {
-    margin-left: 0;
-    padding: 10px;
-    max-width: 100%;
-    min-height: auto;
-    box-shadow: none;
-    border-radius: 0;
-  }
-}
-
-@media (max-width: 450px) {
-  .sidebar {
-    flex-direction: column;
-    align-items: center;
+    margin-left: 100px; /* Deja espacio para la barra lateral */
+    max-width: calc(100% - 100px); /* Ajusta el contenido para que no se desborde */
+    padding: 10px; /* Reduce el padding */
   }
 
-  .sidebar button {
-    font-size: 12px;
-    padding: 8px 5px;
+  /* Container */
+  .container {
+    padding: 17px; /* Reduce el padding dentro del contenedor */
+    margin: 25px auto; /* Ajusta el margen */
+    max-width: 80%; /* Asegura que el contenedor no se desborde */
+    width: 300px;
+    margin-left: auto; /* Automático para el margen izquierdo */
+    margin-right: 0; /* Margen derecho a 0 para que no haya espacio en la derecha */
   }
 
-  .logo img {
-    width: 120px;
+  /* Filtrar opciones */
+  .filters-container {
+    flex-direction: column; /* Cambia la dirección de los filtros a columna */
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    gap: 10px; /* Reduce el espacio entre los elementos */
+    max-width: 90%;
   }
 
-  .content {
-    padding: 8px;
+  .filters-container label {
+    font-size: 14px; /* Reduce el tamaño de la fuente de las etiquetas */
   }
 
-  .header h2 {
-    font-size: 20px;
+  .filters-container select,
+  .filters-container input {
+    width: 100%; /* Asegura que los inputs ocupen todo el ancho disponible */
+    font-size: 12px; /* Reduce el tamaño de la fuente de los inputs */
   }
 
-  .user-profile {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
+  /* Lista de transferencias */
+  ul {
+    padding: 0;
+    width: 100%; /* Asegura que la lista ocupe todo el ancho disponible */
+  }
+
+  li {
+    font-size: 14px; /* Reduce el tamaño de la fuente en la lista */
+    padding: 10px; /* Reduce el padding en los items de la lista */
+    margin-bottom: 10px; /* Reduce el margen inferior */
+  }
+
+  li p {
+    font-size: 14px; /* Ajusta el tamaño del texto */
+  }
+
+  /* Botones en los filtros */
+  .button-group .boton {
+    padding: 8px 10px; /* Ajusta el padding de los botones */
+    font-size: 14px; /* Ajusta el tamaño de la fuente */
   }
 }

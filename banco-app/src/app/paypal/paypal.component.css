@@ -187,4 +187,87 @@ button:hover {
 .paypal-button-container {
     margin-top: 20px;
 }
+@media (max-width: 450px) {
+    /* Sidebar */
+    .sidebar {
+        width: 150px; /* Reduce el ancho de la barra lateral */
+        padding: 10px; /* Reduce el padding para adaptarse mejor */
+    }
 
+    .logo img {
+        width: 120px; /* Reduce el ancho del logo */
+        margin-top: 5px; /* Ajusta el margen superior si es necesario */
+    }
+
+    /* Header */
+    .header {
+        width: calc(100% - 100px); /* Ajusta el ancho del header en función del nuevo tamaño de la barra lateral */
+        margin-left: 80px; /* Alinea el header con la barra lateral */
+        padding: 10px; /* Reduce el padding */
+        text-align: center;
+    }
+
+    .header h2 {
+        font-size: 18px; /* Reduce el tamaño del título */
+    }
+
+    .user-profile {
+        width: 30px; /* Reduce el tamaño del perfil de usuario */
+        height: 30px; /* Reduce el tamaño del perfil de usuario */
+        font-size: 14px; /* Reduce el tamaño del icono */
+    }
+
+    /* Content */
+    .content {
+        margin-left: 170px; /* Deja espacio para la barra lateral */
+        max-width: calc(100% - 90px); /* Ajusta el contenido para que no se desborde */
+        padding: 10px; /* Reduce el padding del contenido */
+    }
+
+    /* Container */
+    .container {
+        padding: 20px; /* Ajusta el padding dentro del contenedor */
+        margin: 20px auto; /* Ajusta el margen */
+        max-width: 90%; /* Asegura que el contenedor no se desborde */
+        width: auto; /* Ajusta el ancho del contenedor para pantallas pequeñas */
+    }
+
+    h2 {
+        font-size: 24px; /* Reduce el tamaño de la fuente del h2 */
+        margin-bottom: 15px; /* Ajusta el margen inferior */
+    }
+
+    label {
+        font-size: 16px; /* Reduce el tamaño de la fuente de las etiquetas */
+        margin-bottom: 8px; /* Ajusta el margen inferior */
+    }
+
+    select {
+        padding: 7px; /* Reduce el padding del select */
+        font-size: 14px; /* Reduce el tamaño de la fuente del select */
+        width: 90%;
+    }
+
+    p {
+        font-size: 16px; /* Reduce el tamaño de la fuente de los párrafos */
+    }
+
+    button {
+        width: 90%; /* Asegura que los botones ocupen todo el ancho disponible */
+        padding: 10px; /* Ajusta el padding */
+        font-size: 14px; /* Reduce el tamaño de la fuente de los botones */
+    }
+
+    /* Button container adjustments */
+    .button-container {
+        width: 50%;
+        margin-top: 10px; /* Ajusta el margen superior */
+        text-align: left; /* Alinea el contenido a la izquierda */
+        padding-left: 100px; /* Añade un padding a la izquierda para mover el botón */
+    }
+
+    /* PayPal button container */
+    .paypal-button-container {
+        margin-top: 8px; /* Ajusta el margen superior */
+    }
+}

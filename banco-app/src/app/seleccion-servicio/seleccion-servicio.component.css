@@ -142,7 +142,7 @@ h2 {
 }
 
 .services button {
-    background-color: #1A61A0;
+    background-color: #37b6e9;
     color: #fff;
     padding: 12px 24px;
     border: none;
@@ -257,5 +257,101 @@ h2 {
 
     .container div {
         width: 100%;
+    }
+}
+
+@media (max-width: 450px) {
+    /* Sidebar */
+    .sidebar {
+        width: 150px; /* Reduce el ancho de la barra lateral */
+        padding: 10px; /* Reduce el padding para adaptarse mejor */
+    }
+
+    .logo img {
+        width: 160px; /* Reduce el ancho del logo */
+        margin-top: 5px; /* Reduce el margen superior si es necesario */
+    }
+
+    /* Header */
+    .header {
+        width: calc(100% - 100px); /* Ajusta el ancho del header en función del nuevo tamaño de la barra lateral */
+        margin-left: 80px; /* Alinea el header con la barra lateral */
+        padding: 10px; /* Reduce el padding */
+        text-align: center;
+    }
+    
+    .header h2 {
+        font-size: 18px; /* Reduce el tamaño del título */
+    }
+
+    .user-profile {
+        width: 30px; /* Reduce el tamaño del perfil de usuario */
+        height: 30px; /* Reduce el tamaño del perfil de usuario */
+        font-size: 14px; /* Reduce el tamaño del icono */
+    }
+
+    /* Content */
+    .content {
+        margin-left: 100px; /* Deja espacio para la barra lateral */
+        max-width: calc(100% - 100px); /* Ajusta el contenido para que no se desborde */
+        padding: 10px; /* Reduce el padding del contenido */
+    }
+
+    /* Container */
+    .container {
+        padding: 15px; /* Reduce el padding dentro del contenedor */
+        margin: 30px auto; /* Reduce el margen superior */
+        max-width: 100%; /* Asegura que el contenedor no se desborde */
+    }
+
+    h1 {
+        margin-left: 63px;
+    }
+
+    /* Botones de selección de servicio */
+    .services {
+        flex-direction: column; /* Cambia la dirección a columna */
+        gap: 10px; /* Ajusta el espacio entre botones */
+    }
+
+    .services button {
+        width: 90%; /* Asegura que los botones ocupen todo el ancho disponible */
+        padding: 8px; /* Reduce el padding */
+        font-size: 14px; /* Reduce el tamaño de la fuente */
+        min-width: 90px; /* Mantiene un ancho mínimo para los botones */
+    }
+
+    /* Botón de regresar */
+    .button-container {
+        margin-top: 15px; /* Reduce el espacio superior */
+    }
+
+    .button-container button {
+        width: 90%; /* Asegura que el botón ocupe todo el ancho disponible */
+        padding: 8px; /* Reduce el padding */
+        font-size: 14px; /* Reduce el tamaño de la fuente */
+    }
+
+    /* Información del servicio */
+    .service-info {
+        height: auto; /* Permite que el contenedor se ajuste al contenido */
+        padding: 12px; /* Reduce el padding */
+        font-size: 14px; /* Reduce el tamaño de la fuente */
+        margin-left: 55px;
+        margin-top: 20px;
+        max-width: 90%; /* Asegura que no se desborde en pantallas pequeñas */
+        box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho */
+        overflow-y: auto; /* Permite el desplazamiento vertical si el contenido es demasiado grande */
+    }
+
+    .service-info p {
+        margin: 8px 0; /* Reduce el margen */
+    }
+
+    /* Botón de PayPal */
+    .paypal-button {
+        width: 90%; /* Asegura que el botón ocupe todo el ancho disponible */
+        padding: 8px; /* Reduce el padding */
+        font-size: 14px; /* Reduce el tamaño de la fuente */
     }
 }
