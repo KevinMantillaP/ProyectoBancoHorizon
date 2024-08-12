@@ -10,36 +10,37 @@ body, html {
 }
 
 /* Estilo del contenedor de la cabecera */
-.header .logo {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centrar verticalmente el contenido */
-  }
-  .logo img{
-    height: 400px;
-    width: auto;
-    margin-right: 10px;
-    margin-bottom: 20px;
-  }
-  .header {
+/* Header */
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #29AECC;
-    padding:  40px;
+    background-color: white; /* Cambiar el fondo a blanco */
+    padding: 20px;
+    border-bottom: 8px solid #2cb5d3; /* Línea azul en la parte inferior */
     position: static;
     top: 0;
     z-index: 1000;
     height: 55px;
+    padding: 30px;
   }
-
-.content {
-    flex: 1;
+  
+  .header .logo {
+    margin-left: 20px; /* Mueve el logo un poco hacia la derecha */
+  }
+  
+  .logo img {
+    height: 200px; /* Ajusta la altura del logo */
+    width: auto;
+  }
+  .content {
+    flex: 1; /* El contenedor debe llenar el espacio restante */
     padding: 20px;
-    background: #99f1fd; /* Fondo celeste */
+    background: #F7F4E7; /* Fondo celeste */
     display: flex;
     justify-content: center; /* Centramos el contenido dentro del contenedor */
+    align-items: center; /* Centra verticalmente */
+    min-height: calc(100vh - 75px); /* Ajusta para considerar el header */
 }
 
 #comprobante {
@@ -119,9 +120,9 @@ body, html {
 }
 
 
- /* Footer styling */
- .footer {
-    background-color: #29AECC;
+/* Footer styling */
+.footer {
+    background-color: #2cb5d3;
     color: #fff;
     padding: 10px 0;
     text-align: center;
@@ -135,6 +136,7 @@ body, html {
     margin-bottom: 0;
     font-family: 'Magdelin Alt Regular';
     font-size:  20px;
+    margin-top: auto;
     
   }
   .footer-column {
@@ -187,3 +189,80 @@ body, html {
   .footer a:hover {
     text-decoration: underline;
   }
+
+  @media (max-width: 450px) {
+
+    /* Ajustes generales */
+    body, html {
+        font-size: 14px; /* Disminuir el tamaño de fuente base */
+    }
+
+    /* Header */
+    .header {
+        flex-direction: column; /* Cambia la disposición a columna para mejor adaptación */
+        padding: 10px; /* Reduce el padding */
+        height: 100px; /* Ajusta la altura */
+        text-align: center; /* Centra el contenido del header */
+    }
+
+    .header .logo img {
+        height: 130px; /* Reduce la altura del logo */
+    }
+
+    /* Contenido principal */
+    .content {
+        flex-direction: column; /* Cambia a disposición en columna */
+        padding: 10px; /* Reduce el padding */
+        margin-left: 0; /* Quita margen izquierdo */
+        max-width: 100%; /* Asegura que ocupe el ancho completo */
+    }
+
+    #comprobante {
+        padding: 15px; /* Reduce el padding interno */
+        margin: 15px 0; /* Ajusta el margen superior/inferior */
+    }
+
+    #comprobante h2 {
+        font-size: 24px; /* Reduce el tamaño de la fuente del título */
+    }
+
+    #descripcion {
+        padding: 10px; /* Reduce el padding interno */
+        margin: 5px 0; /* Ajusta los márgenes */
+    }
+
+    /* Botones */
+    .button-container {
+        flex-direction: column; /* Coloca los botones en columna */
+        gap: 8px; /* Reduce la separación entre botones */
+    }
+
+    .button-container button {
+        padding: 8px 15px; /* Ajusta el padding */
+        font-size: 14px; /* Reduce el tamaño de la fuente */
+        width: 100%; /* Botones a ancho completo */
+    }
+
+    /* Footer */
+    .footer {
+        flex-direction: column; /* Cambia la disposición del footer a columna */
+        align-items: center; /* Centra el contenido horizontalmente */
+        padding: 10px; /* Reduce el padding */
+        font-size: 14px; /* Reduce el tamaño de la fuente */
+    }
+
+    .footer-column {
+        align-items: center; /* Centra el contenido de cada columna */
+        text-align: center; /* Asegura que el texto esté centrado */
+        margin-bottom: 10px; /* Añade espacio entre las columnas */
+    }
+
+    .footer .social-media a {
+        font-size: 14px; /* Reduce el tamaño de fuente de los enlaces */
+    }
+
+    .footer .social-media a img {
+        width: 20px; /* Reduce el tamaño de los iconos */
+        height: 20px;
+    }
+}

@@ -7,8 +7,8 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:4000/api';
-  //private apiUrl = 'https://base-datos-api-rest.vercel.app/api'; 
+  //private apiUrl = 'http://localhost:4000/api';
+  private apiUrl = 'https://base-datos-api-rest.vercel.app/api'; 
   private userCedula: string | null = null; // Variable para almacenar la cédula
   private userNombre: string | null = null; // Variable para almacenar el nombre de usuario
 
